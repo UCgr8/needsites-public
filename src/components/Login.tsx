@@ -38,6 +38,10 @@ export default function Login() {
         {/* Login/Signup Form */}
         <div className="bg-card border border-border rounded-3xl p-8 shadow-xl">
           {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-foreground mb-2">Login</h1>
+            <p className="text-muted-foreground">Welcome back! Please sign in to your account.</p>
+          </div>
           
 
           {/* Form */}
