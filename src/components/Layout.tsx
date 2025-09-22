@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { NAVIGATION_LINKS } from '../utils/constants';
-import { cn } from '../utils/cn';
+import { cn } from '@/lib/utils';
 import logo from '../assets/logo.png';
 
 interface LayoutProps {

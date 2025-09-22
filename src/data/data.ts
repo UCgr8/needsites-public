@@ -1,6 +1,8 @@
+import type { Domain, Category, DomainWithCategory } from '../types';
+
 const CONTACT_EMAIL = 'email@needsites.com';
 
-export const CATEGORIES = [
+export const CATEGORIES: Category[] = [
   {
     slug: "all",
     title: "All Domains", 
@@ -31,7 +33,7 @@ export const CATEGORIES = [
   }
 ];
 
-export const DOMAINS = {
+export const DOMAINS: Record<string, Domain[]> = {
   other: [
     {name: "needsites.com", status: "available", price: 1000000.0},
     {name: "accounting.delivery", status: "available", price: 2663.0}, 

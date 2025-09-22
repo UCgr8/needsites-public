@@ -1,7 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, DollarSign, ExternalLink } from 'lucide-react';
+import { Search, Filter, DollarSign, ExternalLink, ChevronDown } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
+import type { DomainWithCategory } from '../types';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 export default function AllDomains() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,8 +17,8 @@ export default function AllDomains() {
   const [sortBy, setSortBy] = useState('name'); // 'name', 'price-low', 'price-high'
 
   // Flatten all domains with category info
-  const allDomains = useMemo(() => {
-    const domainsWithCategory = [];
+  const allDomains = useMemo((): DomainWithCategory[] => {
+    const domainsWithCategory: DomainWithCategory[] = [];
     for (const [categorySlug, domains] of Object.entries(DOMAINS)) {
       const category = CATEGORIES.find(cat => cat.slug === categorySlug);
       if (Array.isArray(domains)) {
@@ -58,6 +66,11 @@ export default function AllDomains() {
     return filtered;
   }, [allDomains, searchTerm, selectedCategory, sortBy]);
 
+  // Calculate dynamic statistics based on actual data
+  const totalDomains = allDomains.length;
+  const availableDomains = allDomains.filter(d => d.status === 'available').length;
+  const averagePrice = Math.round(allDomains.reduce((sum, d) => sum + d.price, 0) / totalDomains);
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -97,32 +110,34 @@ export default function AllDomains() {
 
             {/* Category Filter */}
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
-              >
-                <option value="all">All Categories</option>
-                {CATEGORIES.map((category) => (
-                  <option key={category.slug} value={category.slug}>
-                    {category.title}
-                  </option>
-                ))}
-              </select>
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent className="bg-background border border-border shadow-lg z-50">
+                  <SelectItem value="all">All Categories</SelectItem>
+                  {CATEGORIES.map((category) => (
+                    <SelectItem key={category.slug} value={category.slug}>
+                      {category.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Sort */}
             <div>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
-              >
-                <option value="name">Sort by Name</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                  <SelectValue placeholder="Sort by Name" />
+                </SelectTrigger>
+                <SelectContent className="bg-background border border-border shadow-lg z-50">
+                  <SelectItem value="name">Sort by Name</SelectItem>
+                  <SelectItem value="price-low">Price: Low to High</SelectItem>
+                  <SelectItem value="price-high">Price: High to Low</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -130,7 +145,10 @@ export default function AllDomains() {
           <div className="mt-6 pt-6 border-t border-border">
             <p className="text-muted-foreground">
               Showing <strong className="text-foreground">{filteredAndSortedDomains.length}</strong> of{' '}
-              <strong className="text-foreground">{allDomains.length}</strong> domains
+              <strong className="text-foreground">{totalDomains}</strong> domains
+              {availableDomains < totalDomains && (
+                <> • <strong className="text-green-600">{availableDomains}</strong> available</>
+              )}
             </p>
           </div>
         </div>

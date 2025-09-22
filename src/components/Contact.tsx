@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
+import type { ContactFormData } from '../types';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { CONTACT_EMAIL } from '../utils/constants';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
@@ -129,19 +137,21 @@ export default function Contact() {
                 <label htmlFor="inquiryType" className="block text-sm font-medium text-card-foreground mb-2">
                   Inquiry Type
                 </label>
-                <select
-                  id="inquiryType"
-                  name="inquiryType"
-                  value={formData.inquiryType}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                <Select 
+                  value={formData.inquiryType} 
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, inquiryType: value }))}
                 >
-                  <option value="general">General Inquiry</option>
-                  <option value="domain-purchase">Domain Purchase</option>
-                  <option value="custom-search">Custom Domain Search</option>
-                  <option value="bulk-purchase">Bulk Purchase</option>
-                  <option value="support">Technical Support</option>
-                </select>
+                  <SelectTrigger className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <SelectValue placeholder="Select inquiry type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border border-border shadow-lg z-50">
+                    <SelectItem value="general">General Inquiry</SelectItem>
+                    <SelectItem value="domain-purchase">Domain Purchase</SelectItem>
+                    <SelectItem value="custom-search">Custom Domain Search</SelectItem>
+                    <SelectItem value="bulk-purchase">Bulk Purchase</SelectItem>
+                    <SelectItem value="support">Technical Support</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
