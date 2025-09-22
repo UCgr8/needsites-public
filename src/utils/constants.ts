@@ -2,6 +2,7 @@ export const NAVIGATION_LINKS = [
   { path: '/', label: 'Home' },
   { path: '/categories', label: 'Categories' },
   { path: '/all', label: 'All Domains' },
+  { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' },
   { path: '/faqs', label: 'FAQs' },
 ];

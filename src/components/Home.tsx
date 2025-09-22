@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Search, Globe, Award, Zap } from 'lucide-react';
 import { CATEGORIES } from '../data/data';
@@ -11,7 +12,27 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col">
+    <>
+      <Helmet>
+        <title>NeedSites - Premium Domain Names for Sale | Domain Marketplace</title>
+        <meta name="description" content="Discover premium domain names for sale at NeedSites. Browse 164+ curated domains across recruiting, design, content and business categories. Find your perfect domain today." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "NeedSites",
+            "url": "https://needsites.com",
+            "description": "Premium domain marketplace offering curated domain names for businesses",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://needsites.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-needsites-blue via-primary to-needsites-dark-blue text-white">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -150,6 +171,96 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">What Our Clients Say</h2>
+            <p className="text-xl text-muted-foreground">Join hundreds of satisfied customers who found their perfect domain</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Johnson",
+                company: "TechStart Inc.",
+                domain: "recruiting.solutions",
+                quote: "NeedSites helped us find the perfect domain for our HR platform. The process was seamless and professional.",
+                rating: 5
+              },
+              {
+                name: "Mike Chen", 
+                company: "Creative Studios",
+                domain: "design.expert",
+                quote: "Excellent service and fair pricing. Our new domain perfectly represents our brand identity.",
+                rating: 5
+              },
+              {
+                name: "Lisa Rodriguez",
+                company: "Business Consulting", 
+                domain: "strategy.business",
+                quote: "The team at NeedSites understood our needs and delivered exactly what we were looking for.",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-card rounded-2xl p-8 border border-border hover:shadow-lg transition-shadow">
+                <div className="mb-6">
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <div key={i} className="w-5 h-5 bg-yellow-400 rounded-full"></div>
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground italic leading-relaxed">"{testimonial.quote}"</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <p className="font-semibold text-card-foreground">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.company}</p>
+                  <p className="text-xs text-primary mt-2 font-medium">Purchased: {testimonial.domain}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Why 500+ Businesses Trust NeedSites</h2>
+            <p className="text-xl text-muted-foreground">Professional domain solutions with unmatched service</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: "🔒", title: "Secure Transfers", desc: "SSL encrypted & escrow protected transactions" },
+              { icon: "⭐", title: "Premium Quality", desc: "Hand-picked domains with verified ownership" },
+              { icon: "🚀", title: "Fast Process", desc: "Complete domain transfers in 5-7 business days" },
+              { icon: "💬", title: "Expert Support", desc: "Dedicated customer success team available 24/7" }
+            ].map((feature, index) => (
+              <div key={index} className="text-center bg-card rounded-xl p-6 border border-border">
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="font-bold text-card-foreground mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-border">
+            {[
+              { number: "164+", label: "Premium Domains" },
+              { number: "500+", label: "Happy Clients" },
+              { number: "98%", label: "Success Rate" },
+              { number: "15+", label: "Years Experience" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-needsites-blue to-needsites-dark-blue text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -174,5 +285,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }
