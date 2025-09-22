@@ -54,9 +54,39 @@ export default function Layout({
       {/* Simplified Apple Liquid Glass Navigation */}
       <header className="liquid-nav" role="banner">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-end lg:justify-between">
-            {/* Left Navigation */}
-            <nav className="hidden lg:flex gap-2" role="navigation" aria-label="Main navigation">
+          <div className="flex items-center justify-between">
+            {/* Desktop: Logo on left */}
+            <Link 
+              to="/" 
+              className="hidden lg:block group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" 
+              aria-label="NeedSites - Go to homepage"
+            >
+              <div className="flex items-center space-x-3">
+                <img 
+                  src={logo} 
+                  alt="NeedSites Logo" 
+                  className="h-12 w-auto group-hover:scale-110 transition-all duration-300" 
+                />
+              </div>
+            </Link>
+
+            {/* Mobile: Centered Logo */}
+            <Link 
+              to="/" 
+              className="absolute left-1/2 transform -translate-x-1/2 lg:hidden group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" 
+              aria-label="NeedSites - Go to homepage"
+            >
+              <div className="flex items-center space-x-3">
+                <img 
+                  src={logo} 
+                  alt="NeedSites Logo" 
+                  className="h-12 w-auto group-hover:scale-110 transition-all duration-300" 
+                />
+              </div>
+            </Link>
+
+            {/* Desktop: Centered Navigation */}
+            <nav className="hidden lg:flex gap-2 absolute left-1/2 transform -translate-x-1/2" role="navigation" aria-label="Main navigation">
               {NAVIGATION_LINKS.map(({ path, label }) => (
                 <Link 
                   key={path} 
@@ -72,21 +102,6 @@ export default function Layout({
                 </Link>
               ))}
             </nav>
-
-            {/* Centered Logo */}
-            <Link 
-              to="/" 
-              className="absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" 
-              aria-label="NeedSites - Go to homepage"
-            >
-              <div className="flex items-center space-x-3">
-                <img 
-                  src={logo} 
-                  alt="NeedSites Logo" 
-                  className="h-12 w-auto group-hover:scale-110 transition-all duration-300" 
-                />
-              </div>
-            </Link>
 
             {/* Right side container */}
             <div className="flex items-center gap-4">
