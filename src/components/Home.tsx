@@ -61,7 +61,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-6xl mx-auto text-center">
               <h1 className="text-6xl md:text-8xl font-bold mb-16 text-black tracking-tight animate-fade-in">
-                Buy or rent sites
+                Buy or rent premium keyword domains
                 <br />
                 <span className="text-2xl md:text-3xl text-muted-foreground">Get free help making your site successful</span>
               </h1>
