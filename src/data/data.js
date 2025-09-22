@@ -2,25 +2,32 @@ const CONTACT_EMAIL = 'email@needsites.com';
 
 export const CATEGORIES = [
   {
+    slug: "all",
+    title: "All Domains", 
+    tagline: "Complete collection", 
+    description: "Browse our entire collection of premium domains across all categories. Perfect for finding that perfect domain name for your project.", 
+    count: 7
+  },
+  {
     slug: "other", 
     title: "Other", 
     tagline: "General business domains", 
     description: "Diverse collection of professional domains across industries. Perfect for established businesses or ambitious startups.", 
-    count: 143
+    count: 3
   }, 
   {
     slug: "recruiting", 
     title: "Recruiting", 
     tagline: "HR & talent acquisition", 
     description: "Specialized domains for recruitment agencies, HR consultants, and talent acquisition professionals.", 
-    count: 12
+    count: 2
   }, 
   {
     slug: "design-content", 
     title: "Design & Content", 
     tagline: "Creative & marketing", 
     description: "Premium domains for design agencies, content creators, and marketing professionals.", 
-    count: 9
+    count: 2
   }
 ];
 

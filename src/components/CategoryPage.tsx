@@ -7,7 +7,15 @@ export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
   
   const category = CATEGORIES.find(cat => cat.slug === slug);
-  const domains = slug ? DOMAINS[slug as keyof typeof DOMAINS] || [] : [];
+  
+  // Handle "all" category by combining all domains
+  const domains = slug === 'all' 
+    ? [
+        ...DOMAINS.other.map(domain => ({ ...domain, category: 'other' })),
+        ...DOMAINS.recruiting.map(domain => ({ ...domain, category: 'recruiting' })),
+        ...DOMAINS['design-content'].map(domain => ({ ...domain, category: 'design-content' }))
+      ]
+    : (slug ? DOMAINS[slug as keyof typeof DOMAINS] || [] : []);
 
   if (!category) {
     return <Navigate to="/categories" replace />;
