@@ -64,6 +64,10 @@ export default {
         'needsites-dark-blue': 'hsl(var(--needsites-dark-blue))',
         'needsites-orange': 'hsl(var(--needsites-orange))',
         'needsites-orange-dark': 'hsl(var(--needsites-orange-dark))',
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

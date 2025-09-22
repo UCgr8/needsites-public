@@ -23,4 +23,19 @@ export interface ContactFormData {
   subject: string;
   message: string;
   inquiryType: string;
+  customSubject?: string;
+  honeypot?: string;
+}
+
+export interface ValidationErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+  customSubject?: string;
+}
+
+export interface SubmissionState {
+  status: 'idle' | 'submitting' | 'success' | 'error' | 'throttled';
+  message?: string;
 }

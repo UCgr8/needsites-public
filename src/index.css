@@ -47,6 +47,13 @@ All colors MUST be HSL.
     --needsites-orange: 24.6 95% 53.1%;
     --needsites-orange-dark: 20.5 90.2% 48.2%;
 
+    /* Orange gradient for CTAs */
+    --gradient-orange: linear-gradient(135deg, hsl(var(--needsites-orange)), hsl(var(--needsites-orange-dark)));
+    
+    /* Success and error colors */
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 355.7 100% 97.3%;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
