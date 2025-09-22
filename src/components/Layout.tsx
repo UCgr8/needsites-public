@@ -62,26 +62,27 @@ export default function Layout({
               </div>
             </Link>
 
-            {/* Right Navigation - Desktop */}
-            <div className="hidden lg:block">
+            {/* Right side container */}
+            <div className="flex items-center gap-4">
+              {/* Login Button - Desktop */}
               <Link 
                 to="/login" 
-                className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange"
+                className="hidden lg:block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange"
               >
                 <span className="relative z-10">Login</span>
               </Link>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20" 
-              aria-expanded={mobileMenuOpen} 
-              aria-controls="mobile-menu" 
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+              {/* Mobile Menu Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+                className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20" 
+                aria-expanded={mobileMenuOpen} 
+                aria-controls="mobile-menu" 
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
