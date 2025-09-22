@@ -57,13 +57,6 @@ export default function DomainPage() {
             <span>→</span>
             <span className="text-foreground font-medium">{foundDomain.name}</span>
           </nav>
-          <Link 
-            to="/category/all" 
-            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mt-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to All Domains
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
