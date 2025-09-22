@@ -95,19 +95,17 @@ ${message}
       </div>
     `;
 
-    // Send email using Zoho SMTP via a service like Resend or direct SMTP
-    // Using fetch to call Zoho's API or SMTP service
+    // Send email using MailChannels HTTPS API (no SMTP needed)
     const emailData = {
-      from: `"NeedSites Contact Form" <${env.ZOHO_EMAIL}>`,
-      to: env.ZOHO_EMAIL,
+      from: `"NeedSites Contact Form" <${env.FROM_EMAIL || 'contact@needsites.com'}>`,
+      to: env.TO_EMAIL || 'email@needsites.com',
       replyTo: `"${name}" <${email}>`,
       subject: `[NeedSites Contact] ${subject}`,
       html: emailHtml,
     };
 
-    // Use Zoho Mail API or SMTP relay service
-    // For Cloudflare Pages, we'll use a service that handles SMTP for us
-    const emailResponse = await sendEmailViaZoho(emailData, env);
+    // Use MailChannels API over HTTPS
+    const emailResponse = await sendEmailViaMailChannels(emailData, env);
 
     if (!emailResponse.success) {
       console.error('Email send failed:', emailResponse.error);
@@ -143,49 +141,45 @@ ${message}
   }
 }
 
-// Helper function to send email via Zoho SMTP
-async function sendEmailViaZoho(emailData, env) {
+// Helper function to send email via MailChannels HTTPS API
+async function sendEmailViaMailChannels(emailData, env) {
   try {
-    // Method 1: Using a service like Resend with your Zoho email as sender
-    if (env.RESEND_API_KEY) {
-      const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
+    const response = await fetch('https://api.mailchannels.net/tx/v1/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: emailData.to }],
+            ...(emailData.replyTo && { reply_to: { email: emailData.replyTo.match(/<(.+?)>/)?.[1] || emailData.replyTo, name: emailData.replyTo.match(/"(.+?)"/)?.[1] || '' } }),
+          },
+        ],
+        from: {
+          email: emailData.from.match(/<(.+?)>/)?.[1] || emailData.from,
+          name: emailData.from.match(/"(.+?)"/)?.[1] || 'NeedSites Contact Form',
         },
-        body: JSON.stringify({
-          from: emailData.from,
-          to: [emailData.to],
-          reply_to: emailData.replyTo,
-          subject: emailData.subject,
-          html: emailData.html,
-        }),
-      });
+        subject: emailData.subject,
+        content: [
+          {
+            type: 'text/html',
+            value: emailData.html,
+          },
+        ],
+      }),
+    });
 
-      if (response.ok) {
-        return { success: true };
-      } else {
-        const errorText = await response.text();
-        return { success: false, error: errorText };
-      }
+    if (response.ok) {
+      return { success: true };
+    } else {
+      const errorText = await response.text();
+      console.error('MailChannels API error:', errorText);
+      return { success: false, error: errorText };
     }
-
-    // Method 2: Direct SMTP using a service worker (requires additional setup)
-    // This would require setting up a separate SMTP service or using Cloudflare Email Workers
-
-    // Method 3: Using Zoho Mail API (if available)
-    if (env.ZOHO_API_KEY) {
-      // This would use Zoho's REST API for sending emails
-      // Implementation depends on Zoho's specific API requirements
-    }
-
-    // Fallback: Log the email (development mode)
-    console.log('Email would be sent:', emailData);
-    return { success: true };
 
   } catch (error) {
-    console.error('SMTP Error:', error);
+    console.error('MailChannels Error:', error);
     return { success: false, error: error.message };
   }
 }
