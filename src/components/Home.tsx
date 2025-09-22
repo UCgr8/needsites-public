@@ -63,7 +63,7 @@ export default function Home() {
               <h1 className="text-6xl md:text-8xl font-bold mb-16 text-black tracking-tight animate-fade-in">
                 Buy or rent premium keyword domains
                 <br />
-                <span className="text-2xl md:text-3xl text-muted-foreground">Get free help making your site successful</span>
+                <span className="text-2xl md:text-3xl text-muted-foreground">Lower prices, faster transfers, and free consulting. </span>
               </h1>
               
               <div className="flex justify-center mt-16 mb-16">
