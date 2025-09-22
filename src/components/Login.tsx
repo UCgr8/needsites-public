@@ -187,15 +187,6 @@ export default function Login() {
 
           {/* Toggle between login/signup */}
           <div className="mt-8 text-center">
-            <p className="text-muted-foreground">
-              {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-              <button
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-primary font-medium hover:text-primary/80 transition-colors"
-              >
-                {isSignUp ? 'Sign in' : 'Sign up'}
-              </button>
-            </p>
           </div>
         </div>
 
