@@ -60,15 +60,13 @@ export default function Home() {
         <section className="relative min-h-screen flex items-center justify-center bg-white">
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-6xl mx-auto text-center">
-              <h1 className="text-6xl md:text-8xl font-bold mb-8 text-black tracking-tight animate-fade-in">
+              <h1 className="text-6xl md:text-8xl font-bold mb-16 text-black tracking-tight animate-fade-in">
                 Buy or rent sites
                 <br />
                 <span className="text-2xl md:text-3xl text-muted-foreground">Choose your premium domain and get help making a successful website.</span>
               </h1>
               
-              
-              
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-16 mb-16">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
                     Browse
