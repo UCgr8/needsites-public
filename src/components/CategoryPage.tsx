@@ -147,7 +147,8 @@ export default function CategoryPage() {
               <Link
                 key={relatedCategory.slug}
                 to={`/category/${relatedCategory.slug}`}
-                className="group bg-card border border-border rounded-2xl p-8 hover:shadow-lg transition-all duration-200 hover:border-primary/20"
+                aria-label={`View ${relatedCategory.title} category`}
+                className="group block liquid-glass-card liquid-interactive relative overflow-hidden p-8 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
               >
                 <h3 className="text-xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
                   {relatedCategory.title}
