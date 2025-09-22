@@ -34,98 +34,132 @@ export default function Home() {
       
       <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent)] bg-[length:20px_20px]"></div>
+      <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden parallax-container">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent)] bg-[length:20px_20px] animate-gradient"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20"></div>
         
-        <div className="relative max-w-7xl mx-auto px-6 py-24">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Buy or Rent
-              <span className="block bg-gradient-to-r from-needsites-orange to-yellow-300 bg-clip-text text-transparent">
-                Premium Domains
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Professional domains for every business need. Custom sites available.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-needsites-blue/20 to-needsites-orange/20 rounded-full blur-xl animate-blob"></div>
+        <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-blob" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-full blur-lg animate-blob" style={{ animationDelay: '4s' }}></div>
+        
+        <div className="relative max-w-7xl mx-auto px-6 py-32 flex items-center min-h-screen">
+          <div className="text-center w-full">
+            <div className="animate-fade-in-up">
+              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+                Buy or Rent
+                <span className="block gradient-text animate-gradient bg-gradient-to-r from-needsites-orange via-yellow-300 to-needsites-orange bg-[length:200%_auto]">
+                  Premium Domains
+                </span>
+              </h1>
+            </div>
+            <div className="animate-fade-in-up stagger-1">
+              <p className="text-xl md:text-2xl mb-12 text-blue-100 max-w-4xl mx-auto leading-relaxed">
+                Professional domains for every business need. Custom sites available.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up stagger-2">
               <Link
                 to="/category/all"
-                className="px-8 py-4 bg-white text-needsites-blue font-semibold rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="group px-10 py-5 glass-card text-white font-semibold rounded-2xl btn-magnetic glow-blue text-lg relative overflow-hidden"
               >
-                Browse All Domains
+                <span className="relative z-10">Browse All Domains</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
               <Link
                 to="/categories"
-                className="px-8 py-4 bg-needsites-orange text-white font-semibold rounded-xl hover:bg-needsites-orange-dark transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="group px-10 py-5 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-2xl btn-magnetic glow-orange text-lg relative overflow-hidden"
               >
-                View Categories
+                <span className="relative z-10">View Categories</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
             </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Why Choose NeedSites?</h2>
-            <p className="text-xl text-muted-foreground">Professional domain solutions for growing businesses</p>
+      <section className="py-32 bg-background relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--needsites-blue)_1px,transparent_1px)] bg-[length:50px_50px]"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <h2 className="text-5xl font-bold gradient-text mb-6">Why Choose NeedSites?</h2>
+            <p className="text-2xl text-muted-foreground">Professional domain solutions for growing businesses</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-2xl bg-card border border-border hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Globe className="w-8 h-8 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="text-center p-10 glass-card rounded-3xl magnetic-hover animate-scale-in stagger-1 group">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform floating">
+                <Globe className="w-10 h-10 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-card-foreground mb-4">Premium Domains</h3>
-              <p className="text-muted-foreground">Hand-picked professional domains across various industries and niches</p>
+              <h3 className="text-3xl font-bold text-card-foreground mb-6">Premium Domains</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">Hand-picked professional domains across various industries and niches</p>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-card border border-border hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-needsites-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Award className="w-8 h-8 text-needsites-orange" />
+            <div className="text-center p-10 glass-card rounded-3xl magnetic-hover animate-scale-in stagger-2 group">
+              <div className="w-20 h-20 bg-gradient-to-br from-needsites-orange/20 to-needsites-orange/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform floating" style={{ animationDelay: '1s' }}>
+                <Award className="w-10 h-10 text-needsites-orange" />
               </div>
-              <h3 className="text-2xl font-bold text-card-foreground mb-4">Verified Quality</h3>
-              <p className="text-muted-foreground">All domains are thoroughly vetted for brandability and market value</p>
+              <h3 className="text-3xl font-bold text-card-foreground mb-6">Verified Quality</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">All domains are thoroughly vetted for brandability and market value</p>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-card border border-border hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-8 h-8 text-green-600" />
+            <div className="text-center p-10 glass-card rounded-3xl magnetic-hover animate-scale-in stagger-3 group">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform floating" style={{ animationDelay: '2s' }}>
+                <Zap className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-card-foreground mb-4">Fast Transfer</h3>
-              <p className="text-muted-foreground">Quick and secure domain transfers with full support throughout</p>
+              <h3 className="text-3xl font-bold text-card-foreground mb-6">Fast Transfer</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">Quick and secure domain transfers with full support throughout</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Domains */}
-      <section className="py-20 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Featured Domains</h2>
-            <p className="text-xl text-muted-foreground">Handpicked premium domains for your business</p>
+      <section className="py-32 relative overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-muted/50 via-background to-muted/30"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-needsites-blue/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-needsites-orange/10 to-transparent rounded-full blur-3xl"></div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <h2 className="text-5xl font-bold gradient-text mb-6">Featured Domains</h2>
+            <p className="text-2xl text-muted-foreground">Handpicked premium domains for your business</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredDomains.map((domain) => (
-              <div key={domain.name} className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg transition-shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                    {domain.category}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-card-foreground mb-4">{domain.name}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-needsites-orange">
-                    ${domain.price.toLocaleString()}
-                  </span>
-                  <Link
-                    to={`/domain/${domain.name}`}
-                    className="px-6 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
-                  >
-                    View Details
-                  </Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {featuredDomains.map((domain, index) => (
+              <div key={domain.name} className={`glass-card rounded-3xl p-10 magnetic-hover animate-scale-in stagger-${index + 1} group relative overflow-hidden`}>
+                {/* Shimmer Effect */}
+                <div className="shimmer absolute inset-0 rounded-3xl"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="px-4 py-2 bg-gradient-to-r from-primary/20 to-primary/10 text-primary text-sm font-semibold rounded-full border border-primary/20">
+                      {domain.category}
+                    </span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-card-foreground mb-8 group-hover:gradient-text transition-all duration-300">{domain.name}</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-4xl font-bold gradient-text">
+                      ${domain.price.toLocaleString()}
+                    </span>
+                    <Link
+                      to={`/domain/${domain.name}`}
+                      className="px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold rounded-xl btn-magnetic glow-blue group-hover:scale-105 transition-transform"
+                    >
+                      View Details
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -134,40 +168,51 @@ export default function Home() {
       </section>
 
       {/* Categories Preview */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Domain Categories</h2>
-            <p className="text-xl text-muted-foreground">Find the perfect domain for your industry</p>
+      <section className="py-32 bg-background relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-3">
+          <div className="absolute inset-0 bg-[linear-gradient(30deg,var(--needsites-blue)_12%,transparent_12.5%,transparent_87%,var(--needsites-blue)_87.5%,var(--needsites-blue)),linear-gradient(150deg,var(--needsites-blue)_12%,transparent_12.5%,transparent_87%,var(--needsites-blue)_87.5%,var(--needsites-blue))] bg-[length:20px_35px]"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <h2 className="text-5xl font-bold gradient-text mb-6">Domain Categories</h2>
+            <p className="text-2xl text-muted-foreground">Find the perfect domain for your industry</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {CATEGORIES.map((category) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {CATEGORIES.map((category, index) => (
               <Link
                 key={category.slug}
                 to={`/category/${category.slug}`}
-                className="group bg-card border border-border rounded-2xl p-8 hover:shadow-lg transition-all duration-200 hover:border-primary/20"
+                className={`group glass-card rounded-3xl p-10 magnetic-hover animate-scale-in stagger-${(index % 3) + 1} relative overflow-hidden`}
               >
-                <h3 className="text-2xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
-                  {category.title}
-                </h3>
-                <p className="text-muted-foreground mb-4">{category.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
-                    {category.count} domains available
-                  </span>
-                  <span className="text-primary group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
+                {/* Shimmer Effect */}
+                <div className="shimmer absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold text-card-foreground mb-4 group-hover:gradient-text transition-all duration-300">
+                    {category.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-8 leading-relaxed text-lg">{category.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      <span className="gradient-text font-bold text-lg">{category.count}</span> domains available
+                    </span>
+                    <span className="text-primary group-hover:translate-x-2 transition-transform font-medium text-2xl">
+                      →
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-16 animate-fade-in-up stagger-4">
             <Link
               to="/categories"
-              className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="px-12 py-6 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-bold rounded-2xl btn-magnetic glow-blue text-xl relative overflow-hidden group"
             >
-              View All Categories
+              <span className="relative z-10">View All Categories</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Link>
           </div>
         </div>
@@ -264,25 +309,36 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:30px_30px] opacity-20"></div>
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Find Your Perfect Domain?</h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Browse our collection of premium domains or get in touch for custom solutions
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <section className="py-32 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:30px_30px] opacity-20 animate-gradient"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-blob"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-blob" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-white/5 to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
+        
+        <div className="max-w-5xl mx-auto px-6 text-center relative">
+          <div className="animate-fade-in-up">
+            <h2 className="text-5xl md:text-6xl font-bold mb-8">Ready to Find Your Perfect Domain?</h2>
+          </div>
+          <div className="animate-fade-in-up stagger-1">
+            <p className="text-2xl mb-12 text-blue-100 leading-relaxed">
+              Browse our collection of premium domains or get in touch for custom solutions
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up stagger-2">
             <Link
               to="/category/all"
-              className="px-8 py-4 bg-white text-needsites-blue font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+              className="group px-12 py-6 glass-card text-white font-bold rounded-2xl btn-magnetic text-xl relative overflow-hidden"
             >
-              Start Browsing
+              <span className="relative z-10">Start Browsing</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Link>
             <Link
               to="/contact"
-              className="px-8 py-4 bg-needsites-orange text-white font-semibold rounded-xl hover:bg-needsites-orange-dark transition-colors"
+              className="group px-12 py-6 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-bold rounded-2xl btn-magnetic glow-orange text-xl relative overflow-hidden"
             >
-              Get Custom Quote
+              <span className="relative z-10">Get Custom Quote</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Link>
           </div>
         </div>

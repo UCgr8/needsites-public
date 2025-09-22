@@ -27,23 +27,26 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Sticky Navigation */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border shadow-sm" role="banner">
+      <header className="sticky top-0 z-50 glass-card backdrop-blur-2xl border-b border-white/20 shadow-lg" role="banner">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Left Navigation */}
-            <nav className="hidden lg:flex gap-1" role="navigation" aria-label="Main navigation">
+            <nav className="hidden lg:flex gap-2" role="navigation" aria-label="Main navigation">
               {NAVIGATION_LINKS.map(({ path, label }) => (
                 <Link
                   key={path}
                   to={path}
                   className={cn(
-                    'px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary',
+                    'px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary relative overflow-hidden group',
                     isActive(path) 
-                      ? 'bg-primary/10 text-primary' 
+                      ? 'bg-gradient-to-r from-primary/20 to-primary/10 text-primary border border-primary/20' 
                       : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
                   )}
                 >
-                  {label}
+                  <span className="relative z-10">{label}</span>
+                  {!isActive(path) && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -51,13 +54,13 @@ export default function Layout({ children }: LayoutProps) {
             {/* Centered Logo */}
             <Link 
               to="/" 
-              className="absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none group focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-2"
+              className="absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3"
               aria-label="NeedSites - Go to homepage"
             >
               <img 
                 src={logo} 
                 alt="NeedSites" 
-                className="h-16 w-auto group-hover:scale-105 transition-transform"
+                className="h-16 w-auto group-hover:scale-110 transition-transform floating"
               />
             </Link>
 
@@ -65,16 +68,17 @@ export default function Layout({ children }: LayoutProps) {
             <div className="hidden lg:block">
               <Link 
                 to="/login" 
-                className="px-4 py-2 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-xl hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-needsites-orange focus:ring-offset-2"
+                className="px-6 py-3 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-bold rounded-xl btn-magnetic glow-orange text-sm relative overflow-hidden group"
               >
-                Login
+                <span className="relative z-10">Login</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary"
+              className="lg:hidden p-3 rounded-xl text-foreground hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -85,16 +89,16 @@ export default function Layout({ children }: LayoutProps) {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div id="mobile-menu" className="lg:hidden mt-4 pb-4 border-t border-border">
-              <nav className="flex flex-col gap-2 mt-4" role="navigation" aria-label="Mobile navigation">
+            <div id="mobile-menu" className="lg:hidden mt-6 pb-6 border-t border-white/10 animate-fade-in-up">
+              <nav className="flex flex-col gap-3 mt-6" role="navigation" aria-label="Mobile navigation">
                 {NAVIGATION_LINKS.map(({ path, label }) => (
                   <Link
                     key={path}
                     to={path}
                     className={cn(
-                      'px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary',
+                      'px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary',
                       isActive(path) 
-                        ? 'bg-primary/10 text-primary' 
+                        ? 'bg-gradient-to-r from-primary/20 to-primary/10 text-primary border border-primary/20' 
                         : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
                     )}
                     onClick={closeMobileMenu}
@@ -104,7 +108,7 @@ export default function Layout({ children }: LayoutProps) {
                 ))}
                 <Link 
                   to="/login" 
-                  className="mt-2 px-4 py-2 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-xl hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg text-center focus:outline-none focus:ring-2 focus:ring-needsites-orange focus:ring-offset-2"
+                  className="mt-4 px-6 py-3 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-bold rounded-xl glow-orange text-center focus:outline-none focus:ring-2 focus:ring-needsites-orange focus:ring-offset-2"
                   onClick={closeMobileMenu}
                 >
                   Login
