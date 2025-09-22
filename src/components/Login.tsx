@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,10 +23,39 @@ export default function Login() {
       [name]: value
     }));
   };
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would authenticate with your backend
-    console.log('Form submitted:', formData);
+    
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      toast({
+        title: "Error",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    // Simulate login attempt delay
+    setTimeout(() => {
+      setIsLoading(false);
+      
+      if (isSignUp) {
+        toast({
+          title: "Sign Up Failed",
+          description: "Account creation is currently unavailable.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Login Failed",
+          description: "Email is not registered",
+          variant: "destructive",
+        });
+      }
+    }, 1500);
   };
   return <div className="min-h-screen bg-gradient-to-br from-needsites-blue/5 via-background to-primary/5 flex items-center justify-center py-12 px-6">
       <div className="w-full max-w-md">
@@ -98,8 +130,12 @@ export default function Login() {
               </div>}
 
             {/* Submit Button */}
-            <button type="submit" className="w-full px-6 py-4 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-lg hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-              {isSignUp ? 'Create Account' : 'Sign In'}
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="w-full px-6 py-4 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-lg hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            >
+              {isLoading ? 'Signing In...' : (isSignUp ? 'Create Account' : 'Sign In')}
             </button>
           </form>
 
