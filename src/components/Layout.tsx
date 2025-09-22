@@ -97,7 +97,7 @@ export default function Layout({
                         'block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary',
                         isActive(path) 
                           ? 'liquid-glass text-white' 
-                          : 'text-foreground hover:text-white hover:bg-white/10'
+                          : 'text-foreground/90 hover:text-white hover:bg-white/10'
                       )} 
                       onClick={closeMobileMenu}
                     >
