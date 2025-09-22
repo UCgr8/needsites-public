@@ -67,9 +67,10 @@ export default function CategoryPage() {
         {domains.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {domains.map((domain) => (
-              <div
+              <Link
                 key={domain.name}
-                className="group bg-card border border-border rounded-2xl p-8 hover:shadow-xl transition-all duration-200 hover:border-primary/20 hover:-translate-y-1"
+                to={`/domain/${domain.name}`}
+                className="group block bg-card border border-border rounded-2xl p-8 hover:shadow-xl transition-all duration-200 hover:border-primary/20 hover:-translate-y-1 cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex-1">
@@ -98,15 +99,12 @@ export default function CategoryPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border">
-                  <Link
-                    to={`/domain/${domain.name}`}
-                    className="block w-full text-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
-                  >
-                    View Details
-                  </Link>
+                <div className="mt-6 pt-6 border-t border-border text-center">
+                  <span className="text-primary font-medium group-hover:text-primary-foreground group-hover:bg-primary px-4 py-2 rounded-lg transition-all duration-200 inline-block">
+                    View Details →
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
