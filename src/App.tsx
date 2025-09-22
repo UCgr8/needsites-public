@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
+import { PageTransition } from './components/PageTransition';
 import Home from './components/Home';
 import Categories from './components/Categories';
 import CategoryPage from './components/CategoryPage';
@@ -31,19 +32,21 @@ function App() {
           <ErrorBoundary>
             <Router>
               <Layout>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/categories" element={<Categories />} />
-                  <Route path="/category/:slug" element={<CategoryPage />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/faqs" element={<FAQs />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/terms" element={<TermsOfService />} />
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                  <Route path="/domain/:name" element={<DomainPage />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <PageTransition>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/categories" element={<Categories />} />
+                    <Route path="/category/:slug" element={<CategoryPage />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/faqs" element={<FAQs />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/terms" element={<TermsOfService />} />
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
+                    <Route path="/domain/:name" element={<DomainPage />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </PageTransition>
               </Layout>
             </Router>
           </ErrorBoundary>

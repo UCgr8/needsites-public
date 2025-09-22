@@ -34,72 +34,63 @@ export default function Home() {
       
       <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden parallax-container">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent)] bg-[length:20px_20px] animate-gradient"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20"></div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-needsites-blue/20 to-needsites-orange/20 rounded-full blur-xl animate-blob"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-2xl animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-full blur-lg animate-blob" style={{ animationDelay: '4s' }}></div>
+      <section className="relative min-h-screen liquid-mesh-bg text-white overflow-hidden">
+        {/* Apple-style Floating Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-needsites-blue/6 rounded-full mix-blend-multiply filter blur-3xl animate-liquid-float"></div>
+          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-needsites-orange/4 rounded-full mix-blend-multiply filter blur-3xl animate-liquid-float" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute bottom-1/3 left-1/3 w-72 h-72 bg-needsites-blue/3 rounded-full mix-blend-multiply filter blur-3xl animate-liquid-float" style={{ animationDelay: '6s' }}></div>
+        </div>
         
         <div className="relative max-w-7xl mx-auto px-6 py-32 flex items-center min-h-screen">
           <div className="text-center w-full">
-            <div className="animate-fade-in-up">
-              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+            <div className="stagger-fade-1">
+              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight liquid-gradient-text drop-shadow-2xl">
                 Buy or Rent
                 <span className="block gradient-text animate-gradient bg-gradient-to-r from-needsites-orange via-yellow-300 to-needsites-orange bg-[length:200%_auto]">
                   Premium Domains
                 </span>
               </h1>
             </div>
-            <div className="animate-fade-in-up stagger-1">
-              <p className="text-xl md:text-2xl mb-12 text-blue-100 max-w-4xl mx-auto leading-relaxed">
+            <div className="stagger-fade-2">
+              <p className="text-xl md:text-2xl mb-12 text-white/90 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
                 Professional domains for every business need. Custom sites available.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up stagger-2">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center stagger-fade-3">
               <Link
                 to="/category/all"
-                className="group px-10 py-5 glass-card text-white font-semibold rounded-2xl btn-magnetic glow-blue text-lg relative overflow-hidden"
+                className="liquid-glass-button bg-gradient-to-r from-needsites-blue to-needsites-dark-blue hover:from-needsites-dark-blue hover:to-needsites-blue text-lg font-semibold group"
               >
                 <span className="relative z-10">Browse All Domains</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
               <Link
                 to="/categories"
-                className="group px-10 py-5 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-2xl btn-magnetic glow-orange text-lg relative overflow-hidden"
+                className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange text-lg font-semibold group"
               >
                 <span className="relative z-10">View Categories</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
             </div>
           </div>
         </div>
         
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-liquid-float">
+          <div className="liquid-glass w-6 h-10 rounded-full flex justify-center items-center">
+            <div className="w-1 h-3 bg-white/90 rounded-full animate-liquid-glow"></div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-32 bg-background relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--needsites-blue)_1px,transparent_1px)] bg-[length:50px_50px]"></div>
-        </div>
-        
+      <section className="py-32 liquid-mesh-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative">
-          <div className="text-center mb-20 animate-fade-in-up">
-            <h2 className="text-5xl font-bold gradient-text mb-6">Why Choose NeedSites?</h2>
+          <div className="text-center mb-20 stagger-fade-1">
+            <h2 className="text-5xl font-bold liquid-gradient-text mb-6 drop-shadow-lg">Why Choose NeedSites?</h2>
             <p className="text-2xl text-muted-foreground">Professional domain solutions for growing businesses</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="text-center p-10 glass-card rounded-3xl magnetic-hover animate-scale-in stagger-1 group">
+            <div className="text-center p-10 liquid-glass-card stagger-fade-2 group">
               <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform floating">
                 <Globe className="w-10 h-10 text-primary" />
               </div>
