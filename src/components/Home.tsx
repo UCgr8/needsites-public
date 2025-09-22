@@ -68,7 +68,7 @@ export default function Home() {
               
               
               
-              <div className="flex justify-center mb-16">
+              <div className="flex justify-center mb-24">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
                     Browse
@@ -77,7 +77,7 @@ export default function Home() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-24">
                 <div className="apple-card p-8 text-center">
                   <div className="text-4xl font-bold mb-2 text-primary">10K+</div>
                   <div className="text-muted-foreground">Premium Domains</div>
