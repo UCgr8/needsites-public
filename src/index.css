@@ -461,14 +461,35 @@ All colors MUST be HSL.
     }
   }
   
-  /* Enhanced Apple Liquid Animation Classes */
-  .animate-liquid-float { animation: liquidFloat 8s ease-in-out infinite; }
-  .animate-mesh-flow { animation: meshFlow 25s ease-in-out infinite; }
-  .animate-liquid-glow { animation: liquidGlow 4s ease-in-out infinite; }
-  .animate-shimmer-liquid { animation: shimmerLiquid 3s ease-in-out infinite; }
-  .animate-page-fade { animation: fadeInPage 0.6s ease-out; }
-  .animate-parallax-float { animation: parallaxFloat 10s ease-in-out infinite; }
-  .animate-scale-in { animation: scaleIn 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+/* Enhanced Apple Liquid Animation Classes */
+.animate-liquid-float { 
+  animation: liquidFloat 8s ease-in-out infinite; 
+  will-change: transform;
+}
+.animate-mesh-flow { 
+  animation: meshFlow 25s ease-in-out infinite; 
+  will-change: background-position, transform;
+}
+.animate-liquid-glow { 
+  animation: liquidGlow 4s ease-in-out infinite; 
+  will-change: box-shadow;
+}
+.animate-shimmer-liquid { 
+  animation: shimmerLiquid 3s ease-in-out infinite; 
+  will-change: transform, opacity;
+}
+.animate-page-fade { 
+  animation: fadeInPage 0.6s ease-out; 
+  will-change: opacity, transform;
+}
+.animate-parallax-float { 
+  animation: parallaxFloat 10s ease-in-out infinite; 
+  will-change: transform;
+}
+.animate-scale-in { 
+  animation: scaleIn 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+  will-change: opacity, transform;
+}
   
   /* Enhanced Staggered Page Transitions */
   .stagger-fade-1 { animation: fadeInPage 0.8s ease-out 0.1s both; }
@@ -476,21 +497,21 @@ All colors MUST be HSL.
   .stagger-fade-3 { animation: fadeInPage 0.8s ease-out 0.3s both; }
   .stagger-fade-4 { animation: fadeInPage 0.8s ease-out 0.4s both; }
   
-  /* Enhanced Interactive States */
-  .liquid-interactive {
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: pointer;
-    transform-style: preserve-3d;
-  }
-  
-  .liquid-interactive:hover {
-    transform: translateY(-6px) rotateX(2deg) scale(1.02);
-  }
-  
-  .liquid-interactive:active {
-    transform: translateY(0) scale(0.98);
-    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  }
+/* Enhanced Interactive States */
+.liquid-interactive {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.liquid-interactive:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.liquid-interactive:active {
+  transform: translateY(0) scale(0.98);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
   /* Parallax Elements */
   .parallax-element {
