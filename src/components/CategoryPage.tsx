@@ -10,11 +10,9 @@ export default function CategoryPage() {
   
   // Handle "all" category by combining all domains
   const domains = slug === 'all' 
-    ? [
-        ...DOMAINS.other.map(domain => ({ ...domain, category: 'other' })),
-        ...DOMAINS.recruiting.map(domain => ({ ...domain, category: 'recruiting' })),
-        ...DOMAINS['design-content'].map(domain => ({ ...domain, category: 'design-content' }))
-      ]
+    ? Object.entries(DOMAINS).flatMap(([categorySlug, categoryDomains]) => 
+        categoryDomains.map(domain => ({ ...domain, category: categorySlug }))
+      )
     : (slug ? DOMAINS[slug as keyof typeof DOMAINS] || [] : []);
 
   if (!category) {
