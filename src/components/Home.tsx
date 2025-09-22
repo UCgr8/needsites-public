@@ -68,15 +68,10 @@ export default function Home() {
               
               
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+              <div className="flex justify-center mb-16">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
-                    Browse Domains
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" size="lg" className="apple-button-secondary text-lg px-12 py-4 h-auto">
-                    Custom Solutions
+                    Browse
                   </Button>
                 </Link>
               </div>
@@ -218,7 +213,7 @@ export default function Home() {
               <div className="text-center mt-12">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button-secondary text-lg px-8 py-3 h-auto">
-                    View All Categories
+                    Browse
                   </Button>
                 </Link>
               </div>
@@ -238,15 +233,10 @@ export default function Home() {
                 Start browsing our premium collection today.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <div className="flex justify-center">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button-white text-xl px-16 py-5 h-auto">
-                    Start Browsing
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" size="lg" className="apple-button-secondary-white text-xl px-16 py-5 h-auto">
-                    Contact Us
+                    Browse
                   </Button>
                 </Link>
               </div>
