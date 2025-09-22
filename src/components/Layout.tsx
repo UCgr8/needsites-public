@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { NAVIGATION_LINKS } from '../utils/constants';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '../hooks/use-mobile';
 import logo from '../assets/logo.png';
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,7 +14,32 @@ export default function Layout({
 }: LayoutProps) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const isMobile = useIsMobile();
+  const mobileMenuRef = React.useRef<HTMLDivElement>(null);
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
+  
   useScrollLock(mobileMenuOpen);
+
+  // Handle ESC key and focus management
+  React.useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('keydown', handleEscKey);
+      // Focus first link in mobile menu
+      const firstLink = mobileMenuRef.current?.querySelector('a');
+      firstLink?.focus();
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [mobileMenuOpen]);
 
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -74,41 +100,77 @@ export default function Layout({
 
               {/* Mobile Menu Button */}
               <button 
+                ref={menuButtonRef}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20" 
+                className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2" 
                 aria-expanded={mobileMenuOpen} 
                 aria-controls="mobile-menu" 
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMobile && window.innerWidth <= 420 && (
+                  <span className="text-sm font-medium">Menu</span>
+                )}
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Drawer */}
           {mobileMenuOpen && (
-            <div id="mobile-menu" className="lg:hidden animate-scale-in">
-              <div className="liquid-glass m-4 p-4 rounded-3xl">
-                <div className="space-y-2">
-                  {NAVIGATION_LINKS.map(({ path, label }) => (
-                    <Link 
-                      key={path} 
-                      to={path} 
-                      className={cn(
-                        'block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary',
-                        isActive(path) 
-                          ? 'liquid-glass text-white' 
-                          : 'text-foreground/90 hover:text-white hover:bg-white/10'
-                      )} 
+            <>
+              {/* Overlay */}
+              <div 
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+                onClick={closeMobileMenu}
+                aria-hidden="true"
+              />
+              
+              {/* Drawer sliding from right */}
+              <div 
+                id="mobile-menu" 
+                ref={mobileMenuRef}
+                className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background/95 backdrop-blur-xl border-l border-border z-50 lg:hidden transform transition-transform duration-300 ease-out"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="mobile-menu-title"
+              >
+                <div className="flex flex-col h-full">
+                  {/* Header */}
+                  <div className="flex items-center justify-between p-6 border-b border-border">
+                    <h2 id="mobile-menu-title" className="text-lg font-semibold">Menu</h2>
+                    <button 
                       onClick={closeMobileMenu}
+                      className="liquid-glass-button text-foreground hover:bg-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      aria-label="Close menu"
                     >
-                      {label}
-                    </Link>
-                  ))}
-                  <div className="pt-4">
+                      <X className="w-6 h-6" />
+                    </button>
+                  </div>
+                  
+                  {/* Navigation */}
+                  <nav className="flex-1 p-6 space-y-2" role="navigation" aria-label="Mobile navigation">
+                    {NAVIGATION_LINKS.map(({ path, label }) => (
+                      <Link 
+                        key={path} 
+                        to={path} 
+                        className={cn(
+                          'block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] flex items-center',
+                          isActive(path) 
+                            ? 'liquid-glass text-white' 
+                            : 'text-foreground/90 hover:text-white hover:bg-white/10'
+                        )} 
+                        onClick={closeMobileMenu}
+                      >
+                        {label}
+                      </Link>
+                    ))}
+                  </nav>
+                  
+                  {/* Footer */}
+                  <div className="p-6 border-t border-border">
                     <Link 
                       to="/login" 
-                      className="block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-center" 
+                      className="block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-center min-h-[44px] flex items-center justify-center" 
                       onClick={closeMobileMenu}
                     >
                       Login
@@ -116,7 +178,7 @@ export default function Layout({
                   </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       </header>
