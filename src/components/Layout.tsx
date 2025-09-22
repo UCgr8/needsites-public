@@ -75,7 +75,7 @@ export default function Layout({
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="lg:hidden liquid-glass-button text-white hover:bg-white/20" 
+              className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20" 
               aria-expanded={mobileMenuOpen} 
               aria-controls="mobile-menu" 
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
