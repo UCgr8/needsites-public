@@ -57,7 +57,7 @@ export default function Layout({ children }: LayoutProps) {
               <img 
                 src={logo} 
                 alt="NeedSites" 
-                className="h-12 w-auto group-hover:scale-105 transition-transform"
+                className="h-16 w-auto group-hover:scale-105 transition-transform"
               />
             </Link>
 
