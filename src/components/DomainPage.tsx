@@ -2,14 +2,16 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Globe, DollarSign, Shield, Clock, CheckCircle, Mail, Phone } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
-
 export default function DomainPage() {
-  const { name } = useParams<{ name: string }>();
-  
+  const {
+    name
+  } = useParams<{
+    name: string;
+  }>();
+
   // Find the domain across all categories
   let foundDomain = null;
   let foundCategory = null;
-  
   for (const [categorySlug, domains] of Object.entries(DOMAINS)) {
     if (Array.isArray(domains)) {
       const domain = domains.find(d => d.name === name);
@@ -20,38 +22,38 @@ export default function DomainPage() {
       }
     }
   }
-
   if (!foundDomain || !foundCategory) {
     return <Navigate to="/category/all" replace />;
   }
-
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(price);
   };
-
-  const features = [
-    { icon: Shield, title: 'Secure Transfer', description: 'Safe and encrypted domain transfer process' },
-    { icon: Clock, title: 'Fast Setup', description: '5-7 day transfer completion' },
-    { icon: CheckCircle, title: 'Premium Quality', description: 'Hand-picked professional domain' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background py-12">
+  const features = [{
+    icon: Shield,
+    title: 'Secure Transfer',
+    description: 'Safe and encrypted domain transfer process'
+  }, {
+    icon: Clock,
+    title: 'Fast Setup',
+    description: '5-7 day transfer completion'
+  }, {
+    icon: CheckCircle,
+    title: 'Premium Quality',
+    description: 'Hand-picked professional domain'
+  }];
+  return <div className="min-h-screen bg-background py-12">
       <div className="max-w-6xl mx-auto px-6">
         {/* Breadcrumb */}
         <div className="mb-8">
           <nav className="flex items-center gap-2 text-muted-foreground">
             <Link to="/category/all" className="hover:text-primary transition-colors">All Domains</Link>
             <span>→</span>
-            <Link 
-              to={`/category/${foundCategory.slug}`} 
-              className="hover:text-primary transition-colors"
-            >
+            <Link to={`/category/${foundCategory.slug}`} className="hover:text-primary transition-colors">
               {foundCategory.title}
             </Link>
             <span>→</span>
@@ -69,10 +71,7 @@ export default function DomainPage() {
                   <Globe className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-                  <Link
-                    to={`/category/${foundCategory.slug}`}
-                    className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full hover:bg-primary/20 transition-colors mb-2"
-                  >
+                  <Link to={`/category/${foundCategory.slug}`} className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full hover:bg-primary/20 transition-colors mb-2">
                     {foundCategory.title}
                   </Link>
                   <h1 className="text-4xl md:text-5xl font-bold text-foreground">
@@ -83,11 +82,7 @@ export default function DomainPage() {
               
               <div className="flex items-center gap-6 mb-6">
                 <div className="flex items-center gap-2">
-                  <span className={`px-4 py-2 text-sm font-medium rounded-full ${
-                    foundDomain.status === 'available' 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-yellow-100 text-yellow-700'
-                  }`}>
+                  <span className={`px-4 py-2 text-sm font-medium rounded-full ${foundDomain.status === 'available' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                     {foundDomain.status === 'available' ? 'Available Now' : 'Reserved'}
                   </span>
                 </div>
@@ -117,15 +112,13 @@ export default function DomainPage() {
             <div className="bg-card border border-border rounded-3xl p-8">
               <h2 className="text-2xl font-bold text-card-foreground mb-6">Why This Domain?</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {features.map((feature, index) => (
-                  <div key={index} className="text-center p-6">
+                {features.map((feature, index) => <div key={index} className="text-center p-6">
                     <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <feature.icon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="font-semibold text-card-foreground mb-2">{feature.title}</h3>
                     <p className="text-muted-foreground text-sm">{feature.description}</p>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -156,15 +149,7 @@ export default function DomainPage() {
             <div className="bg-card border border-border rounded-3xl p-8">
               <h2 className="text-2xl font-bold text-card-foreground mb-6">Similar Domains</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {DOMAINS[foundCategory.slug]
-                  ?.filter(d => d.name !== foundDomain.name)
-                  .slice(0, 4)
-                  .map((domain) => (
-                    <Link
-                      key={domain.name}
-                      to={`/domain/${domain.name}`}
-                      className="group p-4 border border-border rounded-xl hover:border-primary/20 hover:bg-muted/50 transition-all"
-                    >
+                {DOMAINS[foundCategory.slug]?.filter(d => d.name !== foundDomain.name).slice(0, 4).map(domain => <Link key={domain.name} to={`/domain/${domain.name}`} className="group p-4 border border-border rounded-xl hover:border-primary/20 hover:bg-muted/50 transition-all">
                       <div className="flex justify-between items-center">
                         <span className="font-medium text-card-foreground group-hover:text-primary transition-colors">
                           {domain.name}
@@ -173,9 +158,7 @@ export default function DomainPage() {
                           {formatPrice(domain.price)}
                         </span>
                       </div>
-                    </Link>
-                  ))
-                }
+                    </Link>)}
               </div>
             </div>
           </div>
@@ -221,20 +204,11 @@ export default function DomainPage() {
               <div className="border-t border-border pt-6">
                 <h4 className="font-semibold text-card-foreground mb-4">Need Help?</h4>
                 <div className="space-y-3">
-                  <Link
-                    to="/contact"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to="/contact" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                     <Mail className="w-5 h-5" />
                     <span>Email Support</span>
                   </Link>
-                  <a
-                    href="tel:+15551234567"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>Call Us</span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -264,6 +238,5 @@ export default function DomainPage() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
