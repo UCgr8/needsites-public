@@ -208,11 +208,11 @@ All colors MUST be HSL.
 }
 
 .apple-button {
-  background: linear-gradient(135deg, 
-    hsl(var(--primary)) 0%, 
-    hsl(var(--primary) / 0.9) 100%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: hsl(var(--primary-foreground));
-  border: none;
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -237,54 +237,61 @@ All colors MUST be HSL.
 
 .apple-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px hsl(var(--primary) / 0.3);
-  background: linear-gradient(135deg, 
-    hsl(var(--primary) / 0.95) 0%, 
-    hsl(var(--primary) / 0.85) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .apple-button-secondary {
-  background: hsl(var(--background));
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: hsl(var(--primary));
-  border: 2px solid hsl(var(--primary));
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .apple-button-secondary:hover {
-  background: hsl(var(--primary) / 0.05);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px hsl(var(--primary) / 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .apple-button-white {
-  background: hsl(var(--background));
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: hsl(var(--primary));
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .apple-button-white:hover {
-  background: hsl(var(--background) / 0.95);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .apple-button-secondary-white {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .apple-button-secondary-white:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
