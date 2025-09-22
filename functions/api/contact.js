@@ -11,7 +11,22 @@ export async function onRequestPost({ request, env }) {
       return new Response(
         JSON.stringify({ 
           ok: false, 
+          success: false,
           error: 'Server configuration error: TO_EMAIL not set' 
+        }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    if (!env.RESEND_API_KEY) {
+      return new Response(
+        JSON.stringify({ 
+          ok: false, 
+          success: false,
+          error: 'Server configuration error: RESEND_API_KEY not set. Please contact admin.' 
         }),
         { 
           status: 500, 
@@ -27,6 +42,7 @@ export async function onRequestPost({ request, env }) {
       return new Response(
         JSON.stringify({ 
           ok: false, 
+          success: false,
           error: 'Missing required fields: name, email, subject, message' 
         }),
         { 
@@ -40,7 +56,7 @@ export async function onRequestPost({ request, env }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return new Response(
-        JSON.stringify({ ok: false, error: 'Invalid email address' }),
+        JSON.stringify({ ok: false, success: false, error: 'Invalid email address' }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -64,20 +80,6 @@ export async function onRequestPost({ request, env }) {
     const safeMessage = escapeHtml(message);
 
     // Build email content
-    const textContent = `
-New contact form submission from NeedSites:
-
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
-
-Message:
-${message}
-
----
-Submitted at: ${new Date().toISOString()}
-    `.trim();
-
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px 10px 0 0;">
@@ -115,41 +117,28 @@ ${safeMessage}
       </div>
     `;
 
-    // Send email via MailChannels
-    const mailChannelsResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    // Send email via Resend API
+    const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: env.TO_EMAIL }]
-          }
-        ],
-        from: {
-          email: env.FROM_EMAIL || env.TO_EMAIL,
-          name: 'NeedSites'
-        },
-        reply_to: {
-          email: env.REPLY_TO || email,
-          name: name
-        },
+        from: `NeedSites <${env.FROM_EMAIL || 'onboarding@resend.dev'}>`,
+        to: [env.TO_EMAIL],
+        reply_to: `${name} <${email}>`,
         subject: `[NeedSites Contact] ${subject}`,
-        content: [
-          {
-            type: 'text/plain',
-            value: textContent
-          },
-          {
-            type: 'text/html',
-            value: htmlContent
-          }
-        ]
+        html: htmlContent,
       })
     });
 
-    if (mailChannelsResponse.ok) {
+    console.log('Resend API response status:', resendResponse.status);
+    
+    if (resendResponse.ok) {
+      const responseData = await resendResponse.json();
+      console.log('Email sent successfully:', responseData);
+      
       return new Response(
         JSON.stringify({ 
           ok: true,
@@ -162,14 +151,14 @@ ${safeMessage}
         }
       );
     } else {
-      const errorText = await mailChannelsResponse.text();
-      console.error('MailChannels API error:', errorText);
+      const errorText = await resendResponse.text();
+      console.error('Resend API error:', resendResponse.status, errorText);
       
       return new Response(
         JSON.stringify({ 
           ok: false,
           success: false,
-          status: mailChannelsResponse.status,
+          status: resendResponse.status,
           error: 'Failed to send email. Please try again later.'
         }),
         { 
