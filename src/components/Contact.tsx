@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
-import { CONTACT_EMAIL } from '../data/data';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { CONTACT_EMAIL } from '../utils/constants';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,14 +10,48 @@ export default function Contact() {
     message: '',
     inquiryType: 'general'
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would submit to your backend
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          inquiryType: 'general'
+        });
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('Network error. Please try again.');
+      console.error('Contact form error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -137,15 +171,27 @@ export default function Contact() {
                 />
               </div>
 
+              {submitStatus === 'error' && (
+                <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                  <p className="text-sm">{errorMessage}</p>
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={isSubmitted}
+                disabled={isSubmitting || submitStatus === 'success'}
                 className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {isSubmitted ? (
+                {submitStatus === 'success' ? (
                   <>
                     <CheckCircle className="w-5 h-5" />
                     Message Sent!
+                  </>
+                ) : isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    Sending...
                   </>
                 ) : (
                   <>
