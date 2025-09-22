@@ -83,11 +83,11 @@ export default function Home() {
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 <div className="apple-card p-8 text-center">
-                  <div className="text-4xl font-bold mb-2 text-primary">10K+</div>
+                  <div className="text-4xl font-bold mb-2 text-primary">160</div>
                   <div className="text-muted-foreground">Premium Domains</div>
                 </div>
                 <div className="apple-card p-8 text-center">
-                  <div className="text-4xl font-bold mb-2 text-primary">98%</div>
+                  <div className="text-4xl font-bold mb-2 text-primary">100%</div>
                   <div className="text-muted-foreground">Client Satisfaction</div>
                 </div>
                 <div className="apple-card p-8 text-center">
@@ -107,9 +107,7 @@ export default function Home() {
                 <h2 className="text-5xl font-bold mb-6 text-black">
                   Why Choose Our Domains?
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  We make domain acquisition simple, secure, and successful for businesses of all sizes.
-                </p>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">We make domain acquisition simple, fast, and secure.</p>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
