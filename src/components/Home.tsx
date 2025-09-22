@@ -4,61 +4,54 @@ import { Link } from 'react-router-dom';
 import { Globe, Award, Zap, Star, ArrowRight, Sparkles, Shield } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { CATEGORIES } from '../data/data';
-
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0
+  });
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX - window.innerWidth / 2) / window.innerWidth,
-        y: (e.clientY - window.innerHeight / 2) / window.innerHeight,
+        y: (e.clientY - window.innerHeight / 2) / window.innerHeight
       });
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const featuredDomains = [
-    {
-      name: 'needsites.com',
-      price: 1000000,
-      category: 'Premium',
-      description: 'The ultimate domain for website development services'
-    },
-    {
-      name: 'hire.management',
-      price: 3601,
-      category: 'Recruiting',
-      description: 'Perfect for executive recruiting and HR services'
-    },
-    {
-      name: 'content.contractors',
-      price: 2827,
-      category: 'Design & Content',
-      description: 'Ideal for freelance content creation platforms'
-    }
-  ];
-
-  return (
-    <>
+  const featuredDomains = [{
+    name: 'needsites.com',
+    price: 1000000,
+    category: 'Premium',
+    description: 'The ultimate domain for website development services'
+  }, {
+    name: 'hire.management',
+    price: 3601,
+    category: 'Recruiting',
+    description: 'Perfect for executive recruiting and HR services'
+  }, {
+    name: 'content.contractors',
+    price: 2827,
+    category: 'Design & Content',
+    description: 'Ideal for freelance content creation platforms'
+  }];
+  return <>
       <Helmet>
         <title>NeedSites - Premium Domain Names for Sale | Domain Marketplace</title>
         <meta name="description" content="Discover premium domain names for sale at NeedSites. Browse 164+ curated domains across recruiting, design, content and business categories. Find your perfect domain today." />
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "NeedSites",
-            "url": "https://needsites.com",
-            "description": "Premium domain marketplace offering curated domain names for businesses",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://needsites.com/search?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })}
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "NeedSites",
+          "url": "https://needsites.com",
+          "description": "Premium domain marketplace offering curated domain names for businesses",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://needsites.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        })}
         </script>
       </Helmet>
       
@@ -70,7 +63,7 @@ export default function Home() {
               <h1 className="text-6xl md:text-8xl font-bold mb-8 text-black tracking-tight animate-fade-in">
                 Premium Domains
                 <br />
-                <span className="text-5xl md:text-7xl text-muted-foreground">Made Simple</span>
+                <span className="text-5xl md:text-7xl text-muted-foreground"></span>
               </h1>
               
               <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-muted-foreground leading-relaxed">
@@ -78,10 +71,15 @@ export default function Home() {
                 Professional, memorable, and ready to drive your business forward.
               </p>
               
-              <div className="flex justify-center mb-16">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
-                    Browse
+                    Browse Domains
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="apple-button-secondary text-lg px-12 py-4 h-auto">
+                    Custom Solutions
                   </Button>
                 </Link>
               </div>
@@ -167,8 +165,7 @@ export default function Home() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {featuredDomains.map((domain, index) => (
-                  <div key={domain.name} className="apple-card p-8 group">
+                {featuredDomains.map((domain, index) => <div key={domain.name} className="apple-card p-8 group">
                     <div className="relative">
                       <h3 className="text-3xl font-bold mb-2 text-black">{domain.name}</h3>
                       <p className="text-2xl font-bold mb-4 text-primary">${domain.price.toLocaleString()}</p>
@@ -181,8 +178,7 @@ export default function Home() {
                         </Button>
                       </Link>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
           </div>
@@ -202,33 +198,30 @@ export default function Home() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {CATEGORIES.slice(0, 6).map((category, index) => (
-                  <Link 
-                    key={category.slug}
-                    to={`/category/${category.slug}`}
-                    className="block group"
-                  >
-                     <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
-                       <div className="mb-4">
-                         <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
-                           {category.title}
-                         </h3>
-                         <p className="text-muted-foreground text-sm">
-                           {category.count} domains
-                         </p>
-                       </div>
-                       <p className="text-muted-foreground text-sm leading-relaxed">
-                         {category.description}
-                       </p>
-                     </div>
-                  </Link>
-                ))}
+                {CATEGORIES.slice(0, 6).map((category, index) => <Link key={category.slug} to={`/category/${category.slug}`} className="block group">
+                    <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
+                      <div className="flex items-center mb-4">
+                        <img src={category.icon} alt={category.title} className="w-12 h-12 mr-4" />
+                        <div>
+                          <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
+                            {category.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm">
+                            {category.count} domains
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {category.description}
+                      </p>
+                    </div>
+                  </Link>)}
               </div>
               
               <div className="text-center mt-12">
                 <Link to="/categories">
-                  <Button size="lg" className="apple-button text-lg px-8 py-3 h-auto">
-                    Browse
+                  <Button size="lg" className="apple-button-secondary text-lg px-8 py-3 h-auto">
+                    View All Categories
                   </Button>
                 </Link>
               </div>
@@ -248,10 +241,15 @@ export default function Home() {
                 Start browsing our premium collection today.
               </p>
               
-              <div className="flex justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/categories">
                   <Button size="lg" className="apple-button-white text-xl px-16 py-5 h-auto">
-                    Browse
+                    Start Browsing
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="apple-button-secondary-white text-xl px-16 py-5 h-auto">
+                    Contact Us
                   </Button>
                 </Link>
               </div>
@@ -259,6 +257,5 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </>
-  );
+    </>;
 }
