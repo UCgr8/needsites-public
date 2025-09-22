@@ -29,10 +29,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Back to home */}
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Link>
+          
         </div>
 
         {/* Login/Signup Form */}
@@ -40,7 +37,7 @@ export default function Login() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">Login</h1>
-            <p className="text-muted-foreground">Welcome back! Please sign in to your account.</p>
+            
           </div>
           
 
