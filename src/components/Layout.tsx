@@ -64,9 +64,11 @@ export default function Layout({ children }: LayoutProps) {
               aria-label="NeedSites - Go to homepage"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 liquid-glass rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 animate-liquid-glow">
-                  <span className="text-white font-bold text-xl">N</span>
-                </div>
+                <img 
+                  src={logo} 
+                  alt="NeedSites Logo" 
+                  className="h-12 w-auto group-hover:scale-110 transition-all duration-300"
+                />
                 <span className="text-xl font-bold liquid-gradient-text hidden sm:block">NeedSites</span>
               </div>
             </Link>
