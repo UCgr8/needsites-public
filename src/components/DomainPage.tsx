@@ -214,7 +214,7 @@ export default function DomainPage() {
             </div>
 
             {/* Trust Signals */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-700 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-700 rounded-3xl p-8 sticky top-8">
               <h3 className="text-xl font-bold text-card-foreground mb-4">Secure Purchase</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
