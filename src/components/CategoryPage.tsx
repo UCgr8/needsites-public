@@ -35,7 +35,7 @@ export default function CategoryPage() {
         <div className="mb-8">
           <Link 
             to="/categories" 
-            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Categories
