@@ -127,8 +127,9 @@ ${safeMessage}
       body: JSON.stringify({
         from: `NeedSites <${env.FROM_EMAIL || 'onboarding@resend.dev'}>`,
         to: [env.TO_EMAIL],
-        reply_to: `${name} <${email}>`,
-        subject: `[NeedSites Contact] ${subject}`,
+        reply_to: email || env.REPLY_TO || env.FROM_EMAIL,
+        subject: subject?.trim() ? `[NeedSites Contact] ${subject.trim()}` : 'New contact form submission',
+        text: `New contact submission\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
         html: htmlContent,
       })
     });
@@ -159,10 +160,10 @@ ${safeMessage}
           ok: false,
           success: false,
           status: resendResponse.status,
-          error: 'Failed to send email. Please try again later.'
+          error: errorText || 'Failed to send email. Please try again later.'
         }),
         { 
-          status: 500, 
+          status: resendResponse.status, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
@@ -170,11 +171,12 @@ ${safeMessage}
 
   } catch (error) {
     console.error('Contact form error:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return new Response(
       JSON.stringify({ 
         ok: false,
         success: false,
-        error: 'Something went wrong. Please try again later.' 
+        error: message
       }),
       { 
         status: 500, 
