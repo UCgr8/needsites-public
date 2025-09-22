@@ -6,7 +6,9 @@ export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,34 +27,32 @@ export default function Login() {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.email || !formData.password) {
       toast({
         title: "Error",
         description: "Please fill in all required fields.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsLoading(true);
-    
+
     // Simulate login attempt delay
     setTimeout(() => {
       setIsLoading(false);
-      
       if (isSignUp) {
         toast({
           title: "Sign Up Failed",
           description: "Account creation is currently unavailable.",
-          variant: "destructive",
+          variant: "destructive"
         });
       } else {
         toast({
           title: "Login Failed",
           description: "Email is not registered",
-          variant: "destructive",
+          variant: "destructive"
         });
       }
     }, 1500);
@@ -124,27 +124,17 @@ export default function Login() {
 
             {/* Forgot Password (login only) */}
             {!isSignUp && <div className="text-right">
-                <button type="button" className="text-sm text-primary hover:text-primary/80 transition-colors">
-                  Forgot password?
-                </button>
+                
               </div>}
 
             {/* Submit Button */}
-            <button 
-              type="submit" 
-              disabled={isLoading}
-              className="w-full px-6 py-4 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-lg hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {isLoading ? 'Signing In...' : (isSignUp ? 'Create Account' : 'Sign In')}
+            <button type="submit" disabled={isLoading} className="w-full px-6 py-4 bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-white font-semibold rounded-lg hover:from-needsites-orange-dark hover:to-needsites-orange transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+              {isLoading ? 'Signing In...' : isSignUp ? 'Create Account' : 'Sign In'}
             </button>
           </form>
 
           {/* Divider */}
-          <div className="my-8 flex items-center">
-            <div className="flex-1 border-t border-border"></div>
-            <span className="px-4 text-sm text-muted-foreground">or</span>
-            <div className="flex-1 border-t border-border"></div>
-          </div>
+          
 
           {/* Social Login */}
           <div className="space-y-3">
