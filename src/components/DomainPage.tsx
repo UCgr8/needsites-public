@@ -22,7 +22,7 @@ export default function DomainPage() {
   }
 
   if (!foundDomain || !foundCategory) {
-    return <Navigate to="/all" replace />;
+    return <Navigate to="/category/all" replace />;
   }
 
   const formatPrice = (price: number) => {
@@ -46,7 +46,7 @@ export default function DomainPage() {
         {/* Breadcrumb */}
         <div className="mb-8">
           <nav className="flex items-center gap-2 text-muted-foreground">
-            <Link to="/all" className="hover:text-primary transition-colors">All Domains</Link>
+            <Link to="/category/all" className="hover:text-primary transition-colors">All Domains</Link>
             <span>→</span>
             <Link 
               to={`/category/${foundCategory.slug}`} 
@@ -58,7 +58,7 @@ export default function DomainPage() {
             <span className="text-foreground font-medium">{foundDomain.name}</span>
           </nav>
           <Link 
-            to="/all" 
+            to="/category/all" 
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mt-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

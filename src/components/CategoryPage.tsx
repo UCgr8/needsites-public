@@ -130,7 +130,7 @@ export default function CategoryPage() {
                 Contact for Custom Search
               </Link>
               <Link
-                to="/all"
+                to="/category/all"
                 className="px-6 py-3 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/80 transition-colors"
               >
                 Browse All Domains

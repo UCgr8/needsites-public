@@ -10,7 +10,6 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Categories from './components/Categories';
 import CategoryPage from './components/CategoryPage';
-import AllDomains from './components/AllDomains';
 import Contact from './components/Contact';
 import FAQs from './components/FAQs';
 import Login from './components/Login';
@@ -36,7 +35,6 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/categories" element={<Categories />} />
                   <Route path="/category/:slug" element={<CategoryPage />} />
-                  <Route path="/all" element={<AllDomains />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faqs" element={<FAQs />} />
                   <Route path="/login" element={<Login />} />

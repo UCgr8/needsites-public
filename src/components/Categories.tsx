@@ -103,7 +103,7 @@ export default function Categories() {
                 Contact Us
               </Link>
               <Link
-                to="/all"
+                to="/category/all"
                 className="px-8 py-4 bg-needsites-orange text-white font-semibold rounded-xl hover:bg-needsites-orange-dark transition-colors"
               >
                 Browse All Domains
