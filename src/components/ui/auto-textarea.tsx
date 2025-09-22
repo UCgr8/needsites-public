@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 interface AutoTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -8,7 +8,7 @@ interface AutoTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEle
 
 export const AutoTextarea = React.forwardRef<HTMLTextAreaElement, AutoTextareaProps>(
   ({ className, maxLength = 5000, showCounter = true, onChange, ...props }, ref) => {
-    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
     const currentLength = props.value?.toString().length || 0;
 
     // Auto-resize functionality
@@ -20,7 +20,7 @@ export const AutoTextarea = React.forwardRef<HTMLTextAreaElement, AutoTextareaPr
       }
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       adjustHeight();
     }, [props.value]);
 

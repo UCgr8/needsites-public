@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2, RotateCcw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -22,7 +22,7 @@ import {
 } from '../utils/contactFormUtils';
 
 export default function EnhancedContact() {
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = React.useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
@@ -32,18 +32,18 @@ export default function EnhancedContact() {
     honeypot: ''
   });
 
-  const [errors, setErrors] = useState<ValidationErrors>({});
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [submissionState, setSubmissionState] = useState<SubmissionState>({ status: 'idle' });
-  const [throttleTimeLeft, setThrottleTimeLeft] = useState(0);
-  const [draftRestored, setDraftRestored] = useState(false);
+  const [errors, setErrors] = React.useState<ValidationErrors>({});
+  const [touched, setTouched] = React.useState<Record<string, boolean>>({});
+  const [submissionState, setSubmissionState] = React.useState<SubmissionState>({ status: 'idle' });
+  const [throttleTimeLeft, setThrottleTimeLeft] = React.useState(0);
+  const [draftRestored, setDraftRestored] = React.useState(false);
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const successAnnouncerRef = useRef<HTMLDivElement>(null);
-  const errorAnnouncerRef = useRef<HTMLDivElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
+  const successAnnouncerRef = React.useRef<HTMLDivElement>(null);
+  const errorAnnouncerRef = React.useRef<HTMLDivElement>(null);
 
   // Load draft on mount
-  useEffect(() => {
+  React.useEffect(() => {
     const draft = loadDraft();
     if (draft && !draftRestored) {
       setFormData(prev => ({ ...prev, ...draft }));
@@ -52,14 +52,14 @@ export default function EnhancedContact() {
   }, [draftRestored]);
 
   // Auto-save draft
-  useEffect(() => {
+  React.useEffect(() => {
     if (draftRestored && (formData.name || formData.email || formData.message)) {
       saveDraft(formData);
     }
   }, [formData, draftRestored]);
 
   // Throttle timer
-  useEffect(() => {
+  React.useEffect(() => {
     let interval: NodeJS.Timeout;
     if (throttleTimeLeft > 0) {
       interval = setInterval(() => {
