@@ -26,7 +26,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <TooltipProvider>
+        <TooltipProvider delayDuration={200}>
           <Toaster />
           <Sonner />
           <ErrorBoundary>
