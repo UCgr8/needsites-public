@@ -34,8 +34,10 @@ export default function Home() {
       
       <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-needsites-blue via-primary to-needsites-dark-blue text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent)] bg-[length:20px_20px]"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20"></div>
+        
         <div className="relative max-w-7xl mx-auto px-6 py-24">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -262,7 +264,8 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-needsites-blue to-needsites-dark-blue text-white">
+      <section className="py-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:30px_30px] opacity-20"></div>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Find Your Perfect Domain?</h2>
           <p className="text-xl mb-8 text-blue-100">
