@@ -70,7 +70,7 @@ export default function Home() {
               <h1 className="text-6xl md:text-8xl font-bold mb-8 text-black tracking-tight animate-fade-in">
                 Buy or rent sites
                 <br />
-                <span className="text-5xl md:text-7xl text-muted-foreground">Free consulting available</span>
+                <span className="text-5xl md:text-7xl text-muted-foreground">Choose your premium domain and get help making a successful website.</span>
               </h1>
               
               <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-muted-foreground leading-relaxed">
