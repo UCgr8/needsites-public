@@ -28,7 +28,7 @@ export default function Layout({
       {/* Simplified Apple Liquid Glass Navigation */}
       <header className="liquid-nav" role="banner">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-end lg:justify-between">
             {/* Left Navigation */}
             <nav className="hidden lg:flex gap-2" role="navigation" aria-label="Main navigation">
               {NAVIGATION_LINKS.map(({ path, label }) => (
