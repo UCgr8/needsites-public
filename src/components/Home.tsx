@@ -213,26 +213,19 @@ export default function Home() {
                     to={`/category/${category.slug}`}
                     className="block group"
                   >
-                    <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
-                      <div className="flex items-center mb-4">
-                        <img 
-                          src={category.icon} 
-                          alt={category.title}
-                          className="w-12 h-12 mr-4"
-                        />
-                        <div>
-                          <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
-                            {category.title}
-                          </h3>
-                          <p className="text-muted-foreground text-sm">
-                            {category.count} domains
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {category.description}
-                      </p>
-                    </div>
+                     <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
+                       <div className="mb-4">
+                         <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
+                           {category.title}
+                         </h3>
+                         <p className="text-muted-foreground text-sm">
+                           {category.count} domains
+                         </p>
+                       </div>
+                       <p className="text-muted-foreground text-sm leading-relaxed">
+                         {category.description}
+                       </p>
+                     </div>
                   </Link>
                 ))}
               </div>
