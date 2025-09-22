@@ -28,16 +28,8 @@ export default function Categories() {
             >
               <div className="relative z-10 p-10">
                 <div className="flex items-start justify-between mb-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform floating overflow-hidden">
-                    {category.icon ? (
-                      <img 
-                        src={category.icon} 
-                        alt={category.title}
-                        className="w-12 h-12 object-contain opacity-80"
-                      />
-                    ) : (
-                      <Layers className="w-10 h-10 text-primary" />
-                    )}
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform floating">
+                    <Layers className="w-10 h-10 text-primary" />
                   </div>
                   <ExternalLink className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
