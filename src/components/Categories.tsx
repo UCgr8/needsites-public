@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Folder, ExternalLink, ArrowRight, Layers } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { CATEGORIES } from '../data/data';
 
 export default function Categories() {
@@ -27,10 +27,7 @@ export default function Categories() {
               className={`group liquid-glass-card liquid-interactive stagger-fade-${Math.min((index % 4) + 1, 4)} relative overflow-hidden`}
             >
               <div className="relative z-10 p-10">
-                <div className="flex items-start justify-between mb-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform floating">
-                    <Layers className="w-10 h-10 text-primary" />
-                  </div>
+                <div className="flex items-end justify-end mb-8">
                   <ExternalLink className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
 

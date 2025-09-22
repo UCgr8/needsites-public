@@ -194,11 +194,9 @@ export default function Home() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {CATEGORIES.slice(0, 6).map((category, index) => <Link key={category.slug} to={`/category/${category.slug}`} className="block group">
-                    <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
-                      <div className="flex items-center mb-4">
-                        <img src={category.icon} alt={category.title} className="w-12 h-12 mr-4" />
-                        <div>
+                  {CATEGORIES.slice(0, 6).map((category, index) => <Link key={category.slug} to={`/category/${category.slug}`} className="block group">
+                      <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
+                        <div className="mb-4">
                           <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
                             {category.title}
                           </h3>
@@ -206,12 +204,11 @@ export default function Home() {
                             {category.count} domains
                           </p>
                         </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {category.description}
+                        </p>
                       </div>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {category.description}
-                      </p>
-                    </div>
-                  </Link>)}
+                    </Link>)}
               </div>
               
               <div className="text-center mt-12">
