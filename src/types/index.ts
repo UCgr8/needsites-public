@@ -10,6 +10,7 @@ export interface Category {
   tagline: string;
   description: string;
   count: number;
+  icon?: string | null;
 }
 
 export interface DomainWithCategory extends Domain {
