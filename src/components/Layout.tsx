@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { NAVIGATION_LINKS } from '../utils/constants';
 import { cn } from '../utils/cn';
-import logo from '../assets/logo.png';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -54,11 +53,9 @@ export default function Layout({ children }: LayoutProps) {
               className="absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none group focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-2"
               aria-label="NeedSites - Go to homepage"
             >
-              <img 
-                src={logo} 
-                alt="NeedSites" 
-                className="h-12 w-auto group-hover:scale-105 transition-transform"
-              />
+              <div className="h-12 w-auto group-hover:scale-105 transition-transform bg-gradient-to-r from-needsites-blue to-needsites-dark-blue text-white px-4 py-2 rounded-lg font-bold text-xl">
+                NeedSites
+              </div>
             </Link>
 
             {/* Right Navigation - Desktop */}
