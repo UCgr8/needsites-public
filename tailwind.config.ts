@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +60,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        'needsites-blue': 'hsl(var(--needsites-blue))',
+        'needsites-dark-blue': 'hsl(var(--needsites-dark-blue))',
+        'needsites-orange': 'hsl(var(--needsites-orange))',
+        'needsites-orange-dark': 'hsl(var(--needsites-orange-dark))',
       },
       borderRadius: {
         lg: "var(--radius)",
