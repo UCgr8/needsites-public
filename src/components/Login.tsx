@@ -146,11 +146,7 @@ export default function Login() {
         </div>
 
         {/* Terms */}
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          By {isSignUp ? 'creating an account' : 'signing in'}, you agree to our{' '}
-          <Link to="/terms" className="text-primary hover:text-primary/80">Terms of Service</Link> and{' '}
-          <Link to="/privacy" className="text-primary hover:text-primary/80">Privacy Policy</Link>
-        </div>
+        
       </div>
     </div>;
 }
