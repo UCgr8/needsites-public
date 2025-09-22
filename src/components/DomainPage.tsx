@@ -213,28 +213,6 @@ export default function DomainPage() {
               </div>
             </div>
 
-            {/* Trust Signals */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-700 rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-card-foreground mb-4">Secure Purchase</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-card-foreground">Escrow protection available</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-card-foreground">30-day money-back guarantee</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-card-foreground">Free transfer assistance</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-card-foreground">24/7 support included</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
