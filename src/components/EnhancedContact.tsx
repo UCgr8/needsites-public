@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2, RotateCcw } from 'lucide-react';
+import { Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2, RotateCcw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { AutoTextarea } from './ui/auto-textarea';
@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Label } from './ui/label';
 import { toast } from '@/hooks/use-toast';
 import { ContactFormData, ValidationErrors, SubmissionState } from '../types';
-import { CONTACT_EMAIL } from '../utils/constants';
 import {
   validateForm,
   saveDraft,
@@ -177,12 +176,12 @@ export default function EnhancedContact() {
         
         toast({
           title: "Message sent successfully!",
-          description: `Thanks! We got your message. We'll reply from ${CONTACT_EMAIL}.`,
+          description: "Thanks! We got your message. We'll reply soon.",
         });
 
         // Announce success for screen readers
         if (successAnnouncerRef.current) {
-          successAnnouncerRef.current.textContent = `Message sent successfully! We'll reply from ${CONTACT_EMAIL}.`;
+          successAnnouncerRef.current.textContent = "Message sent successfully! We'll reply soon.";
         }
 
         setTimeout(() => setSubmissionState({ status: 'idle' }), 3000);
@@ -454,8 +453,7 @@ export default function EnhancedContact() {
               {/* Help Text */}
               <div className="text-sm text-muted-foreground border-t border-border pt-4">
                 <p>
-                  We reply within 1 business day from <strong>{CONTACT_EMAIL}</strong>. 
-                  Check your spam folder if you don't see our response.
+                  We'll get back to you as soon as possible. Check your spam folder if you don't see our response.
                 </p>
               </div>
             </form>
@@ -475,60 +473,8 @@ export default function EnhancedContact() {
             />
           </div>
 
-          {/* Contact Information - keep existing */}
+          {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="text-2xl font-bold text-card-foreground mb-6">Get in Touch</h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-card-foreground mb-1">Email Us</h3>
-                    <p className="text-muted-foreground mb-2">
-                      Send us an email and we'll respond within 24 hours
-                    </p>
-                    <a 
-                      href={`mailto:${CONTACT_EMAIL}`}
-                      className="text-primary hover:text-primary/80 font-medium transition-colors"
-                    >
-                      {CONTACT_EMAIL}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-needsites-orange/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-needsites-orange" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-card-foreground mb-1">Phone Support</h3>
-                    <p className="text-muted-foreground mb-2">
-                      Available Monday to Friday, 9 AM - 6 PM EST
-                    </p>
-                    <p className="text-needsites-orange font-medium">
-                      +1 (555) 123-4567
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-card-foreground mb-1">Office Location</h3>
-                    <p className="text-muted-foreground">
-                      123 Domain Street<br />
-                      Tech City, TC 12345<br />
-                      United States
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* FAQ Quick Links */}
             <div className="bg-gradient-to-br from-needsites-blue/10 to-primary/5 rounded-3xl p-8">
               <h3 className="text-xl font-bold text-foreground mb-4">Quick Questions?</h3>
@@ -563,7 +509,7 @@ export default function EnhancedContact() {
               </div>
               <div className="mt-6 pt-6 border-t border-border">
                 <p className="text-sm text-muted-foreground">
-                  For urgent inquiries outside business hours, please email us and we'll respond as soon as possible.
+                  For urgent inquiries outside business hours, please use the contact form and we'll respond as soon as possible.
                 </p>
               </div>
             </div>
