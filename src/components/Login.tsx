@@ -184,10 +184,6 @@ export default function Login() {
           {/* Social Login */}
           <div className="space-y-3">
             <button className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-border rounded-lg hover:bg-muted transition-colors">
-              <div className="w-5 h-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded"></div>
-              <span className="text-card-foreground">Continue with Google</span>
-            </button>
-            <button className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-border rounded-lg hover:bg-muted transition-colors">
               <div className="w-5 h-5 bg-gray-900 rounded"></div>
               <span className="text-card-foreground">Continue with GitHub</span>
             </button>
