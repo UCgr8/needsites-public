@@ -68,14 +68,13 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-6xl mx-auto text-center">
               <h1 className="text-6xl md:text-8xl font-bold mb-8 text-black tracking-tight animate-fade-in">
-                Premium Domains
+                Buy or rent sites
                 <br />
-                <span className="text-5xl md:text-7xl text-muted-foreground">Made Simple</span>
+                <span className="text-5xl md:text-7xl text-muted-foreground">Free consulting available</span>
               </h1>
               
               <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-muted-foreground leading-relaxed">
-                Discover hand-picked premium domains that elevate your brand. 
-                Professional, memorable, and ready to drive your business forward.
+                Choose your premium domain and get help making a successful website.
               </p>
               
               <div className="flex justify-center mb-16">
