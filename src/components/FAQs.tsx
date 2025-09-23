@@ -140,7 +140,7 @@ export default function FAQs() {
         {/* Popular Categories */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
-            Browse Domains by Category
+            Get your site before its gone
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link to="/category/other" className="group bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:border-primary/20">
