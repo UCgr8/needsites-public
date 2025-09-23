@@ -226,6 +226,18 @@ export default function EnhancedContact() {
           </p>
         </div>
 
+        {/* FAQ Quick Links */}
+        <div className="bg-gradient-to-br from-needsites-blue/10 to-primary/5 rounded-3xl p-8 mb-12 stagger-fade-2">
+          <h3 className="text-xl font-bold text-foreground mb-4">Quick Questions?</h3>
+          <p className="text-muted-foreground mb-6">
+            Check our frequently asked questions for instant answers to common inquiries.
+          </p>
+          <a href="/faqs" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors">
+            View FAQs
+            <Send className="w-4 h-4" />
+          </a>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Enhanced Contact Form */}
           <div className="bg-card border border-border rounded-3xl p-8 shadow-lg">
@@ -360,18 +372,6 @@ export default function EnhancedContact() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            {/* FAQ Quick Links */}
-            <div className="bg-gradient-to-br from-needsites-blue/10 to-primary/5 rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-foreground mb-4">Quick Questions?</h3>
-              <p className="text-muted-foreground mb-6">
-                Check our frequently asked questions for instant answers to common inquiries.
-              </p>
-              <a href="/faqs" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors">
-                View FAQs
-                <Send className="w-4 h-4" />
-              </a>
-            </div>
-
             {/* Business Hours */}
             <div className="bg-card border border-border rounded-3xl p-8">
               <h3 className="text-xl font-bold text-card-foreground mb-6">Business Hours</h3>
