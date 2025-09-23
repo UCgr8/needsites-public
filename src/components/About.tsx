@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Users, Target, Award, Clock } from 'lucide-react';
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
+import { useInView } from '../hooks/useInView';
 
 const About = () => {
   const team = [
@@ -22,11 +24,13 @@ const About = () => {
   ];
 
   const stats = [
-    { icon: Award, label: "Premium Domains", value: "164+" },
-    { icon: Users, label: "Happy Clients", value: "500+" },
-    { icon: Target, label: "Success Rate", value: "98%" },
-    { icon: Clock, label: "Years Experience", value: "15+" }
+    { icon: Award, label: "Premium Domains", value: "164+", number: 164, suffix: "+" },
+    { icon: Users, label: "Happy Clients", value: "500+", number: 500, suffix: "+" },
+    { icon: Target, label: "Success Rate", value: "98%", number: 98, suffix: "%" },
+    { icon: Clock, label: "Years Experience", value: "15+", number: 15, suffix: "+" }
   ];
+
+  const [statsRef, statsInView] = useInView({ threshold: 0.3 });
 
   return (
     <>
@@ -49,16 +53,25 @@ const About = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="h-8 w-8 text-primary" />
+          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            {stats.map((stat, index) => {
+              const animatedValue = useAnimatedCounter({
+                target: stat.number,
+                duration: 2000 + index * 200,
+                suffix: stat.suffix,
+                startAnimation: statsInView
+              });
+
+              return (
+                <div key={index} className="text-center">
+                  <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <stat.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div className="text-3xl font-bold text-foreground mb-2">{animatedValue}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
                 </div>
-                <div className="text-3xl font-bold text-foreground mb-2">{stat.value}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Mission Section */}
