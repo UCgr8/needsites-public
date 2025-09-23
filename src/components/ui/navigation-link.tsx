@@ -25,7 +25,7 @@ export function NavigationLink({
     return false;
   };
 
-  const baseStyles = "transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary font-semibold";
+  const baseStyles = "transition-all duration-300 focus:outline-none font-semibold";
   
   const desktopStyles = cn(
     baseStyles,
