@@ -169,25 +169,23 @@ export default function Layout({
                           'block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] flex items-center',
                           isActive(path) 
                             ? 'liquid-glass text-white' 
-                            : 'text-foreground/90 hover:text-white hover:bg-white/10'
+                            : 'text-foreground hover:text-primary hover:bg-primary/10'
                         )} 
                         onClick={closeMobileMenu}
                       >
                         {label}
                       </Link>
                     ))}
-                  </nav>
-                  
-                  {/* Footer */}
-                  <div className="p-6 border-t border-border">
+                    
+                    {/* Login link integrated with nav links */}
                     <Link 
                       to="/login" 
-                      className="block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark text-center min-h-[44px] flex items-center justify-center" 
+                      className="block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] flex items-center text-foreground hover:text-primary hover:bg-primary/10"
                       onClick={closeMobileMenu}
                     >
                       Login
                     </Link>
-                  </div>
+                  </nav>
                 </div>
               </div>
             </>
