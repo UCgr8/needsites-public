@@ -385,7 +385,7 @@ export default function EnhancedContact() {
                   <span className="text-card-foreground font-medium">10:00 AM - 2:00 PM EST</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Sunday</span>
+                  
                   <span className="text-card-foreground font-medium">Closed</span>
                 </div>
               </div>
