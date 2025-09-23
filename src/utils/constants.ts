@@ -1,4 +1,5 @@
 export const NAVIGATION_LINKS = [
+  { path: '/info', label: 'Start Here' },
   { path: '/categories', label: 'Categories' },
   { path: '/about', label: 'About' },
   { path: '/faqs', label: 'FAQs' },

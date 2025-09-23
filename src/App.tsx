@@ -16,6 +16,7 @@ import FAQs from './components/FAQs';
 import Login from './components/Login';
 import DomainPage from './components/DomainPage';
 import About from './components/About';
+import Info from './components/Info';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './pages/NotFound';
@@ -35,6 +36,7 @@ function App() {
                 <PageTransition>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/info" element={<Info />} />
                     <Route path="/categories" element={<Categories />} />
                     <Route path="/category/:slug" element={<CategoryPage />} />
                     <Route path="/contact" element={<Contact />} />
