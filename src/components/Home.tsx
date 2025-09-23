@@ -88,7 +88,7 @@ export default function Home() {
                 </div>
                 <div className="apple-card p-8 text-center">
                   <div className="text-4xl font-bold mb-2 text-primary">71</div>
-                  <div className="text-muted-foreground">Client Satisfaction</div>
+                  <div className="text-muted-foreground">Satisfied Clients</div>
                 </div>
                 <div className="apple-card p-8 text-center">
                   <div className="text-4xl font-bold mb-2 text-primary">24h</div>
