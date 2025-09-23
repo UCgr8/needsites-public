@@ -76,7 +76,7 @@ export default function Layout({
             
 
             {/* Mobile Menu Button - Always on the far right */}
-            <button ref={menuButtonRef} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2 ml-auto" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu" aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>
+            <button ref={menuButtonRef} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 h-20 w-20 flex items-center justify-center gap-2 ml-auto" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu" aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               {isMobile && window.innerWidth <= 420 && <span className="text-sm font-medium">Menu</span>}
             </button>
