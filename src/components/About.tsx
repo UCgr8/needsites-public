@@ -32,8 +32,8 @@ const About = () => {
   }, {
     icon: Clock,
     label: "Years Experience",
-    value: "48",
-    number: 48,
+    value: "32",
+    number: 32,
     suffix: ""
   }];
   const [statsRef, statsInView] = useInView({
