@@ -142,24 +142,9 @@ export default function FAQs() {
           <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
             Get your site before its gone
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link to="/category/other" className="group bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:border-primary/20">
-              <h3 className="font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
-                General Business
-              </h3>
-              <p className="text-muted-foreground text-sm">Professional domains for all industries</p>
-            </Link>
-            <Link to="/category/recruiting" className="group bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:border-primary/20">
-              <h3 className="font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
-                Recruiting & HR
-              </h3>
-              <p className="text-muted-foreground text-sm">Domains for talent acquisition professionals</p>
-            </Link>
-            <Link to="/category/design-content" className="group bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:border-primary/20">
-              <h3 className="font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
-                Design & Content
-              </h3>
-              <p className="text-muted-foreground text-sm">Creative domains for agencies and freelancers</p>
+          <div className="text-center">
+            <Link to="/category/other" className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors">
+              Browse
             </Link>
           </div>
         </div>
