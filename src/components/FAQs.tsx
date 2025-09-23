@@ -130,7 +130,7 @@ export default function FAQs() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-needsites-blue font-semibold rounded-xl hover:bg-blue-50 transition-colors">
               <Mail className="w-5 h-5" />
-              Contact Support
+              Contact Us
             </Link>
             
             
