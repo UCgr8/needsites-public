@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { NAVIGATION_LINKS } from '../utils/constants';
-import { cn } from '@/lib/utils';
 import { useIsMobile } from '../hooks/use-mobile';
+import { NavigationLink } from './ui/navigation-link';
 import logo from '../assets/logo.png';
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,7 +12,6 @@ interface LayoutProps {
 export default function Layout({
   children
 }: LayoutProps) {
-  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const isMobile = useIsMobile();
   const mobileMenuRef = React.useRef<HTMLDivElement>(null);
@@ -37,11 +36,7 @@ export default function Layout({
       document.removeEventListener('keydown', handleEscKey);
     };
   }, [mobileMenuOpen]);
-  const isActive = (path: string) => {
-    if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
-    return false;
-  };
+
   const closeMobileMenu = () => setMobileMenuOpen(false);
   return <div className="min-h-screen bg-background relative">
       {/* Simplified Apple Liquid Glass Navigation */}
@@ -64,12 +59,11 @@ export default function Layout({
 
             {/* Desktop: Centered Navigation */}
             <nav className="hidden lg:flex gap-2 absolute left-1/2 transform -translate-x-1/2" role="navigation" aria-label="Main navigation">
-              {NAVIGATION_LINKS.map(({
-              path,
-              label
-            }) => <Link key={path} to={path} className={cn('px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary', isActive(path) ? 'liquid-glass text-white' : 'text-foreground hover:text-white hover:bg-white/10')}>
-                  <span className="relative z-10">{label}</span>
-                </Link>)}
+              {NAVIGATION_LINKS.map(({ path, label }) => (
+                <NavigationLink key={path} to={path} variant="desktop">
+                  {label}
+                </NavigationLink>
+              ))}
             </nav>
 
             {/* Desktop Login Button - Right */}
@@ -100,17 +94,16 @@ export default function Layout({
                   
                   {/* Navigation */}
                   <nav className="flex-1 p-6 space-y-2" role="navigation" aria-label="Mobile navigation">
-                    {NAVIGATION_LINKS.map(({
-                  path,
-                  label
-                }) => <Link key={path} to={path} className={cn('block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] flex items-center', isActive(path) ? 'liquid-glass text-white' : 'text-foreground hover:text-primary hover:bg-primary/10')} onClick={closeMobileMenu}>
+                    {NAVIGATION_LINKS.map(({ path, label }) => (
+                      <NavigationLink key={path} to={path} variant="mobile" onClick={closeMobileMenu}>
                         {label}
-                      </Link>)}
+                      </NavigationLink>
+                    ))}
                     
                     {/* Login link integrated with nav links */}
-                    <Link to="/login" className="block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] flex items-center text-foreground hover:text-primary hover:bg-primary/10" onClick={closeMobileMenu}>
+                    <NavigationLink to="/login" variant="mobile" onClick={closeMobileMenu}>
                       Login
-                    </Link>
+                    </NavigationLink>
                   </nav>
                 </div>
               </div>

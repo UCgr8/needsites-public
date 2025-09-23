@@ -158,6 +158,38 @@ All colors MUST be HSL.
   }
 }
 
+/* Enhanced Navigation Link Styles */
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.05));
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.nav-link-inactive {
+  position: relative;
+}
+
+.nav-link-inactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: inherit;
+  transition: background 0.3s ease;
+  z-index: -1;
+}
+
+.nav-link-inactive:hover::before {
+  background: hsl(var(--primary) / 0.05);
+}
+
 /* Apple-Style Components */
 .liquid-glass-button {
   background: rgba(255, 255, 255, 0.1);
