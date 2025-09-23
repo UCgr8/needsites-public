@@ -25,7 +25,7 @@ const About = () => {
     suffix: ""
   }, {
     icon: Users,
-    label: "Happy Clients",
+    label: "Satisfied Clients",
     value: "126",
     number: 126,
     suffix: ""
