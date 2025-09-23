@@ -82,7 +82,7 @@ const Info = () => {
   return (
     <>
       <Helmet>
-        <title>Start Here: Why Buy Direct on NeedSites | Domain Marketplace Guide</title>
+        <title>Why Buy Direct on NeedSites | Domain Marketplace Guide</title>
         <meta name="description" content="Learn why keyword domains work better than invented brands. Get expert guidance, action kits, and secure transfers when you buy direct from NeedSites." />
       </Helmet>
 
@@ -92,7 +92,7 @@ const Info = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto text-center stagger-fade-1">
               <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
-                Start Here: Why Buy Direct on NeedSites
+                Why Buy Direct on NeedSites
               </h1>
               <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-12">
                 The right domain makes customer acquisition easier. When you buy here, you also get help turning that domain into a working launch.
