@@ -487,17 +487,17 @@ export default function FAQs() {
       <div className="min-h-screen bg-background py-12 relative">
         <div className="max-w-6xl mx-auto px-6">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 stagger-fade-1">
             <div className="flex justify-between items-start mb-8">
               <div className="flex-1" />
               <div className="text-sm text-muted-foreground">
                 Updated: September 23, 2025
               </div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold mb-8 liquid-gradient-text">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               Clear answers about buying direct on NeedSites and how our personalized consulting works.
             </p>
           </div>
