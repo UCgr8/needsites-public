@@ -26,8 +26,8 @@ const About = () => {
   }, {
     icon: Users,
     label: "Satisfied Clients",
-    value: "126",
-    number: 126,
+    value: "71",
+    number: 71,
     suffix: ""
   }, {
     icon: Clock,
