@@ -539,21 +539,6 @@ export default function FAQs() {
                 );
               })}
             </div>
-            
-            {/* Category Anchor Links */}
-            <div className="text-center">
-              <div className="flex flex-wrap gap-4 justify-center text-sm">
-                {categories.slice(2).map(category => (
-                  <button
-                    key={category}
-                    onClick={() => scrollToCategory(category)}
-                    className="text-primary hover:underline"
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Featured FAQs */}
