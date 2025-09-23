@@ -59,8 +59,8 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center bg-white">
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-6xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-16 text-black tracking-tight animate-fade-in">
+            <div className="max-w-6xl mx-auto text-center stagger-fade-1">
+              <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
                 Buy or rent premium keyword domains
                 <br />
                 <span className="text-2xl md:text-3xl text-muted-foreground">Lower prices, faster transfers, and free consulting. </span>
@@ -103,11 +103,11 @@ export default function Home() {
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-5xl font-bold mb-6 text-black">
+              <div className="text-center mb-16 stagger-fade-1">
+                <h2 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
                   Why Choose Our Domains?
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">We make domain acquisition simple, fast, and secure.</p>
+                <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">We make domain acquisition simple, fast, and secure.</p>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -149,11 +149,11 @@ export default function Home() {
         <section className="py-24 apple-section-bg">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-5xl font-bold mb-6 text-black">
+              <div className="text-center mb-16 stagger-fade-1">
+                <h2 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
                   Featured Premium Domains
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
                   Exceptional domains that are ready to become the foundation of your next big venture.
                 </p>
               </div>
@@ -182,11 +182,11 @@ export default function Home() {
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-5xl font-bold mb-6 text-black">
+              <div className="text-center mb-16 stagger-fade-1">
+                <h2 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
                   Explore by Category
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
                   Find the perfect domain for your industry with our curated categories.
                 </p>
               </div>
@@ -223,11 +223,11 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-24 apple-hero-bg relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 text-white">
+            <div className="max-w-4xl mx-auto text-center stagger-fade-1">
+              <h2 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg text-white">
                 Ready to Find Your Perfect Domain?
               </h2>
-              <p className="text-xl md:text-2xl mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-12">
                 Join thousands of successful businesses who've found their ideal domain with us. 
                 Start browsing our premium collection today.
               </p>

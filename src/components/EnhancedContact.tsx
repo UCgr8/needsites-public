@@ -219,11 +219,11 @@ export default function EnhancedContact() {
     <div className="min-h-screen bg-background py-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+        <div className="text-center mb-16 stagger-fade-1">
+          <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
             Contact Us
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Ready to find your perfect domain? Get in touch with our team for personalized assistance, 
             custom searches, or any questions about our domain marketplace.
           </p>

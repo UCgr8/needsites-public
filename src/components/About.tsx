@@ -38,11 +38,11 @@ const About = () => {
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10">
         <div className="container mx-auto px-4 py-16">
           {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-needsites-blue bg-clip-text text-transparent mb-6">
+          <div className="text-center mb-16 stagger-fade-1">
+            <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
               About NeedSites
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               We're passionate about connecting businesses with premium domains that elevate their brand and drive success. 
               Since 2009, we've been curating the finest domain names for forward-thinking companies.
             </p>
