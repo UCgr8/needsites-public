@@ -153,7 +153,7 @@ export const DOMAINS: Record<string, Domain[]> = {
     {name: "talent.agency", status: "available", price: 1542}
   ],
   "it-and-software-tech": [
-    {name: "needsites.com", status: "available", price: 1000000},
+    {name: "needsites.com", status: "available", price: 500000},
     {name: "startup.delivery", status: "available", price: 5631},
     {name: "software.express", status: "available", price: 4029},
     {name: "app.delivery", status: "available", price: 3655},

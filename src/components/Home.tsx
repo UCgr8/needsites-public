@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
   const featuredDomains = [{
     name: 'needsites.com',
-    price: 1000000,
+    price: 500000,
     category: 'Premium',
     description: 'The ultimate domain for website development services'
   }, {
