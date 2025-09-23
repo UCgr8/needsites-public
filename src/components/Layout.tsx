@@ -51,14 +51,14 @@ export default function Layout({
             {/* Desktop: Logo on left */}
             <Link to="/" className="hidden lg:block group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" aria-label="NeedSites - Go to homepage">
               <div className="flex items-center space-x-3">
-                <img src={logo} alt="NeedSites Logo" className="h-12 w-auto group-hover:scale-110 transition-all duration-300" />
+                <img src={logo} alt="NeedSites Logo" className="h-20 w-auto group-hover:scale-110 transition-all duration-300" />
               </div>
             </Link>
 
             {/* Mobile: Logo on left */}
             <Link to="/" className="lg:hidden group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" aria-label="NeedSites - Go to homepage">
               <div className="flex items-center space-x-3">
-                <img src={logo} alt="NeedSites Logo" className="h-12 w-auto group-hover:scale-110 transition-all duration-300" />
+                <img src={logo} alt="NeedSites Logo" className="h-20 w-auto group-hover:scale-110 transition-all duration-300" />
               </div>
             </Link>
 
