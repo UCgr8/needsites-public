@@ -31,7 +31,7 @@ export function NavigationLink({
     baseStyles,
     "px-4 py-3 rounded-xl text-sm relative",
     isActive(to) 
-      ? "nav-link-active text-primary bg-primary/10 border border-primary/20" 
+      ? "nav-link-active text-blue-500 bg-blue-500/10 border border-blue-500/20 font-semibold" 
       : "nav-link-inactive text-muted-foreground hover:text-primary hover:bg-primary/5"
   );
 
