@@ -131,7 +131,7 @@ export default function FAQs() {
 
         {/* Contact CTA */}
         <div className="bg-needsites-dark-blue rounded-3xl p-12 text-white text-center mt-16 bg-blue-50">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-gray-300">
             <MessageCircle className="w-8 h-8" />
           </div>
           <h2 className="text-3xl font-bold mb-4 text-zinc-800">Still Have Questions?</h2>
