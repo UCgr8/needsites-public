@@ -3,37 +3,49 @@ import { Helmet } from 'react-helmet-async';
 import { Users, Target, Award, Clock } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter';
 import { useInView } from '../hooks/useInView';
-
 const About = () => {
-  const team = [
-    {
-      name: "Alex Johnson",
-      role: "CEO & Founder",
-      bio: "15+ years in domain industry, former startup executive"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Head of Acquisitions", 
-      bio: "Expert in domain valuation and market analysis"
-    },
-    {
-      name: "Mike Rodriguez",
-      role: "Customer Success",
-      bio: "Dedicated to helping clients find their perfect domain"
-    }
-  ];
-
-  const stats = [
-    { icon: Award, label: "Premium Domains", value: "164", number: 164, suffix: "" },
-    { icon: Users, label: "Happy Clients", value: "126", number: 126, suffix: "" },
-    { icon: Target, label: "Success Rate", value: "100%", number: 100, suffix: "%" },
-    { icon: Clock, label: "Years Experience", value: "24", number: 24, suffix: "" }
-  ];
-
-  const [statsRef, statsInView] = useInView({ threshold: 0.3 });
-
-  return (
-    <>
+  const team = [{
+    name: "Alex Johnson",
+    role: "CEO & Founder",
+    bio: "15+ years in domain industry, former startup executive"
+  }, {
+    name: "Sarah Chen",
+    role: "Head of Acquisitions",
+    bio: "Expert in domain valuation and market analysis"
+  }, {
+    name: "Mike Rodriguez",
+    role: "Customer Success",
+    bio: "Dedicated to helping clients find their perfect domain"
+  }];
+  const stats = [{
+    icon: Award,
+    label: "Premium Domains",
+    value: "164",
+    number: 164,
+    suffix: ""
+  }, {
+    icon: Users,
+    label: "Happy Clients",
+    value: "126",
+    number: 126,
+    suffix: ""
+  }, {
+    icon: Target,
+    label: "Success Rate",
+    value: "100%",
+    number: 100,
+    suffix: "%"
+  }, {
+    icon: Clock,
+    label: "Years Experience",
+    value: "24",
+    number: 24,
+    suffix: ""
+  }];
+  const [statsRef, statsInView] = useInView({
+    threshold: 0.3
+  });
+  return <>
       <Helmet>
         <title>About Us - NeedSites Domain Marketplace</title>
         <meta name="description" content="Learn about NeedSites - your trusted partner in premium domain acquisition. Meet our team and discover our mission to connect businesses with perfect domains." />
@@ -43,9 +55,7 @@ const About = () => {
         <div className="container mx-auto px-4 py-16">
           {/* Hero Section */}
           <div className="text-center mb-16 stagger-fade-1">
-            <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
-              About NeedSites
-            </h1>
+            <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">About Need Sites</h1>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               We're passionate about connecting businesses with premium domains that elevate their brand and drive success. 
               Since 2009, we've been curating the finest domain names for forward-thinking companies.
@@ -55,23 +65,20 @@ const About = () => {
           {/* Stats Section */}
           <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             {stats.map((stat, index) => {
-              const animatedValue = useAnimatedCounter({
-                target: stat.number,
-                duration: 2000 + index * 200,
-                suffix: stat.suffix,
-                startAnimation: statsInView
-              });
-
-              return (
-                <div key={index} className="text-center">
+            const animatedValue = useAnimatedCounter({
+              target: stat.number,
+              duration: 2000 + index * 200,
+              suffix: stat.suffix,
+              startAnimation: statsInView
+            });
+            return <div key={index} className="text-center">
                   <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <stat.icon className="h-8 w-8 text-primary" />
                   </div>
                   <div className="text-3xl font-bold text-foreground mb-2">{animatedValue}</div>
                   <div className="text-muted-foreground">{stat.label}</div>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
 
           {/* Mission Section */}
@@ -121,21 +128,17 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-card rounded-xl p-6 border border-border text-center hover:shadow-lg transition-shadow">
+            {team.map((member, index) => <div key={index} className="bg-card rounded-xl p-6 border border-border text-center hover:shadow-lg transition-shadow">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Users className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                 <p className="text-primary font-medium mb-3">{member.role}</p>
                 <p className="text-muted-foreground text-sm">{member.bio}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default About;
