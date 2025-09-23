@@ -724,27 +724,6 @@ export default function FAQs() {
           </div>
         </div>
 
-        {/* Floating Contact Card */}
-        <div className="fixed bottom-6 right-6 z-50">
-          <Card className="bg-primary text-primary-foreground shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm">Still need help?</h3>
-                  <p className="text-xs opacity-90">We reply quickly</p>
-                </div>
-              </div>
-              <Button asChild size="sm" variant="secondary" className="w-full">
-                <Link to="/contact">
-                  Contact Us
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Back to Top Button */}
         {showBackToTop && (
