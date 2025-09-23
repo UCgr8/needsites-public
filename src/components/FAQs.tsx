@@ -123,7 +123,7 @@ export default function FAQs() {
             Get your site before its gone
           </h2>
           <div className="text-center">
-            <Link to="/category/other" className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors">
+            <Link to="/category/other" className="inline-flex items-center px-8 py-4 bg-needsites-orange text-primary-foreground font-semibold rounded-xl hover:bg-needsites-orange-dark transition-colors">
               Browse
             </Link>
           </div>
