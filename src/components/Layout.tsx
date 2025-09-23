@@ -67,7 +67,11 @@ export default function Layout({
             </nav>
 
             {/* Desktop Login Button - Right */}
-            
+            <div className="hidden lg:block ml-auto">
+              <NavigationLink to="/login" variant="desktop">
+                Login
+              </NavigationLink>
+            </div>
 
             {/* Mobile Menu Button - Always on the far right */}
             <button ref={menuButtonRef} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 h-20 w-20 flex items-center justify-center gap-2 ml-auto" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu" aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>
