@@ -59,29 +59,39 @@ const About = () => {
           </div>
 
           {/* A note from Adam */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">A note from Adam (the founder)</h2>
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              <div className="md:col-span-2">
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  I've been the person staring at a blank page with a good idea and no obvious starting point. The early days are noisy: a thousand choices, a hundred opinions, not enough time. What I learned—sometimes the hard way—is that a strong, clear name quiets the room. People "get it" faster. You move faster.
-                </p>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  I built NeedSites for people like us: builders who want less friction at the start and more momentum after day one.
-                </p>
-                <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground">
-                  "Good work loves a good start."
-                </blockquote>
+          <Card className="mb-16 bg-gradient-to-br from-card to-card/50 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Quote className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">A note from Adam (the founder)</h2>
               </div>
-              <div className="flex justify-center">
-                <img 
-                  src={founderPhoto} 
-                  alt="Adam, Founder of NeedSites" 
-                  className="w-48 h-48 rounded-xl object-cover shadow-lg"
-                />
+              <div className="grid md:grid-cols-3 gap-8 items-start">
+                <div className="md:col-span-2 space-y-6">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    I've been the person staring at a blank page with a good idea and no obvious starting point. The early days are noisy: a thousand choices, a hundred opinions, not enough time. What I learned—sometimes the hard way—is that a strong, clear name quiets the room. People "get it" faster. You move faster.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    I built NeedSites for people like us: builders who want less friction at the start and more momentum after day one.
+                  </p>
+                  <blockquote className="bg-primary/5 border-l-4 border-primary rounded-r-lg p-6 italic text-xl text-foreground">
+                    "Good work loves a good start."
+                  </blockquote>
+                </div>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <img 
+                      src={founderPhoto} 
+                      alt="Adam, Founder of NeedSites" 
+                      className="w-48 h-48 rounded-xl object-cover shadow-xl ring-2 ring-primary/10"
+                    />
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                      <Users className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Your journey starts here - Callout */}
           <Card className="mb-16 bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
@@ -97,114 +107,175 @@ const About = () => {
           </Card>
 
           {/* Why I care */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Why I care</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I've launched projects that worked and projects that didn't. The difference was rarely effort—it was direction: the first few moves that turn intent into traction. When someone showed up with a steady hand, I moved quicker and made better decisions. NeedSites is me paying that forward: a focused name and a calm, practical plan so you can get to real customer conversations sooner.
-            </p>
-          </div>
+          <Card className="mb-16 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <ArrowRight className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">Why I care</h2>
+              </div>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I've launched projects that worked and projects that didn't. The difference was rarely effort—it was direction: the first few moves that turn intent into traction. When someone showed up with a steady hand, I moved quicker and made better decisions. NeedSites is me paying that forward: a focused name and a calm, practical plan so you can get to real customer conversations sooner.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* What I believe */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">What I believe (guiding principles)</h2>
-            <ul className="space-y-4">
-              {principles.map((principle, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-3 flex-shrink-0"></div>
-                  <p className="text-lg text-muted-foreground">{principle}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Card className="mb-16 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">What I believe (guiding principles)</h2>
+              </div>
+              <div className="grid gap-4">
+                {principles.map((principle, index) => (
+                  <div key={index} className="flex items-start gap-4 p-4 bg-muted/30 rounded-lg border border-border/30">
+                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    </div>
+                    <p className="text-lg text-muted-foreground font-medium">{principle}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           {/* How I work with buyers */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">How I work with buyers</h2>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              When you purchase a domain on NeedSites, you're not just handed the keys. We'll talk like founders do—plain language, honest trade-offs, and a short list of next steps you can actually do.
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">A focused kickoff conversation to sharpen your angle</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">Straight answers to unblock decisions</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">Notes you can reference when things get loud again</span>
-              </li>
-            </ul>
-            <p className="text-muted-foreground mt-6">
-              For what's included, timelines, and pricing options, see{' '}
-              <Link to="/info" className="text-primary hover:underline font-medium">
-                Start Here
-              </Link>.
-            </p>
-          </div>
+          <Card className="mb-16 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Users className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">How I work with buyers</h2>
+              </div>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                When you purchase a domain on NeedSites, you're not just handed the keys. We'll talk like founders do—plain language, honest trade-offs, and a short list of next steps you can actually do.
+              </p>
+              <div className="grid gap-4">
+                <div className="flex items-center gap-4 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">A focused kickoff conversation to sharpen your angle</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">Straight answers to unblock decisions</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">Notes you can reference when things get loud again</span>
+                </div>
+              </div>
+              <p className="text-muted-foreground mt-6 text-center">
+                For what's included, timelines, and pricing options, see{' '}
+                <Link to="/info" className="text-primary hover:underline font-medium">
+                  Start Here
+                </Link>.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* Trust & Proof */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Trust & Proof</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span className="text-muted-foreground"><strong>Real person, real access:</strong> You'll talk to me (Adam).</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-primary" />
-                  <span className="text-muted-foreground"><strong>Secure transfer:</strong> Escrow.com protection with guided handoff.</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <ExternalLink className="h-5 w-5 text-primary mt-0.5" />
-                  <div className="text-muted-foreground">
-                    <strong>Where I list:</strong> {marketplaces.join(' • ')} (buying direct here includes the kickoff + action kit).
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 bg-primary/20 rounded flex items-center justify-center">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  </div>
-                  <span className="text-muted-foreground"><strong>Portfolio:</strong> 160+ domains curated for clarity and intent.</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 bg-primary/20 rounded flex items-center justify-center">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  </div>
-                  <span className="text-muted-foreground"><strong>Working style:</strong> transparent, responsive, and focused on getting you to a live v1.</span>
-                </div>
+          <Card className="mb-16 shadow-lg border-border/50 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">Trust & Proof</h2>
               </div>
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <p className="text-sm text-muted-foreground text-center mb-4">(Logos and badges go here. Keep this section concise and visual.)</p>
-                <div className="flex justify-center items-center gap-4 opacity-60">
-                  <Shield className="h-8 w-8" />
-                  <span className="text-sm font-medium">Escrow.com</span>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/30 shadow-sm">
+                    <Users className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-foreground">Real person, real access:</strong>
+                      <p className="text-muted-foreground">You'll talk to me (Adam).</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/30 shadow-sm">
+                    <Shield className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-foreground">Secure transfer:</strong>
+                      <p className="text-muted-foreground">Escrow.com protection with guided handoff.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/30 shadow-sm">
+                    <ExternalLink className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-foreground">Where I list:</strong>
+                      <p className="text-muted-foreground">{marketplaces.join(' • ')} (buying direct here includes the kickoff + action kit).</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/30 shadow-sm">
+                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                      <div className="w-3 h-3 bg-primary rounded-full"></div>
+                    </div>
+                    <div>
+                      <strong className="text-foreground">Portfolio:</strong>
+                      <p className="text-muted-foreground">160+ domains curated for clarity and intent.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/30 shadow-sm">
+                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+                      <div className="w-3 h-3 bg-primary rounded-full"></div>
+                    </div>
+                    <div>
+                      <strong className="text-foreground">Working style:</strong>
+                      <p className="text-muted-foreground">transparent, responsive, and focused on getting you to a live v1.</p>
+                    </div>
+                  </div>
                 </div>
+                <Card className="bg-gradient-to-br from-card to-muted/30 border-primary/20 shadow-md">
+                  <CardContent className="p-6 text-center">
+                    <p className="text-sm text-muted-foreground mb-4">(Logos and badges go here. Keep this section concise and visual.)</p>
+                    <div className="flex justify-center items-center gap-4 opacity-80">
+                      <div className="flex flex-col items-center gap-2">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Shield className="h-6 w-6 text-primary" />
+                        </div>
+                        <span className="text-sm font-medium">Escrow.com</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Timeline */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Timeline (high-level)</h2>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-3 h-3 bg-muted rounded-full mt-2"></div>
-                <p className="text-muted-foreground"><strong>Then:</strong> tinkerer + operator; shipped a lot, learned what sticks</p>
+          <Card className="mb-16 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <ArrowRight className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">Timeline (high-level)</h2>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-3 h-3 bg-primary/50 rounded-full mt-2"></div>
-                <p className="text-muted-foreground"><strong>Recently:</strong> began curating keyword-focused domains by category</p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-6 p-4 bg-muted/20 rounded-lg border border-border/30">
+                  <div className="w-4 h-4 bg-muted rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <strong className="text-foreground">Then:</strong>
+                    <p className="text-muted-foreground">tinkerer + operator; shipped a lot, learned what sticks</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+                  <div className="w-4 h-4 bg-primary/50 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <strong className="text-foreground">Recently:</strong>
+                    <p className="text-muted-foreground">began curating keyword-focused domains by category</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-6 p-4 bg-primary/20 rounded-lg border border-primary/30">
+                  <div className="w-4 h-4 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <strong className="text-foreground">Now:</strong>
+                    <p className="text-muted-foreground">NeedSites—names plus practical guidance so founders can launch faster</p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-3 h-3 bg-primary rounded-full mt-2"></div>
-                <p className="text-muted-foreground"><strong>Now:</strong> NeedSites—names plus practical guidance so founders can launch faster</p>
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Team Section */}
           <div className="mb-16">
@@ -228,31 +299,47 @@ const About = () => {
           </div>
 
           {/* What to expect when we talk */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">What to expect when we talk</h2>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">You'll do most of the talking; I'll narrow the path with questions.</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">We'll pick a first audience and a simple offer.</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-muted-foreground">We'll write one sentence you can say out loud when someone asks, "So what do you do?"</span>
-              </li>
-            </ul>
-          </div>
+          <Card className="mb-16 shadow-lg border-border/50">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Quote className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">What to expect when we talk</h2>
+              </div>
+              <div className="grid gap-4">
+                <div className="flex items-center gap-4 p-4 bg-secondary/10 rounded-lg border border-secondary/20">
+                  <div className="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">You'll do most of the talking; I'll narrow the path with questions.</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-secondary/10 rounded-lg border border-secondary/20">
+                  <div className="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">We'll pick a first audience and a simple offer.</span>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-secondary/10 rounded-lg border border-secondary/20">
+                  <div className="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <span className="text-muted-foreground font-medium">We'll write one sentence you can say out loud when someone asks, "So what do you do?"</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* A small promise */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">A small promise</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              If you show up ready to move, I'll match your energy. I'll tell you what I think—even when the answer is "simplify." And I'll celebrate the first win with you, because getting started is the hard part most people skip.
-            </p>
-          </div>
+          <Card className="mb-16 shadow-lg border-border/50 bg-gradient-to-br from-secondary/5 to-primary/5">
+            <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">A small promise</h2>
+              </div>
+              <p className="text-lg text-muted-foreground leading-relaxed text-center">
+                If you show up ready to move, I'll match your energy. I'll tell you what I think—even when the answer is "simplify." And I'll celebrate the first win with you, because getting started is the hard part most people skip.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* Light next step */}
           <Card className="bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/10">
