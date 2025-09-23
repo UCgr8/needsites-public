@@ -2,16 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { CATEGORIES } from '../data/data';
-
 export default function Categories() {
-  return (
-    <div className="min-h-screen liquid-mesh-bg py-20 relative overflow-hidden animate-page-fade">
+  return <div className="min-h-screen liquid-mesh-bg py-20 relative overflow-hidden animate-page-fade">
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
         <div className="text-center mb-20 stagger-fade-1">
-          <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">
-            Domain Categories
-          </h1>
+          <h1 className="text-6xl md:text-7xl font-bold mb-8 liquid-gradient-text drop-shadow-lg">Site Categories</h1>
           <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Browse our curated collection of premium domains organized by industry and business type. 
             Find the perfect domain for your specific needs.
@@ -20,12 +16,7 @@ export default function Categories() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CATEGORIES.filter(cat => cat.slug !== 'all').map((category, index) => (
-            <Link
-              key={category.slug}
-              to={`/category/${category.slug}`}
-              className={`block group stagger-fade-${Math.min((index % 4) + 1, 4)}`}
-            >
+          {CATEGORIES.filter(cat => cat.slug !== 'all').map((category, index) => <Link key={category.slug} to={`/category/${category.slug}`} className={`block group stagger-fade-${Math.min(index % 4 + 1, 4)}`}>
               <div className="apple-card p-8 h-full transition-all duration-300 group-hover:scale-105">
                 <div className="flex items-end justify-end mb-6">
                   <ExternalLink className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -52,8 +43,7 @@ export default function Categories() {
                   </span>
                 </div>
               </div>
-            </Link>
-          ))}
+            </Link>)}
         </div>
 
         {/* Stats Section */}
@@ -98,16 +88,10 @@ export default function Categories() {
                 We have access to thousands more domains. Get in touch for custom searches and recommendations.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link
-                  to="/contact"
-                  className="liquid-glass-button bg-gradient-to-r from-white/20 to-white/10 hover:from-white/30 hover:to-white/20 text-white font-bold text-lg"
-                >
+                <Link to="/contact" className="liquid-glass-button bg-gradient-to-r from-white/20 to-white/10 hover:from-white/30 hover:to-white/20 text-white font-bold text-lg">
                   <span className="relative z-10">Contact Us</span>
                 </Link>
-                <Link
-                  to="/category/all"
-                  className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange text-white font-bold text-lg"
-                >
+                <Link to="/category/all" className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange text-white font-bold text-lg">
                   <span className="relative z-10">Browse All Domains</span>
                 </Link>
               </div>
@@ -115,6 +99,5 @@ export default function Categories() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
