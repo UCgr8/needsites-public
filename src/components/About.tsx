@@ -30,12 +30,6 @@ const About = () => {
     number: 126,
     suffix: ""
   }, {
-    icon: Target,
-    label: "Success Rate",
-    value: "100%",
-    number: 100,
-    suffix: "%"
-  }, {
     icon: Clock,
     label: "Years Experience",
     value: "24",
