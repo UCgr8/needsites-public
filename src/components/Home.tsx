@@ -68,7 +68,13 @@ export default function Home() {
               
               <div className="flex justify-center mt-16 mb-16">
                 <Link to="/categories">
-                  <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
+                  <Button 
+                    size="lg" 
+                    className="apple-button text-lg px-12 py-4 h-auto transition-transform duration-300 ease-out"
+                    style={{
+                      transform: `translate3d(${mousePosition.x * 20}px, ${mousePosition.y * 10}px, 0)`
+                    }}
+                  >
                     Browse
                   </Button>
                 </Link>
