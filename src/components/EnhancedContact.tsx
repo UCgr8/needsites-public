@@ -238,6 +238,30 @@ export default function EnhancedContact() {
           </a>
         </div>
 
+        {/* Business Hours */}
+        <div className="bg-card border border-border rounded-3xl p-8 mb-12 stagger-fade-3">
+          <h3 className="text-xl font-bold text-card-foreground mb-6">Business Hours</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Monday - Friday</span>
+              <span className="text-card-foreground font-medium">9:00 AM - 5:00 PM EST</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Saturday</span>
+              <span className="text-card-foreground font-medium">10:00 AM - 2:00 PM EST</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Sunday</span>
+              <span className="text-card-foreground font-medium">Closed</span>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-border">
+            <p className="text-sm text-muted-foreground">
+              For urgent inquiries outside business hours, please use the contact form and we'll respond as soon as possible.
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Enhanced Contact Form */}
           <div className="bg-card border border-border rounded-3xl p-8 shadow-lg">
@@ -372,29 +396,7 @@ export default function EnhancedContact() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            {/* Business Hours */}
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-card-foreground mb-6">Business Hours</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Monday - Friday</span>
-                  <span className="text-card-foreground font-medium">9:00 AM - 5:00 PM EST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Saturday</span>
-                  <span className="text-card-foreground font-medium">10:00 AM - 2:00 PM EST</span>
-                </div>
-                <div className="flex justify-between">
-                  
-                  <span className="text-card-foreground font-medium">Closed</span>
-                </div>
-              </div>
-              <div className="mt-6 pt-6 border-t border-border">
-                <p className="text-sm text-muted-foreground">
-                  For urgent inquiries outside business hours, please use the contact form and we'll respond as soon as possible.
-                </p>
-              </div>
-            </div>
+            {/* Placeholder for future contact info */}
           </div>
         </div>
       </div>
