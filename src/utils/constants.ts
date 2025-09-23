@@ -1,5 +1,4 @@
 export const NAVIGATION_LINKS = [
-  { path: '/', label: 'Home' },
   { path: '/categories', label: 'Categories' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' },
