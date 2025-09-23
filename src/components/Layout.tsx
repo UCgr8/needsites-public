@@ -54,7 +54,7 @@ export default function Layout({
       {/* Simplified Apple Liquid Glass Navigation */}
       <header className="liquid-nav" role="banner">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             {/* Desktop: Logo on left */}
             <Link 
               to="/" 
@@ -70,10 +70,10 @@ export default function Layout({
               </div>
             </Link>
 
-            {/* Mobile: Centered Logo */}
+            {/* Mobile: Logo on left */}
             <Link 
               to="/" 
-              className="absolute left-1/2 transform -translate-x-1/2 lg:hidden group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" 
+              className="lg:hidden group focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-3 transition-transform duration-300 hover:scale-105" 
               aria-label="NeedSites - Go to homepage"
             >
               <div className="flex items-center space-x-3">
@@ -103,31 +103,28 @@ export default function Layout({
               ))}
             </nav>
 
-            {/* Right side container */}
-            <div className="flex items-center gap-4">
-              {/* Login Button - Desktop */}
-              <Link 
-                to="/login" 
-                className="hidden lg:block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange"
-              >
-                <span className="relative z-10">Login</span>
-              </Link>
+            {/* Desktop Login Button - Right */}
+            <Link 
+              to="/login" 
+              className="hidden lg:block liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange ml-auto"
+            >
+              <span className="relative z-10">Login</span>
+            </Link>
 
-              {/* Mobile Menu Button */}
-              <button 
-                ref={menuButtonRef}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2" 
-                aria-expanded={mobileMenuOpen} 
-                aria-controls="mobile-menu" 
-                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                {isMobile && window.innerWidth <= 420 && (
-                  <span className="text-sm font-medium">Menu</span>
-                )}
-              </button>
-            </div>
+            {/* Mobile Menu Button - Always on the far right */}
+            <button 
+              ref={menuButtonRef}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="lg:hidden liquid-glass-button text-foreground hover:bg-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2 ml-auto" 
+              aria-expanded={mobileMenuOpen} 
+              aria-controls="mobile-menu" 
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobile && window.innerWidth <= 420 && (
+                <span className="text-sm font-medium">Menu</span>
+              )}
+            </button>
           </div>
 
           {/* Mobile Menu Drawer */}
