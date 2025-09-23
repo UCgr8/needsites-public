@@ -119,7 +119,7 @@ export default function FAQs() {
 
         {/* Popular Categories */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
+          <h2 className="font-bold text-foreground mb-8 text-center text-3xl">
             Get your site before its gone
           </h2>
           <div className="text-center">
