@@ -19,35 +19,35 @@ export default function Categories() {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CATEGORIES.filter(cat => cat.slug !== 'all').map((category, index) => (
             <Link
               key={category.slug}
               to={`/category/${category.slug}`}
-              className={`group liquid-glass-card liquid-interactive stagger-fade-${Math.min((index % 4) + 1, 4)} relative overflow-hidden`}
+              className={`block group stagger-fade-${Math.min((index % 4) + 1, 4)}`}
             >
-              <div className="relative z-10 p-10">
-                <div className="flex items-end justify-end mb-8">
+              <div className="apple-card p-8 h-full transition-all duration-300 group-hover:scale-105">
+                <div className="flex items-end justify-end mb-6">
                   <ExternalLink className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-card-foreground mb-4 group-hover:gradient-text transition-all duration-300">
+                <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-primary transition-all duration-300">
                   {category.title}
                 </h3>
                 
-                <p className="text-lg font-semibold text-needsites-orange mb-6">
+                <p className="text-lg font-semibold text-needsites-orange mb-4">
                   {category.tagline}
                 </p>
                 
-                <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   {category.description}
                 </p>
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground">
-                    <strong className="gradient-text text-xl">{category.count}</strong> domains available
+                    <strong className="text-primary text-lg">{category.count}</strong> domains available
                   </span>
-                  <span className="text-primary group-hover:translate-x-2 transition-transform font-medium text-xl">
+                  <span className="text-primary group-hover:translate-x-2 transition-transform font-medium">
                     Explore →
                   </span>
                 </div>
