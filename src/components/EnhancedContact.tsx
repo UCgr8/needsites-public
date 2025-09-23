@@ -350,11 +350,7 @@ export default function EnhancedContact() {
               </div>
 
               {/* Help Text */}
-              <div className="text-sm text-muted-foreground border-t border-border pt-4">
-                <p>
-                  We'll get back to you as soon as possible. Check your spam folder if you don't see our response.
-                </p>
-              </div>
+              
             </form>
 
             {/* Screen reader announcements */}
