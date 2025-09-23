@@ -24,7 +24,7 @@ const About = () => {
   ];
 
   const stats = [
-    { icon: Award, label: "Premium Domains", value: "164+", number: 164, suffix: "+" },
+    { icon: Award, label: "Premium Domains", value: "164", number: 164, suffix: "" },
     { icon: Users, label: "Happy Clients", value: "126", number: 126, suffix: "" },
     { icon: Target, label: "Success Rate", value: "98%", number: 98, suffix: "%" },
     { icon: Clock, label: "Years Experience", value: "15+", number: 15, suffix: "+" }
