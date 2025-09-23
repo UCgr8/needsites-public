@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import { PageTransition } from './components/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './components/Home';
 import Categories from './components/Categories';
 import CategoryPage from './components/CategoryPage';
@@ -32,6 +33,7 @@ function App() {
           <Sonner />
           <ErrorBoundary>
             <Router>
+              <ScrollToTop />
               <Layout>
                 <PageTransition>
                   <Routes>
