@@ -134,7 +134,7 @@ export default function FAQs() {
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <MessageCircle className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl font-bold mb-4">Still Have Questions?</h2>
+          <h2 className="text-3xl font-bold mb-4 text-zinc-800">Still Have Questions?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Our domain experts are here to help! Get personalized assistance with domain selection, 
             purchasing, or technical setup.
