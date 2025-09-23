@@ -117,8 +117,20 @@ export default function FAQs() {
             </div>)}
         </div>
 
+        {/* Popular Categories */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
+            Get your site before its gone
+          </h2>
+          <div className="text-center">
+            <Link to="/category/other" className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors">
+              Browse
+            </Link>
+          </div>
+        </div>
+
         {/* Contact CTA */}
-        <div className="bg-gradient-to-r from-needsites-blue to-needsites-dark-blue rounded-3xl p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-needsites-blue to-needsites-dark-blue rounded-3xl p-12 text-white text-center mt-16">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <MessageCircle className="w-8 h-8" />
           </div>
@@ -134,18 +146,6 @@ export default function FAQs() {
             </Link>
             
             
-          </div>
-        </div>
-
-        {/* Popular Categories */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
-            Get your site before its gone
-          </h2>
-          <div className="text-center">
-            <Link to="/category/other" className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors">
-              Browse
-            </Link>
           </div>
         </div>
       </div>
