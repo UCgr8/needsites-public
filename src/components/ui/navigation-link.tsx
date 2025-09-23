@@ -29,7 +29,7 @@ export function NavigationLink({
   
   const desktopStyles = cn(
     baseStyles,
-    "px-4 py-3 rounded-xl text-sm relative",
+    "px-8 py-4 rounded-xl text-xl relative",
     isActive(to) 
       ? "nav-link-active text-blue-500 bg-blue-500/10 border border-blue-500/20 font-semibold" 
       : "nav-link-inactive text-muted-foreground hover:text-primary hover:bg-primary/5"
