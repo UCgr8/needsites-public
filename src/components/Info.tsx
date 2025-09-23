@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Zap, Target, Users, Star, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import PurchaseWaysSection from './PurchaseWaysSection';
 
 const Info = () => {
   const whyBuyHereFeatures = [
@@ -233,8 +234,11 @@ const Info = () => {
           </div>
         </section>
 
+        {/* Purchase Ways */}
+        <PurchaseWaysSection variant="info" />
+
         {/* How buying works */}
-        <section className="py-24 bg-white">
+        <section className="py-24 apple-section-bg">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">

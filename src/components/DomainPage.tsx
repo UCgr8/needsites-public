@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Globe, DollarSign, Shield, Clock, CheckCircle, Mail, Phone } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
+import PurchaseWaysSection from './PurchaseWaysSection';
 export default function DomainPage() {
   const {
     name
@@ -162,6 +163,13 @@ export default function DomainPage() {
               </div>
             </div>
           </div>
+
+          {/* Purchase Ways Section */}
+          <PurchaseWaysSection 
+            variant="domain" 
+            domainPrice={foundDomain.price} 
+            className="!py-12"
+          />
 
           {/* Sidebar */}
           <div className="space-y-8">

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Globe, Award, Zap, Star, ArrowRight, Sparkles, Shield } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { CATEGORIES } from '../data/data';
+import PurchaseWaysSection from './PurchaseWaysSection';
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
@@ -150,6 +151,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Purchase Ways */}
+        <PurchaseWaysSection variant="homepage" />
 
         {/* Featured Domains */}
         <section className="py-24 apple-section-bg">
