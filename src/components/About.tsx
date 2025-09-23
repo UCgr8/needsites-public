@@ -27,7 +27,7 @@ const About = () => {
     { icon: Award, label: "Premium Domains", value: "164", number: 164, suffix: "" },
     { icon: Users, label: "Happy Clients", value: "126", number: 126, suffix: "" },
     { icon: Target, label: "Success Rate", value: "100%", number: 100, suffix: "%" },
-    { icon: Clock, label: "Years Experience", value: "15+", number: 15, suffix: "+" }
+    { icon: Clock, label: "Years Experience", value: "24", number: 24, suffix: "" }
   ];
 
   const [statsRef, statsInView] = useInView({ threshold: 0.3 });
