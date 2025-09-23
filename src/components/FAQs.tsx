@@ -130,7 +130,7 @@ export default function FAQs() {
         </div>
 
         {/* Contact CTA */}
-        <div className="bg-gradient-to-r from-needsites-blue to-needsites-dark-blue rounded-3xl p-12 text-white text-center mt-16">
+        <div className="bg-needsites-dark-blue rounded-3xl p-12 text-white text-center mt-16">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <MessageCircle className="w-8 h-8" />
           </div>
