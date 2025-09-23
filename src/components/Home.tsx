@@ -87,7 +87,7 @@ export default function Home() {
                   <div className="text-muted-foreground">Premium Domains</div>
                 </div>
                 <div className="apple-card p-8 text-center">
-                  <div className="text-4xl font-bold mb-2 text-primary">100%</div>
+                  <div className="text-4xl font-bold mb-2 text-primary">71</div>
                   <div className="text-muted-foreground">Client Satisfaction</div>
                 </div>
                 <div className="apple-card p-8 text-center">
