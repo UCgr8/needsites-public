@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { NAVIGATION_LINKS } from '../utils/constants';
 import { useIsMobile } from '../hooks/use-mobile';
 import { NavigationLink } from './ui/navigation-link';
+import { Button } from './ui/button';
 import logo from '../assets/logo.png';
 interface LayoutProps {
   children: React.ReactNode;
@@ -68,9 +69,9 @@ export default function Layout({
 
             {/* Desktop Login Button - Right */}
             <div className="hidden lg:block ml-auto">
-              <NavigationLink to="/login" variant="desktop">
-                Login
-              </NavigationLink>
+              <Button asChild size="lg" className="text-lg">
+                <Link to="/login">Login</Link>
+              </Button>
             </div>
 
             {/* Mobile Menu Button - Always on the far right */}
