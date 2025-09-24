@@ -100,7 +100,7 @@ const Info = () => {
               </p>
               
               <div className="flex justify-center">
-                <Link to="/categories">
+                <Link to="/bundles">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
                     Browse Domains
                     <ArrowRight className="ml-2 w-5 h-5" />
@@ -300,7 +300,7 @@ const Info = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-                <Link to="/categories">
+                <Link to="/bundles">
                   <Button size="lg" className="apple-button text-lg px-12 py-4 h-auto">
                     Browse Domains
                     <ArrowRight className="ml-2 w-5 h-5" />

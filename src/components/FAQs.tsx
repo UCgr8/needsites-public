@@ -700,7 +700,7 @@ export default function FAQs() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button asChild size="lg" className="gap-2">
-              <Link to="/categories">
+              <Link to="/bundles">
                 Browse Domains
               </Link>
             </Button>

@@ -68,7 +68,7 @@ export default function Home() {
               </h1>
               
               <div className="flex justify-center mt-16 mb-16">
-                <Link to="/categories">
+                <Link to="/bundles">
                   <Button 
                     size="lg" 
                     className="apple-button text-lg px-12 py-4 h-auto transition-transform duration-300 ease-out"
@@ -202,7 +202,7 @@ export default function Home() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {CATEGORIES.slice(0, 6).map((category, index) => <Link key={category.slug} to={`/category/${category.slug}`} className="block group">
+                  {CATEGORIES.slice(0, 6).map((category, index) => <Link key={category.slug} to={`/bundle/${category.slug}`} className="block group">
                       <div className="apple-card p-6 h-full transition-all duration-300 group-hover:scale-105">
                         <div className="mb-4">
                           <h3 className="text-xl font-bold text-black group-hover:text-primary transition-all duration-300">
@@ -220,7 +220,7 @@ export default function Home() {
               </div>
               
               <div className="text-center mt-12">
-                <Link to="/categories">
+                <Link to="/bundles">
                   <Button size="lg" className="apple-button-secondary text-lg px-8 py-3 h-auto">
                     Browse
                   </Button>
@@ -243,7 +243,7 @@ export default function Home() {
               </p>
               
               <div className="flex justify-center">
-                <Link to="/categories">
+                <Link to="/bundles">
                   <Button size="lg" className="apple-button-white text-xl px-16 py-5 h-auto">
                     Browse
                   </Button>

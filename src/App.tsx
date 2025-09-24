@@ -10,8 +10,8 @@ import Layout from './components/Layout';
 import { PageTransition } from './components/PageTransition';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './components/Home';
-import Categories from './components/Categories';
-import CategoryPage from './components/CategoryPage';
+import Bundles from './components/Bundles';
+import BundlePage from './components/BundlePage';
 import Domains from './components/Domains';
 import Contact from './components/Contact';
 import FAQs from './components/FAQs';
@@ -40,8 +40,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/info" element={<Info />} />
-                    <Route path="/categories" element={<Categories />} />
-                    <Route path="/category/:slug" element={<CategoryPage />} />
+                    <Route path="/bundles" element={<Bundles />} />
+                    <Route path="/bundle/:slug" element={<BundlePage />} />
                     <Route path="/domains" element={<Domains />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/faqs" element={<FAQs />} />

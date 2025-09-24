@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, DollarSign } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
 
-export default function CategoryPage() {
+export default function BundlePage() {
   const { slug } = useParams<{ slug: string }>();
   
   const category = CATEGORIES.find(cat => cat.slug === slug);
@@ -16,7 +16,7 @@ export default function CategoryPage() {
     : (slug ? DOMAINS[slug as keyof typeof DOMAINS] || [] : []);
 
   if (!category) {
-    return <Navigate to="/categories" replace />;
+    return <Navigate to="/bundles" replace />;
   }
 
   const formatPrice = (price: number) => {
@@ -34,11 +34,11 @@ export default function CategoryPage() {
         {/* Breadcrumb */}
         <div className="mb-8">
           <Link 
-            to="/categories" 
+            to="/bundles" 
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Categories
+            Back to Bundles
           </Link>
         </div>
 
@@ -126,7 +126,7 @@ export default function CategoryPage() {
                 Contact for Custom Search
               </Link>
               <Link
-                to="/category/all"
+                to="/bundle/all"
                 className="px-6 py-3 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/80 transition-colors"
               >
                 Browse All Domains
@@ -138,14 +138,14 @@ export default function CategoryPage() {
         {/* Related Categories */}
         <div className="mt-20">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
-            Explore Other Categories
+            Explore Other Bundles
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {CATEGORIES.filter(cat => cat.slug !== slug).slice(0, 2).map((relatedCategory) => (
               <Link
                 key={relatedCategory.slug}
-                to={`/category/${relatedCategory.slug}`}
-                aria-label={`View ${relatedCategory.title} category`}
+                to={`/bundle/${relatedCategory.slug}`}
+                aria-label={`View ${relatedCategory.title} bundle`}
                 className="group block liquid-glass-card liquid-interactive relative overflow-hidden p-8 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
               >
                 <h3 className="text-xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">

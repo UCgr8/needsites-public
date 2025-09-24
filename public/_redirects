@@ -1,1 +1,3 @@
+/categories /bundles 301
+/category/* /bundle/:splat 301
 /* /index.html 200

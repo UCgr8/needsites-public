@@ -351,7 +351,7 @@ const About = () => {
                   <Link to="/info">Start Here</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/categories">Browse Domains</Link>
+                  <Link to="/bundles">Browse Domains</Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <Link to="/contact">Ask a Question</Link>

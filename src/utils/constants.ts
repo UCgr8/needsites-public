@@ -1,6 +1,6 @@
 export const NAVIGATION_LINKS = [
   { path: '/info', label: 'Info' },
-  { path: '/categories', label: 'Bundles' },
+  { path: '/bundles', label: 'Bundles' },
   { path: '/domains', label: 'Domains' },
   { path: '/about', label: 'About' },
   { path: '/faqs', label: 'FAQs' },

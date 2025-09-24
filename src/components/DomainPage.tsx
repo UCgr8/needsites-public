@@ -24,7 +24,7 @@ export default function DomainPage() {
     }
   }
   if (!foundDomain || !foundCategory) {
-    return <Navigate to="/category/all" replace />;
+    return <Navigate to="/bundle/all" replace />;
   }
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -52,9 +52,9 @@ export default function DomainPage() {
         {/* Breadcrumb */}
         <div className="mb-8">
           <nav className="flex items-center gap-2 text-muted-foreground">
-            <Link to="/category/all" className="hover:text-primary transition-colors">All Domains</Link>
+            <Link to="/bundle/all" className="hover:text-primary transition-colors">All Domains</Link>
             <span>→</span>
-            <Link to={`/category/${foundCategory.slug}`} className="hover:text-primary transition-colors">
+            <Link to={`/bundle/${foundCategory.slug}`} className="hover:text-primary transition-colors">
               {foundCategory.title}
             </Link>
             <span>→</span>
@@ -72,7 +72,7 @@ export default function DomainPage() {
                   <Globe className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-                  <Link to={`/category/${foundCategory.slug}`} className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full hover:bg-primary/20 transition-colors mb-2">
+                  <Link to={`/bundle/${foundCategory.slug}`} className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full hover:bg-primary/20 transition-colors mb-2">
                     {foundCategory.title}
                   </Link>
                   <h1 className="text-4xl md:text-5xl font-bold text-foreground">

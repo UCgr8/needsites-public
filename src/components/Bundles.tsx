@@ -48,7 +48,7 @@ export default function Categories() {
 
           {/* Category Bundles */}
           {CATEGORIES.filter(cat => cat.slug !== 'all').map((category, index) => (
-            <Link key={category.slug} to={`/category/${category.slug}`} className={`block group stagger-fade-${Math.min((index % 4) + 2, 5)}`}>
+            <Link key={category.slug} to={`/bundle/${category.slug}`} className={`block group stagger-fade-${Math.min((index % 4) + 2, 5)}`}>
               <div className="apple-card p-8 h-full transition-all duration-300 group-hover:scale-105">
                 <div className="flex items-end justify-end mb-6">
                   <ExternalLink className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -124,7 +124,7 @@ export default function Categories() {
                 <Link to="/contact" className="liquid-glass-button bg-gradient-to-r from-white/20 to-white/10 hover:from-white/30 hover:to-white/20 text-white font-bold text-lg">
                   <span className="relative z-10">Contact Us</span>
                 </Link>
-                <Link to="/category/all" className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange text-white font-bold text-lg">
+                <Link to="/bundle/all" className="liquid-glass-button bg-gradient-to-r from-needsites-orange to-needsites-orange-dark hover:from-needsites-orange-dark hover:to-needsites-orange text-white font-bold text-lg">
                   <span className="relative z-10">Browse All Domains</span>
                 </Link>
               </div>
