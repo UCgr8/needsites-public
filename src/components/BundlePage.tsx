@@ -28,9 +28,11 @@ export default function BundlePage() {
     }).format(price);
   };
 
-  // Calculate bundle price by summing all domain binPrices
+  // Calculate bundle price by summing all available domain binPrices
   const calculateBundlePrice = () => {
-    return domains.reduce((total, domain) => total + domain.binPrice, 0);
+    return domains
+      .filter(domain => domain.status === 'available')
+      .reduce((total, domain) => total + domain.binPrice, 0);
   };
 
   return (

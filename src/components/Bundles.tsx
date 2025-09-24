@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
 export default function Bundles() {
-  // Calculate bundle price by summing all domain binPrices
+  // Calculate bundle price by summing all available domain binPrices
   const calculateBundlePrice = (categorySlug: string) => {
     if (categorySlug === 'all') {
-      return Object.values(DOMAINS).flat().reduce((total, domain) => total + domain.binPrice, 0);
+      return Object.values(DOMAINS)
+        .flat()
+        .filter(domain => domain.status === 'available')
+        .reduce((total, domain) => total + domain.binPrice, 0);
     }
-    return (DOMAINS[categorySlug] || []).reduce((total, domain) => total + domain.binPrice, 0);
+    return (DOMAINS[categorySlug] || [])
+      .filter(domain => domain.status === 'available')
+      .reduce((total, domain) => total + domain.binPrice, 0);
   };
 
   const formatPrice = (price: number) => {
