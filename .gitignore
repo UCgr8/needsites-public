@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.env
+.env.*
+.supabase
+supabase/.temp
+.vercel
+dist
+build
+node_modules
