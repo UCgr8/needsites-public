@@ -1,27 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DOMAINS, CATEGORIES } from '../data/data';
-
-export interface DomainApiData {
-  domain: string;
-  binPrice?: number;
-  tags?: string[];
-  bundle?: string;
-  availability?: { 
-    bin?: boolean; 
-    offer?: boolean; 
-    rto?: boolean; 
-  };
-  primaryKeyword?: string;
-  domainIsLive?: boolean;
-  tld?: string;
-  length?: number;
-  updatedAt?: string;
-  useCases?: Array<{
-    title: string;
-    valueProp: string;
-    example: string;
-  }>;
-}
+import type { DomainApiData } from '@/types';
 
 interface UseDomainDataResult {
   domainData: DomainApiData | null;
