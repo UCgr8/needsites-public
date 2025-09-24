@@ -28,6 +28,11 @@ export default function BundlePage() {
     }).format(price);
   };
 
+  // Calculate bundle price by summing all domain binPrices
+  const calculateBundlePrice = () => {
+    return domains.reduce((total, domain) => total + domain.binPrice, 0);
+  };
+
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="max-w-7xl mx-auto px-6">
@@ -58,6 +63,13 @@ export default function BundlePage() {
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold text-primary">{category.count}</span>
                 <span className="text-muted-foreground">domains available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-6 h-6 text-needsites-orange" />
+                <span className="text-3xl font-bold text-needsites-orange">
+                  {formatPrice(calculateBundlePrice())}
+                </span>
+                <span className="text-muted-foreground">bundle price</span>
               </div>
             </div>
           </div>

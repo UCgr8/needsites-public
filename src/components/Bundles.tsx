@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
-import { CATEGORIES } from '../data/data';
+import { ExternalLink, DollarSign } from 'lucide-react';
+import { CATEGORIES, DOMAINS } from '../data/data';
 export default function Bundles() {
+  // Calculate bundle price by summing all domain binPrices
+  const calculateBundlePrice = (categorySlug: string) => {
+    if (categorySlug === 'all') {
+      return Object.values(DOMAINS).flat().reduce((total, domain) => total + domain.binPrice, 0);
+    }
+    return (DOMAINS[categorySlug] || []).reduce((total, domain) => total + domain.binPrice, 0);
+  };
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   return <div className="min-h-screen liquid-mesh-bg py-20 relative overflow-hidden animate-page-fade">
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
@@ -35,6 +52,13 @@ export default function Bundles() {
                 Browse our entire collection of premium domains across all bundles. Perfect for finding that perfect domain name for your project.
               </p>
 
+              <div className="flex items-center gap-2 mb-4">
+                <DollarSign className="w-5 h-5 text-needsites-orange" />
+                <span className="text-2xl font-bold text-needsites-orange">
+                  {formatPrice(calculateBundlePrice('all'))}
+                </span>
+              </div>
+
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">
                   <strong className="text-primary text-lg">164</strong> domains available
@@ -65,6 +89,13 @@ export default function Bundles() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {category.description}
                 </p>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <DollarSign className="w-5 h-5 text-needsites-orange" />
+                  <span className="text-2xl font-bold text-needsites-orange">
+                    {formatPrice(calculateBundlePrice(category.slug))}
+                  </span>
+                </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground">
