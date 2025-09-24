@@ -1,21 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Lightbulb, Clock, Shield } from 'lucide-react';
 import OfferModal from './OfferModal';
-import type { OfferFormData } from './OfferModal';
+import BuyNowModal from './BuyNowModal';
+import RTOModal from './RTOModal';
 import { useDomainData } from '@/hooks/useDomainData';
 import { toast } from '@/hooks/use-toast';
 import { analytics } from '@/utils/analytics';
+import { getParam, setParams, removeParam } from '@/lib/urlState';
 import type { DomainApiData } from '@/types';
 import escrowLogo from '@/assets/escrow-logo.png';
 
 export default function DomainPage() {
   const { name } = useParams<{ name: string }>();
   const { domainData, loading, error } = useDomainData(name || '');
-  const [offerModalOpen, setOfferModalOpen] = useState(false);
+  
+  // Modal states
+  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+  const [isBuyNowModalOpen, setIsBuyNowModalOpen] = useState(false);
+  const [isRTOModalOpen, setIsRTOModalOpen] = useState(false);
+  
+  // URL params for attribution
+  const [urlParams, setUrlParams] = useState<{ src?: string; host?: string }>({});
+
+  // Handle URL params on mount
+  useEffect(() => {
+    const src = getParam('src');
+    const host = getParam('host');
+    const flow = getParam('flow');
+    
+    setUrlParams({ 
+      src: src || undefined, 
+      host: host || undefined 
+    });
+    
+    // Auto-open modal based on flow param
+    if (flow === 'offer') {
+      setIsOfferModalOpen(true);
+      analytics.track('offer_open', {
+        domain: domainData?.domain,
+        price: domainData?.bin_price,
+        bundle: domainData?.bundle,
+        tags: domainData?.tags,
+        src,
+        host
+      });
+    } else if (flow === 'bin') {
+      setIsBuyNowModalOpen(true);
+      analytics.track('bin_open', {
+        domain: domainData?.domain,
+        price: domainData?.bin_price,
+        bundle: domainData?.bundle,
+        tags: domainData?.tags,
+        src,
+        host
+      });
+    } else if (flow === 'rto') {
+      setIsRTOModalOpen(true);
+      analytics.track('rto_open', {
+        domain: domainData?.domain,
+        price: domainData?.bin_price,
+        bundle: domainData?.bundle,
+        tags: domainData?.tags,
+        src,
+        host
+      });
+    }
+  }, [domainData]);
+
+  // Handle modal close with URL cleanup
+  const handleModalClose = (modalType: 'offer' | 'bin' | 'rto') => {
+    removeParam('flow');
+    
+    switch (modalType) {
+      case 'offer':
+        setIsOfferModalOpen(false);
+        break;
+      case 'bin':
+        setIsBuyNowModalOpen(false);
+        break;
+      case 'rto':
+        setIsRTOModalOpen(false);
+        break;
+    }
+  };
+
+  // Handle modal open with URL params
+  const handleModalOpen = (modalType: 'offer' | 'bin' | 'rto') => {
+    setParams({ flow: modalType });
+    
+    const eventPayload = {
+      domain: domainData?.domain,
+      price: domainData?.bin_price,
+      bundle: domainData?.bundle,
+      tags: domainData?.tags,
+      src: urlParams.src,
+      host: urlParams.host
+    };
+    
+    switch (modalType) {
+      case 'offer':
+        setIsOfferModalOpen(true);
+        analytics.track('offer_open', eventPayload);
+        break;
+      case 'bin':
+        setIsBuyNowModalOpen(true);
+        analytics.track('bin_open', eventPayload);
+        break;
+      case 'rto':
+        setIsRTOModalOpen(true);
+        analytics.track('rto_open', eventPayload);
+        break;
+    }
+  };
 
   // Handle missing domain name
   if (!name) {
@@ -131,70 +231,12 @@ export default function DomainPage() {
     return baseUseCases.slice(0, 4); // Return top 4 use cases
   };
 
-  const handleOfferSubmit = async (offerData: OfferFormData) => {
-    try {
-      // Track analytics
-      analytics.track('domain_offer_submit', {
-        domain: domainData.domain,
-        price: domainData.bin_price,
-        bundle: domainData.bundle,
-        tags: domainData.tags
-      });
-
-      // Here you would submit to your backend
-      console.log('Offer submitted:', { domain: domainData.domain, ...offerData });
-      
-      toast({
-        title: "Offer Submitted",
-        description: "We'll review your offer and respond within 1 business day.",
-      });
-      
-      setOfferModalOpen(false);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to submit offer. Please try again.",
-        variant: "destructive"
-      });
-    }
-  };
-
   const handleBuyNowClick = () => {
-    analytics.track('domain_bin_click', {
-      domain: domainData.domain,
-      price: domainData.bin_price,
-      bundle: domainData.bundle,
-      tags: domainData.tags
-    });
-    
-    // Create checkout URL with parameters
-    const params = new URLSearchParams(window.location.search);
-    const src = params.get('src') || '';
-    const host = params.get('host') || '';
-    
-    const checkoutParams = new URLSearchParams({
-      domain: domainData.domain,
-      price: domainData.bin_price?.toString() || '',
-      action: 'buy',
-      ...(src && { src }),
-      ...(host && { host })
-    });
-    
-    // For now, just show a toast - replace with actual checkout flow
-    toast({
-      title: "Redirecting to checkout...",
-      description: `Processing purchase for ${domainData.domain}`,
-    });
+    handleModalOpen('bin');
   };
 
   const handleRentToOwnClick = () => {
-    analytics.track('domain_rto_open', {
-      domain: domainData.domain,
-      price: domainData.bin_price,
-      bundle: domainData.bundle,
-      tags: domainData.tags
-    });
-    setOfferModalOpen(true);
+    handleModalOpen('rto');
   };
 
   const handleViewDomainClick = () => {
@@ -296,15 +338,7 @@ export default function DomainPage() {
                 {domainData.availability_offer && (
                   <Button 
                     variant="outline"
-                    onClick={() => {
-                      analytics.track('domain_offer_open', {
-                        domain: domainData.domain,
-                        price: domainData.bin_price,
-                        bundle: domainData.bundle,
-                        tags: domainData.tags
-                      });
-                      setOfferModalOpen(true);
-                    }}
+                    onClick={() => handleModalOpen('offer')}
                     size="lg"
                     className="flex-1 sm:flex-none px-8 py-3 h-auto"
                     aria-label={`Make an Offer for ${domainData.domain}`}
@@ -483,15 +517,7 @@ export default function DomainPage() {
                     </p>
                     <Button 
                       variant="outline" 
-                      onClick={() => {
-                      analytics.track('domain_offer_open', {
-                        domain: domainData.domain,
-                        price: domainData.bin_price,
-                        bundle: domainData.bundle,
-                        tags: domainData.tags
-                      });
-                        setOfferModalOpen(true);
-                      }} 
+                      onClick={() => handleModalOpen('offer')} 
                       className="w-full h-10"
                       aria-label={`Make an Offer for ${domainData.domain}`}
                     >
@@ -552,13 +578,38 @@ export default function DomainPage() {
         </Card>
       </div>
 
-      {/* Offer Modal */}
+      {/* Modals */}
       <OfferModal
-        isOpen={offerModalOpen}
-        onClose={() => setOfferModalOpen(false)}
-        domainName={domainData.domain}
+        isOpen={isOfferModalOpen}
+        onClose={() => handleModalClose('offer')}
+        domain={domainData.domain}
         binPrice={domainData.bin_price || 0}
-        onSubmit={handleOfferSubmit}
+        bundle={domainData.bundle}
+        tags={domainData.tags}
+        src={urlParams.src}
+        host={urlParams.host}
+      />
+      
+      <BuyNowModal
+        isOpen={isBuyNowModalOpen}
+        onClose={() => handleModalClose('bin')}
+        domain={domainData.domain}
+        binPrice={domainData.bin_price || 0}
+        bundle={domainData.bundle}
+        tags={domainData.tags}
+        src={urlParams.src}
+        host={urlParams.host}
+      />
+      
+      <RTOModal
+        isOpen={isRTOModalOpen}
+        onClose={() => handleModalClose('rto')}
+        domain={domainData.domain}
+        binPrice={domainData.bin_price || 0}
+        bundle={domainData.bundle}
+        tags={domainData.tags}
+        src={urlParams.src}
+        host={urlParams.host}
       />
     </div>
   );

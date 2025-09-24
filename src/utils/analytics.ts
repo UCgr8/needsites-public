@@ -1,8 +1,15 @@
 interface AnalyticsEvent {
-  domain: string;
+  domain?: string;
   price?: number;
   bundle?: string;
   tags?: string[];
+  src?: string;
+  host?: string;
+  offerAmount?: number;
+  wantRto?: boolean;
+  months?: number;
+  downPayment?: number;
+  monthly?: number;
 }
 
 class Analytics {
