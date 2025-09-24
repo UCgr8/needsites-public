@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, DollarSign } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
 export default function Bundles() {
   // Calculate bundle price by summing all domain binPrices
@@ -53,7 +53,6 @@ export default function Bundles() {
               </p>
 
               <div className="flex items-center gap-2 mb-4">
-                <DollarSign className="w-5 h-5 text-needsites-orange" />
                 <span className="text-2xl font-bold text-needsites-orange">
                   {formatPrice(calculateBundlePrice('all'))}
                 </span>
@@ -91,7 +90,6 @@ export default function Bundles() {
                 </p>
 
                 <div className="flex items-center gap-2 mb-4">
-                  <DollarSign className="w-5 h-5 text-needsites-orange" />
                   <span className="text-2xl font-bold text-needsites-orange">
                     {formatPrice(calculateBundlePrice(category.slug))}
                   </span>

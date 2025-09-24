@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, DollarSign } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { CATEGORIES, DOMAINS } from '../data/data';
 
 export default function BundlePage() {
@@ -65,7 +65,6 @@ export default function BundlePage() {
                 <span className="text-muted-foreground">domains available</span>
               </div>
               <div className="flex items-center gap-2">
-                <DollarSign className="w-6 h-6 text-needsites-orange" />
                 <span className="text-3xl font-bold text-needsites-orange">
                   {formatPrice(calculateBundlePrice())}
                 </span>
@@ -104,7 +103,6 @@ export default function BundlePage() {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <DollarSign className="w-5 h-5 text-needsites-orange" />
                     <span className="text-2xl font-bold text-needsites-orange">
                       {formatPrice(domain.price)}
                     </span>
