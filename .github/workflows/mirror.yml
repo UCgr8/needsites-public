@@ -1,0 +1,36 @@
+name: Mirror to Public
+
+on:
+  push:
+    branches: [ "main" ]   # runs when you push to main
+  workflow_dispatch: {}     # lets you run it manually
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # (optional) remove private-only folders before publishing
+      - name: Remove private-only paths
+        run: |
+          rm -rf .vercel || true
+          rm -rf supabase/.temp || true
+
+      - name: Initialize public repo
+        run: |
+          git config user.name "mirror-bot"
+          git config user.email "mirror-bot@users.noreply.github.com"
+          rm -rf .git
+          git init
+          git add .
+          git commit -m "Mirror: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          git branch -M main
+
+      - name: Push to public mirror
+        run: |
+          git remote add origin https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/${{ secrets.MIRROR_REPO }}.git
+          git push -f origin main
