@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { DOMAINS, CATEGORIES } from '../data/data';
+import supabase from '@/lib/supabaseClient';
 import type { DomainApiData } from '@/types';
 
 interface UseDomainDataResult {
@@ -8,46 +8,27 @@ interface UseDomainDataResult {
   error: string | null;
 }
 
-const convertStaticToApiData = (domainName: string): DomainApiData | null => {
-  // Find domain in static data
-  let foundDomain = null;
-  let foundCategory = null;
-  
-  for (const [categorySlug, domains] of Object.entries(DOMAINS)) {
-    if (Array.isArray(domains)) {
-      const domain = domains.find(d => d.name.toLowerCase() === domainName.toLowerCase());
-      if (domain) {
-        foundDomain = domain;
-        foundCategory = CATEGORIES.find(cat => cat.slug === categorySlug);
-        break;
+const fetchDomainFromSupabase = async (domainName: string): Promise<DomainApiData | null> => {
+  try {
+    const { data, error } = await supabase
+      .from('domains')
+      .select('domain, bin_price, tags, bundle, availability_bin, availability_offer, availability_rto, primary_keyword, domain_is_live, tld, length, updated_at')
+      .ilike('domain', domainName.toLowerCase())
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // No rows found
+        return null;
       }
+      throw error;
     }
-  }
 
-  if (!foundDomain || !foundCategory) {
-    return null;
+    return data;
+  } catch (err) {
+    console.error('Supabase query error:', err);
+    throw err;
   }
-
-  // Convert static domain to API format
-  const domainParts = foundDomain.name.split('.');
-  const primaryKeyword = domainParts[0];
-  
-  return {
-    domain: foundDomain.name,
-    binPrice: foundDomain.binPrice || foundDomain.price,
-    tags: foundDomain.tags,
-    bundle: foundCategory.title,
-    availability: {
-      bin: foundDomain.flags?.bin ?? true,
-      offer: foundDomain.flags?.offer ?? true,
-      rto: foundDomain.flags?.rto ?? true,
-    },
-    primaryKeyword,
-    domainIsLive: false, // Default to false for static data
-    tld: foundDomain.tld,
-    length: foundDomain.length || foundDomain.name.length,
-    updatedAt: new Date().toISOString()
-  };
 };
 
 export const useDomainData = (domainName: string): UseDomainDataResult => {
@@ -66,37 +47,11 @@ export const useDomainData = (domainName: string): UseDomainDataResult => {
         setLoading(true);
         setError(null);
 
-        // Try to fetch from API first
-        try {
-          const response = await fetch('https://needsites.com/domains.json');
-          
-          if (!response.ok) {
-            throw new Error(`API responded with status: ${response.status}`);
-          }
-
-          const contentType = response.headers.get('content-type');
-          if (!contentType || !contentType.includes('application/json')) {
-            throw new Error('API did not return JSON');
-          }
-
-          const domains: DomainApiData[] = await response.json();
-          
-          // Case-insensitive domain matching
-          const foundDomain = domains.find(
-            domain => domain.domain.toLowerCase() === domainName.toLowerCase()
-          );
-
-          if (foundDomain) {
-            setDomainData(foundDomain);
-            return;
-          }
-        } catch (apiError) {
-          console.warn('API fetch failed, falling back to static data:', apiError);
-        }
-
-        // Fallback to static data
-        const staticDomainData = convertStaticToApiData(domainName);
-        setDomainData(staticDomainData);
+        // Clean domain name (remove protocol and www)
+        const cleanDomain = domainName.replace(/^(https?:\/\/)?(www\.)?/, '');
+        const domainData = await fetchDomainFromSupabase(cleanDomain);
+        
+        setDomainData(domainData);
         
       } catch (err) {
         console.error('Error loading domain data:', err);

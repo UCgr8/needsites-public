@@ -92,7 +92,7 @@ export default function DomainPage() {
   // Generate use cases based on domain data with persuasive mini-pitches
   const generateUseCases = (domainData: DomainApiData) => {
     const domain = domainData.domain;
-    const primaryKeyword = domainData.primaryKeyword || domain.split('.')[0];
+    const primaryKeyword = domainData.primary_keyword || domain.split('.')[0];
     
     // If useCases exist in the API data, use them
     if (domainData.useCases && domainData.useCases.length > 0) {
@@ -136,7 +136,7 @@ export default function DomainPage() {
       // Track analytics
       analytics.track('domain_offer_submit', {
         domain: domainData.domain,
-        price: domainData.binPrice,
+        price: domainData.bin_price,
         bundle: domainData.bundle,
         tags: domainData.tags
       });
@@ -162,7 +162,7 @@ export default function DomainPage() {
   const handleBuyNowClick = () => {
     analytics.track('domain_bin_click', {
       domain: domainData.domain,
-      price: domainData.binPrice,
+      price: domainData.bin_price,
       bundle: domainData.bundle,
       tags: domainData.tags
     });
@@ -174,7 +174,7 @@ export default function DomainPage() {
     
     const checkoutParams = new URLSearchParams({
       domain: domainData.domain,
-      price: domainData.binPrice?.toString() || '',
+      price: domainData.bin_price?.toString() || '',
       action: 'buy',
       ...(src && { src }),
       ...(host && { host })
@@ -190,7 +190,7 @@ export default function DomainPage() {
   const handleRentToOwnClick = () => {
     analytics.track('domain_rto_open', {
       domain: domainData.domain,
-      price: domainData.binPrice,
+      price: domainData.bin_price,
       bundle: domainData.bundle,
       tags: domainData.tags
     });
@@ -200,7 +200,7 @@ export default function DomainPage() {
   const handleViewDomainClick = () => {
     analytics.track('view_domain_click', {
       domain: domainData.domain,
-      price: domainData.binPrice,
+      price: domainData.bin_price,
       bundle: domainData.bundle,
       tags: domainData.tags
     });
@@ -229,7 +229,7 @@ export default function DomainPage() {
                   {domainData.domain}
                 </h1>
                 
-                {domainData.domainIsLive && (
+                {domainData.domain_is_live && (
                   <a
                     href={`https://${domainData.domain}`}
                     target="_blank"
@@ -244,9 +244,9 @@ export default function DomainPage() {
               </div>
               
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                {domainData.binPrice && (
+                {domainData.bin_price && (
                   <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold">
-                    BIN: {formatPrice(domainData.binPrice)}
+                    BIN: {formatPrice(domainData.bin_price)}
                   </div>
                 )}
                 <div className="flex flex-col items-end gap-1">
@@ -261,9 +261,9 @@ export default function DomainPage() {
             </div>
 
             {/* RTO Pricing (if available) */}
-            {domainData.availability?.rto && domainData.rtoMonthly && domainData.rtoMonths && (
+            {domainData.availability_rto && domainData.rto && (
               <div className="text-sm text-muted-foreground mb-2">
-                Or from {formatPrice(domainData.rtoMonthly)}/mo for {domainData.rtoMonths} months (RTO)
+                Or from ${Math.ceil((domainData.bin_price || 0 - (domainData.rto.downPayment || 0)) / (domainData.rto.months || 36))}/mo for {domainData.rto.months || 36} months (RTO)
               </div>
             )}
 
@@ -282,7 +282,7 @@ export default function DomainPage() {
 
               {/* Primary CTAs */}
               <div className="flex flex-col sm:flex-row gap-3">
-                {domainData.availability?.bin && (
+                {domainData.availability_bin && (
                   <Button 
                     onClick={handleBuyNowClick}
                     size="lg"
@@ -293,13 +293,13 @@ export default function DomainPage() {
                   </Button>
                 )}
                 
-                {domainData.availability?.offer && (
+                {domainData.availability_offer && (
                   <Button 
                     variant="outline"
                     onClick={() => {
                       analytics.track('domain_offer_open', {
                         domain: domainData.domain,
-                        price: domainData.binPrice,
+                        price: domainData.bin_price,
                         bundle: domainData.bundle,
                         tags: domainData.tags
                       });
@@ -313,7 +313,7 @@ export default function DomainPage() {
                   </Button>
                 )}
                 
-                {domainData.availability?.rto && (
+                {domainData.availability_rto && (
                   <Button 
                     variant="outline"
                     onClick={handleRentToOwnClick}
@@ -449,7 +449,7 @@ export default function DomainPage() {
           <CardContent>
             <div className="grid md:grid-cols-3 gap-4">
               
-              {domainData.availability?.bin && (
+              {domainData.availability_bin && (
                 <Card className="border-2 border-primary/20 bg-primary/5">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg">Buy Now</CardTitle>
@@ -472,7 +472,7 @@ export default function DomainPage() {
                 </Card>
               )}
 
-              {domainData.availability?.offer && (
+              {domainData.availability_offer && (
                 <Card className="border-2 border-muted">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg">Make an Offer</CardTitle>
@@ -484,12 +484,12 @@ export default function DomainPage() {
                     <Button 
                       variant="outline" 
                       onClick={() => {
-                        analytics.track('domain_offer_open', {
-                          domain: domainData.domain,
-                          price: domainData.binPrice,
-                          bundle: domainData.bundle,
-                          tags: domainData.tags
-                        });
+                      analytics.track('domain_offer_open', {
+                        domain: domainData.domain,
+                        price: domainData.bin_price,
+                        bundle: domainData.bundle,
+                        tags: domainData.tags
+                      });
                         setOfferModalOpen(true);
                       }} 
                       className="w-full h-10"
@@ -501,15 +501,15 @@ export default function DomainPage() {
                 </Card>
               )}
 
-              {domainData.availability?.rto && (
+              {domainData.availability_rto && (
                 <Card className="border-2 border-muted">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg">Rent to Own</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <p className="text-muted-foreground text-sm">
-                      {domainData.rtoMonthly && domainData.rtoMonths ? 
-                        `From ${formatPrice(domainData.rtoMonthly)}/mo for ${domainData.rtoMonths} months. Escrow.com Domain Holding.` :
+                      {domainData.rto ? 
+                        `From $${Math.ceil((domainData.bin_price || 0 - (domainData.rto.downPayment || 0)) / (domainData.rto.months || 36))}/mo for ${domainData.rto.months || 36} months. Escrow.com Domain Holding.` :
                         "Monthly via Escrow.com Domain Holding."
                       }
                     </p>
@@ -557,7 +557,7 @@ export default function DomainPage() {
         isOpen={offerModalOpen}
         onClose={() => setOfferModalOpen(false)}
         domainName={domainData.domain}
-        binPrice={domainData.binPrice}
+        binPrice={domainData.bin_price || 0}
         onSubmit={handleOfferSubmit}
       />
     </div>

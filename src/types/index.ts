@@ -52,21 +52,22 @@ export interface SubmissionState {
 
 export interface DomainApiData {
   domain: string;
-  binPrice?: number;
+  bin_price?: number;
   tags?: string[];
   bundle?: string;
-  availability?: { 
-    bin?: boolean; 
-    offer?: boolean; 
-    rto?: boolean; 
-  };
-  primaryKeyword?: string;
-  domainIsLive?: boolean;
+  availability_bin?: boolean;
+  availability_offer?: boolean;
+  availability_rto?: boolean;
+  primary_keyword?: string;
+  domain_is_live?: boolean;
   tld?: string;
   length?: number;
-  updatedAt?: string;
-  rtoMonthly?: number;
-  rtoMonths?: number;
+  updated_at?: string;
+  rto?: {
+    months?: number;
+    downPayment?: number;
+    interestPct?: number;
+  };
   useCases?: Array<{
     title: string;
     valueProp: string;
