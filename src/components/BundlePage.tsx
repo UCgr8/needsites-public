@@ -135,7 +135,7 @@ export default function BundlePage() {
           </div>
         )}
 
-        {/* Related Categories */}
+        {/* Related Bundles */}
         <div className="mt-20">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Explore Other Bundles

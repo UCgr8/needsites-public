@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { CATEGORIES } from '../data/data';
-export default function Categories() {
+export default function Bundles() {
   return <div className="min-h-screen liquid-mesh-bg py-20 relative overflow-hidden animate-page-fade">
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
@@ -32,7 +32,7 @@ export default function Categories() {
               </p>
               
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Browse our entire collection of premium domains across all categories. Perfect for finding that perfect domain name for your project.
+                Browse our entire collection of premium domains across all bundles. Perfect for finding that perfect domain name for your project.
               </p>
 
               <div className="flex items-center justify-between">
@@ -98,7 +98,7 @@ export default function Categories() {
                 <div className="text-6xl font-bold text-needsites-orange mb-4 group-hover:scale-110 transition-transform">
                   10
                 </div>
-                <div className="text-muted-foreground text-lg">Categories</div>
+                <div className="text-muted-foreground text-lg">Bundles</div>
               </div>
               <div className="text-center group liquid-interactive">
                 <div className="text-6xl font-bold text-green-600 mb-4 group-hover:scale-110 transition-transform">100%</div>

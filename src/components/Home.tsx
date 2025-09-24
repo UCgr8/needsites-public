@@ -39,7 +39,7 @@ export default function Home() {
   return <>
       <Helmet>
         <title>NeedSites - Premium Domain Names for Sale | Domain Marketplace</title>
-        <meta name="description" content="Discover premium domain names for sale at NeedSites. Browse 164+ curated domains across recruiting, design, content and business categories. Find your perfect domain today." />
+        <meta name="description" content="Discover premium domain names for sale at NeedSites. Browse 164+ curated domains across recruiting, design, content and business bundles. Find your perfect domain today." />
         <script type="application/ld+json">
           {JSON.stringify({
           "@context": "https://schema.org",
@@ -188,7 +188,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Categories Preview */}
+        {/* Bundles Preview */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
@@ -197,7 +197,7 @@ export default function Home() {
                   Explore by Category
                 </h2>
                 <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                  Find the perfect domain for your industry with our curated categories.
+                  Find the perfect domain for your industry with our curated bundles.
                 </p>
               </div>
               
