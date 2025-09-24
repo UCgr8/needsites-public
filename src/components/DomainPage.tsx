@@ -158,6 +158,8 @@ export default function DomainPage() {
         title: "Offer Submitted",
         description: "We'll review your offer and respond within 1 business day.",
       });
+      
+      setOfferModalOpen(false);
     } catch (error) {
       toast({
         title: "Error",
@@ -210,61 +212,66 @@ export default function DomainPage() {
           <div className="mb-12">
             <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-needsites-orange/10 rounded-3xl p-8 md:p-12">
               
-              {/* Domain name and price */}
-              <div className="mb-6">
-                <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
-                  {domainData.domain}
-                </h1>
+              {/* Row 1: Domain name, price, badge, and view domain link */}
+              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-8">
+                <div className="flex-1">
+                  <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
+                    {domainData.domain}
+                  </h1>
+                </div>
                 
-                <div className="flex flex-wrap items-center gap-4 mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   {domainData.binPrice && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg text-muted-foreground">BIN:</span>
-                      <span className="text-3xl font-bold text-needsites-orange">
+                    <div className="bg-background/50 rounded-lg px-4 py-2 border">
+                      <span className="text-sm text-muted-foreground mr-2">BIN:</span>
+                      <span className="text-2xl font-bold text-needsites-orange">
                         {formatPrice(domainData.binPrice)}
                       </span>
                     </div>
                   )}
-                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
+                  
+                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 w-fit">
                     Available now
                   </Badge>
+                  
+                  {/* Secondary link if domain is live */}
+                  {domainData.domainIsLive && (
+                    <a
+                      href={`https://${domainData.domain}`}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                      onClick={handleViewDomainClick}
+                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                      aria-label="Open live domain in a new tab"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      View domain
+                    </a>
+                  )}
                 </div>
+              </div>
 
+              {/* Row 2: Tags and CTAs */}
+              <div className="space-y-4">
                 {/* Tags */}
                 {domainData.tags && domainData.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2">
                     {domainData.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                      <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-3 py-1">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                 )}
 
-                {/* Secondary link if domain is live */}
-                {domainData.domainIsLive && (
-                  <div className="mb-6">
-                    <a
-                      href={`https://${domainData.domain}`}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      onClick={handleViewDomainClick}
-                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                      aria-label="Open live domain in a new tab"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      View domain
-                    </a>
-                  </div>
-                )}
-
                 {/* Primary CTAs */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row gap-3 mt-6">
                   {domainData.availability?.bin && (
                     <Button 
                       onClick={handleBuyNowClick}
-                      className="px-8 py-4 text-lg font-semibold"
+                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
                       size="lg"
+                      aria-label={`Buy It Now for ${domainData.domain}`}
                     >
                       Buy It Now
                     </Button>
@@ -273,9 +280,18 @@ export default function DomainPage() {
                   {domainData.availability?.offer && (
                     <Button 
                       variant="outline"
-                      onClick={() => setOfferModalOpen(true)}
-                      className="px-8 py-4 text-lg font-semibold"
+                      onClick={() => {
+                        analytics.track('domain_offer_open', {
+                          domain: domainData.domain,
+                          price: domainData.binPrice,
+                          bundle: domainData.bundle,
+                          tags: domainData.tags
+                        });
+                        setOfferModalOpen(true);
+                      }}
+                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
                       size="lg"
+                      aria-label={`Make an Offer for ${domainData.domain}`}
                     >
                       Make an Offer
                     </Button>
@@ -283,10 +299,11 @@ export default function DomainPage() {
                   
                   {domainData.availability?.rto && (
                     <Button 
-                      variant="secondary"
+                      variant="outline"
                       onClick={handleRentToOwnClick}
-                      className="px-8 py-4 text-lg font-semibold"
+                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
                       size="lg"
+                      aria-label={`Start Rent to Own for ${domainData.domain}`}
                     >
                       Rent to Own
                     </Button>
@@ -294,7 +311,7 @@ export default function DomainPage() {
                 </div>
 
                 {/* Trust note */}
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground mt-4 max-w-2xl">
                   When you buy through NeedSites, we pay 100% of the Escrow.com fees. 
                   Protected by Escrow.com. Typical transfer: 1–5 business days.
                 </p>
@@ -306,26 +323,23 @@ export default function DomainPage() {
           <div className="mb-12">
             <div className="bg-card border border-border rounded-3xl p-8">
               <h2 className="text-2xl font-bold text-card-foreground mb-8">Why this domain?</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-start gap-3">
-                  <Target className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="flex items-center gap-4 py-6">
+                  <Target className="h-8 w-8 text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-foreground">Keyword clarity</p>
-                    <p className="text-sm text-muted-foreground">easier CTR in ads & search</p>
+                    <span className="font-semibold text-foreground">Keyword clarity — higher CTR in ads & search</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <div className="flex items-center gap-4 py-6">
+                  <Users className="h-8 w-8 text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-foreground">Memorable & credible</p>
-                    <p className="text-sm text-muted-foreground">better referrals and response</p>
+                    <span className="font-semibold text-foreground">Memorable & credible — better referrals and response</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <Zap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <div className="flex items-center gap-4 py-6">
+                  <Zap className="h-8 w-8 text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-foreground">Fast transfer</p>
-                    <p className="text-sm text-muted-foreground">guided via Escrow.com (we pay the fees)</p>
+                    <span className="font-semibold text-foreground">Fast transfer — guided via Escrow.com (we pay the fees)</span>
                   </div>
                 </div>
               </div>
@@ -336,12 +350,12 @@ export default function DomainPage() {
           <div className="mb-12">
             <div className="bg-card border border-border rounded-3xl p-8">
               <h2 className="text-2xl font-bold text-card-foreground mb-8">Use Cases & Value Propositions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {useCases.map((useCase, index) => (
-                  <div key={index} className="p-6 border border-border rounded-xl hover:border-primary/20 transition-colors">
+                  <div key={index} className="p-4 border border-border rounded-xl hover:border-primary/20 transition-colors">
                     <h3 className="font-semibold text-foreground mb-2">{useCase.title}</h3>
-                    <p className="text-sm text-foreground mb-3">{useCase.valueProp}</p>
-                    <p className="text-xs text-muted-foreground italic">{useCase.example}</p>
+                    <p className="text-sm text-foreground mb-3 leading-relaxed">{useCase.valueProp}</p>
+                    <p className="text-xs text-muted-foreground italic leading-relaxed">{useCase.example}</p>
                   </div>
                 ))}
               </div>
@@ -375,37 +389,68 @@ export default function DomainPage() {
             </div>
           </div>
 
-          {/* Ways to buy */}
+          {/* Multiple ways to get this domain */}
           <div className="mb-12">
             <div className="bg-card border border-border rounded-3xl p-8">
               <h2 className="text-2xl font-bold text-card-foreground mb-8">Multiple ways to get this domain</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 {/* Buy It Now */}
-                <div className="p-6 border border-border rounded-xl text-center">
-                  <h3 className="font-semibold text-foreground mb-2">Buy It Now</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Immediate purchase at the listed price.
+                <div className="p-6 border border-border rounded-xl text-center space-y-4">
+                  <h3 className="font-semibold text-foreground">Buy It Now</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Immediate purchase at listed price.
                   </p>
-                  <p className="text-xs text-muted-foreground">We pay 100% of Escrow.com fees.</p>
+                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                  <Button 
+                    onClick={handleBuyNowClick}
+                    className="w-full px-6 py-3 rounded-lg"
+                    size="lg"
+                  >
+                    Purchase Now
+                  </Button>
                 </div>
 
                 {/* Make an Offer */}
-                <div className="p-6 border border-border rounded-xl text-center">
-                  <h3 className="font-semibold text-foreground mb-2">Make an Offer</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Propose your best number or bundle; reply in 1 business day.
+                <div className="p-6 border border-border rounded-xl text-center space-y-4">
+                  <h3 className="font-semibold text-foreground">Make an Offer</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Propose your best number or bundle. Reply in 1 business day.
                   </p>
-                  <p className="text-xs text-muted-foreground">We pay 100% of Escrow.com fees.</p>
+                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                  <Button 
+                    variant="outline"
+                    onClick={() => {
+                      analytics.track('domain_offer_open', {
+                        domain: domainData.domain,
+                        price: domainData.binPrice,
+                        bundle: domainData.bundle,
+                        tags: domainData.tags
+                      });
+                      setOfferModalOpen(true);
+                    }}
+                    className="w-full px-6 py-3 rounded-lg"
+                    size="lg"
+                  >
+                    Make Offer
+                  </Button>
                 </div>
 
                 {/* Rent to Own */}
-                <div className="p-6 border border-border rounded-xl text-center">
-                  <h3 className="font-semibold text-foreground mb-2">Rent to Own</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                <div className="p-6 border border-border rounded-xl text-center space-y-4">
+                  <h3 className="font-semibold text-foreground">Rent to Own</h3>
+                  <p className="text-sm text-muted-foreground">
                     Monthly via Escrow.com Domain Holding.
                   </p>
-                  <p className="text-xs text-muted-foreground">We pay 100% of Escrow.com fees.</p>
+                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                  <Button 
+                    variant="outline"
+                    onClick={handleRentToOwnClick}
+                    className="w-full px-6 py-3 rounded-lg"
+                    size="lg"
+                  >
+                    Start RTO
+                  </Button>
                 </div>
               </div>
             </div>
