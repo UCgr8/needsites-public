@@ -95,9 +95,18 @@ export default function DomainPage() {
                 </div>
               </div>
 
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg text-muted-foreground mb-6">
                 {foundCategory.description} This premium domain is perfect for businesses in the {foundCategory.title.toLowerCase()} industry.
               </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {foundDomain.tags?.map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full border border-primary/20">
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">

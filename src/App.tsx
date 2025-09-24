@@ -12,6 +12,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './components/Home';
 import Categories from './components/Categories';
 import CategoryPage from './components/CategoryPage';
+import Domains from './components/Domains';
 import Contact from './components/Contact';
 import FAQs from './components/FAQs';
 import Login from './components/Login';
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/info" element={<Info />} />
                     <Route path="/categories" element={<Categories />} />
                     <Route path="/category/:slug" element={<CategoryPage />} />
+                    <Route path="/domains" element={<Domains />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/faqs" element={<FAQs />} />
                     <Route path="/login" element={<Login />} />

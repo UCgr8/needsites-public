@@ -2,6 +2,15 @@ export interface Domain {
   name: string;
   status: 'available' | 'reserved';
   price: number;
+  binPrice: number;
+  tags: string[];
+  tld: string;
+  length: number;
+  flags: {
+    bin: boolean;
+    offer: boolean;
+    rto: boolean;
+  };
 }
 
 export interface Category {
