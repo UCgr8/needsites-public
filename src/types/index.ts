@@ -65,6 +65,8 @@ export interface DomainApiData {
   tld?: string;
   length?: number;
   updatedAt?: string;
+  rtoMonthly?: number;
+  rtoMonths?: number;
   useCases?: Array<{
     title: string;
     valueProp: string;

@@ -16,7 +16,8 @@ class Analytics {
         custom_parameter: JSON.stringify(data),
         domain: data.domain,
         price: data.price,
-        bundle: data.bundle
+        bundle: data.bundle,
+        tags: data.tags
       });
     }
     

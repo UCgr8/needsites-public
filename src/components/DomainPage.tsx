@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Globe, ExternalLink, Target, Users, Zap, ChevronRight, HelpCircle, MessageSquare } from 'lucide-react';
-import { useDomainData, DomainApiData } from '../hooks/useDomainData';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import OfferModal, { OfferFormData } from './OfferModal';
-import { analytics } from '../utils/analytics';
-import { useToast } from '@/hooks/use-toast';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ExternalLink, Lightbulb, Clock, Shield } from 'lucide-react';
+import OfferModal from './OfferModal';
+import type { OfferFormData } from './OfferModal';
+import { useDomainData } from '@/hooks/useDomainData';
+import { toast } from '@/hooks/use-toast';
+import { analytics } from '@/utils/analytics';
+import type { DomainApiData } from '@/types';
+import escrowLogo from '@/assets/escrow-logo.png';
+
 export default function DomainPage() {
   const { name } = useParams<{ name: string }>();
   const { domainData, loading, error } = useDomainData(name || '');
   const [offerModalOpen, setOfferModalOpen] = useState(false);
-  const { toast } = useToast();
 
   // Handle missing domain name
   if (!name) {
@@ -75,6 +79,7 @@ export default function DomainPage() {
       </div>
     );
   }
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -84,61 +89,46 @@ export default function DomainPage() {
     }).format(price);
   };
 
-  const generateUseCases = (domain: DomainApiData): Array<{title: string; valueProp: string; example: string}> => {
-    if (domain.useCases && domain.useCases.length > 0) {
-      return domain.useCases;
+  // Generate use cases based on domain data with persuasive mini-pitches
+  const generateUseCases = (domainData: DomainApiData) => {
+    const domain = domainData.domain;
+    const primaryKeyword = domainData.primaryKeyword || domain.split('.')[0];
+    
+    // If useCases exist in the API data, use them
+    if (domainData.useCases && domainData.useCases.length > 0) {
+      return domainData.useCases;
     }
-
-    // Generate use cases based on primaryKeyword and tags
-    const keyword = domain.primaryKeyword || domain.domain.split('.')[0];
-    const useCases = [];
-
-    // Always include at least these 3
-    useCases.push({
-      title: "Keyword-Rich Landing Page",
-      valueProp: `Exact-match clarity for ${keyword} campaigns.`,
-      example: `"Get ${keyword} Solutions Today"`
-    });
-
-    useCases.push({
-      title: "SEO & SEM Hub", 
-      valueProp: "Own the query. Rank for intent terms and lower CAC.",
-      example: `"#1 ${keyword} Resource"`
-    });
-
-    useCases.push({
-      title: "Agency / Services",
-      valueProp: `Turn ${keyword} searches into booked consults.`,
-      example: `"Expert ${keyword} Consulting"`
-    });
-
-    // Add additional based on tags
-    if (domain.tags?.includes('SaaS') || domain.tags?.includes('AI')) {
-      useCases.push({
+    
+    // Otherwise, generate persuasive use cases
+    const baseUseCases = [
+      {
+        title: "Agency / Services",
+        valueProp: `Turn passive searches for "${primaryKeyword}" into booked consultations. A brandable, exact-match domain lifts credibility and close rates.`,
+        example: `Premium ${primaryKeyword} consulting`
+      },
+      {
+        title: "Keyword-Rich Landing Page",
+        valueProp: `Match search intent in the URL, improve Quality Score/CTR, and make paid traffic convert without extra explaining.`,
+        example: `High-converting ${primaryKeyword} campaigns`
+      },
+      {
+        title: "SEO & SEM Hub", 
+        valueProp: `Own the query. Publish comparison pages, guides, and pricing to rank for intent terms—and cut CAC in paid.`,
+        example: `${primaryKeyword.charAt(0).toUpperCase() + primaryKeyword.slice(1)} authority site`
+      },
+      {
         title: "AI Service Tool",
-        valueProp: `Deliver instant ${keyword} outputs with AI.`,
-        example: `"AI-Powered ${keyword} Generator"`
-      });
-    }
-
-    if (domain.tags?.includes('Marketing') || domain.tags?.includes('Content')) {
-      useCases.push({
+        valueProp: `Deliver instant ${primaryKeyword} outputs and capture emails. A memorable domain becomes the product people share.`,
+        example: `AI-powered ${primaryKeyword} platform`
+      },
+      {
         title: "Blog / Content Library",
-        valueProp: "Publish problem–solution content that compounds authority.",
-        example: `"Ultimate ${keyword} Guide"`
-      });
-    }
-
-    // Add marketplace if appropriate
-    if (useCases.length < 5) {
-      useCases.push({
-        title: "Marketplace or Platform",
-        valueProp: `Aggregate demand & supply around ${keyword}.`,
-        example: `"Connect ${keyword} Buyers & Sellers"`
-      });
-    }
-
-    return useCases.slice(0, 5); // Max 5 use cases
+        valueProp: `Publish problem-solution content that compounds topical authority and drives steady inbound leads.`,
+        example: `${primaryKeyword.charAt(0).toUpperCase() + primaryKeyword.slice(1)} resource hub`
+      }
+    ];
+    
+    return baseUseCases.slice(0, 4); // Return top 4 use cases
   };
 
   const handleOfferSubmit = async (offerData: OfferFormData) => {
@@ -177,8 +167,24 @@ export default function DomainPage() {
       tags: domainData.tags
     });
     
-    // Redirect to purchase flow - customize this URL
-    window.open(`https://www.escrow.com/domain/${domainData.domain}`, '_blank');
+    // Create checkout URL with parameters
+    const params = new URLSearchParams(window.location.search);
+    const src = params.get('src') || '';
+    const host = params.get('host') || '';
+    
+    const checkoutParams = new URLSearchParams({
+      domain: domainData.domain,
+      price: domainData.binPrice?.toString() || '',
+      action: 'buy',
+      ...(src && { src }),
+      ...(host && { host })
+    });
+    
+    // For now, just show a toast - replace with actual checkout flow
+    toast({
+      title: "Redirecting to checkout...",
+      description: `Processing purchase for ${domainData.domain}`,
+    });
   };
 
   const handleRentToOwnClick = () => {
@@ -188,8 +194,6 @@ export default function DomainPage() {
       bundle: domainData.bundle,
       tags: domainData.tags
     });
-    
-    // For now, open offer modal - you can customize this
     setOfferModalOpen(true);
   };
 
@@ -203,221 +207,93 @@ export default function DomainPage() {
   };
 
   const useCases = generateUseCases(domainData);
+
+  // Generate urgency message (rotate between two options)
+  const urgencyMessages = [
+    "This is a one-of-a-kind domain. Don't let a competitor get it first.",
+    "Secure this unique digital asset before it's gone."
+  ];
+  const urgencyMessage = urgencyMessages[Math.floor(Math.random() * urgencyMessages.length)];
+
   return (
-    <>
-      <div className="min-h-screen bg-background py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          
-          {/* Hero Block */}
-          <div className="mb-12">
-            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-needsites-orange/10 rounded-3xl p-8 md:p-12">
-              
-              {/* Row 1: Domain name, price, badge, and view domain link */}
-              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-8">
-                <div className="flex-1">
-                  <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
-                    {domainData.domain}
-                  </h1>
-                </div>
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 py-8 px-4 animate-page-fade">
+      <div className="max-w-4xl mx-auto space-y-8">
+        
+        {/* Hero Section */}
+        <Card className="apple-card p-8">
+          <CardContent className="p-0">
+            {/* Row 1: Domain, Price, Badge, View Domain */}
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-2">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
+                  {domainData.domain}
+                </h1>
                 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  {domainData.binPrice && (
-                    <div className="bg-background/50 rounded-lg px-4 py-2 border">
-                      <span className="text-sm text-muted-foreground mr-2">BIN:</span>
-                      <span className="text-2xl font-bold text-needsites-orange">
-                        {formatPrice(domainData.binPrice)}
-                      </span>
-                    </div>
-                  )}
-                  
-                  <Badge className="bg-green-100 text-green-700 hover:bg-green-100 w-fit">
+                {domainData.domainIsLive && (
+                  <a
+                    href={`https://${domainData.domain}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    onClick={handleViewDomainClick}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+                    aria-label="Open live domain in a new tab"
+                  >
+                    View domain <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+              
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                {domainData.binPrice && (
+                  <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold">
+                    BIN: {formatPrice(domainData.binPrice)}
+                  </div>
+                )}
+                <div className="flex flex-col items-end gap-1">
+                  <Badge variant="secondary" className="w-fit">
                     Available now
                   </Badge>
-                  
-                  {/* Secondary link if domain is live */}
-                  {domainData.domainIsLive && (
-                    <a
-                      href={`https://${domainData.domain}`}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      onClick={handleViewDomainClick}
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-                      aria-label="Open live domain in a new tab"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      View domain
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Row 2: Tags and CTAs */}
-              <div className="space-y-4">
-                {/* Tags */}
-                {domainData.tags && domainData.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {domainData.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-3 py-1">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
-
-                {/* Primary CTAs */}
-                <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                  {domainData.availability?.bin && (
-                    <Button 
-                      onClick={handleBuyNowClick}
-                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
-                      size="lg"
-                      aria-label={`Buy It Now for ${domainData.domain}`}
-                    >
-                      Buy It Now
-                    </Button>
-                  )}
-                  
-                  {domainData.availability?.offer && (
-                    <Button 
-                      variant="outline"
-                      onClick={() => {
-                        analytics.track('domain_offer_open', {
-                          domain: domainData.domain,
-                          price: domainData.binPrice,
-                          bundle: domainData.bundle,
-                          tags: domainData.tags
-                        });
-                        setOfferModalOpen(true);
-                      }}
-                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
-                      size="lg"
-                      aria-label={`Make an Offer for ${domainData.domain}`}
-                    >
-                      Make an Offer
-                    </Button>
-                  )}
-                  
-                  {domainData.availability?.rto && (
-                    <Button 
-                      variant="outline"
-                      onClick={handleRentToOwnClick}
-                      className="px-6 py-3 text-base font-semibold rounded-lg flex-1 sm:flex-none"
-                      size="lg"
-                      aria-label={`Start Rent to Own for ${domainData.domain}`}
-                    >
-                      Rent to Own
-                    </Button>
-                  )}
-                </div>
-
-                {/* Trust note */}
-                <p className="text-sm text-muted-foreground mt-4 max-w-2xl">
-                  When you buy through NeedSites, we pay 100% of the Escrow.com fees. 
-                  Protected by Escrow.com. Typical transfer: 1–5 business days.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Why this domain? */}
-          <div className="mb-12">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="text-2xl font-bold text-card-foreground mb-8">Why this domain?</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="flex items-center gap-4 py-6">
-                  <Target className="h-8 w-8 text-primary flex-shrink-0" />
-                  <div>
-                    <span className="font-semibold text-foreground">Keyword clarity — higher CTR in ads & search</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 py-6">
-                  <Users className="h-8 w-8 text-primary flex-shrink-0" />
-                  <div>
-                    <span className="font-semibold text-foreground">Memorable & credible — better referrals and response</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 py-6">
-                  <Zap className="h-8 w-8 text-primary flex-shrink-0" />
-                  <div>
-                    <span className="font-semibold text-foreground">Fast transfer — guided via Escrow.com (we pay the fees)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Use Cases & Value Propositions */}
-          <div className="mb-12">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="text-2xl font-bold text-card-foreground mb-8">Use Cases & Value Propositions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {useCases.map((useCase, index) => (
-                  <div key={index} className="p-4 border border-border rounded-xl hover:border-primary/20 transition-colors">
-                    <h3 className="font-semibold text-foreground mb-2">{useCase.title}</h3>
-                    <p className="text-sm text-foreground mb-3 leading-relaxed">{useCase.valueProp}</p>
-                    <p className="text-xs text-muted-foreground italic leading-relaxed">{useCase.example}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Domain details */}
-          <div className="mb-12">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="text-2xl font-bold text-card-foreground mb-6">Domain Details</h2>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-2 border-b border-border">
-                  <span className="text-muted-foreground">Length</span>
-                  <span className="font-medium text-card-foreground">
-                    {domainData.length || domainData.domain.length} characters
-                  </span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-border">
-                  <span className="text-muted-foreground">Extension</span>
-                  <span className="font-medium text-card-foreground">
-                    .{domainData.tld || domainData.domain.split('.').pop()}
-                  </span>
-                </div>
-                {domainData.bundle && (
-                  <div className="flex justify-between items-center py-2">
-                    <span className="text-muted-foreground">Bundle</span>
-                    <span className="font-medium text-card-foreground">{domainData.bundle}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Multiple ways to get this domain */}
-          <div className="mb-12">
-            <div className="bg-card border border-border rounded-3xl p-8">
-              <h2 className="text-2xl font-bold text-card-foreground mb-8">Multiple ways to get this domain</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                {/* Buy It Now */}
-                <div className="p-6 border border-border rounded-xl text-center space-y-4">
-                  <h3 className="font-semibold text-foreground">Buy It Now</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Immediate purchase at listed price.
+                  <p className="text-xs text-muted-foreground max-w-xs text-right">
+                    {urgencyMessage}
                   </p>
-                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RTO Pricing (if available) */}
+            {domainData.availability?.rto && domainData.rtoMonthly && domainData.rtoMonths && (
+              <div className="text-sm text-muted-foreground mb-2">
+                Or from {formatPrice(domainData.rtoMonthly)}/mo for {domainData.rtoMonths} months (RTO)
+              </div>
+            )}
+
+            {/* Row 2: Tags and CTAs */}
+            <div className="space-y-3">
+              {/* Tags */}
+              {domainData.tags && domainData.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {domainData.tags.map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs px-2 py-1">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+
+              {/* Primary CTAs */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {domainData.availability?.bin && (
                   <Button 
                     onClick={handleBuyNowClick}
-                    className="w-full px-6 py-3 rounded-lg"
                     size="lg"
+                    className="flex-1 sm:flex-none px-8 py-3 h-auto"
+                    aria-label={`Buy Now for ${domainData.domain}`}
                   >
-                    Purchase Now
+                    Buy Now
                   </Button>
-                </div>
-
-                {/* Make an Offer */}
-                <div className="p-6 border border-border rounded-xl text-center space-y-4">
-                  <h3 className="font-semibold text-foreground">Make an Offer</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Propose your best number or bundle. Reply in 1 business day.
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                )}
+                
+                {domainData.availability?.offer && (
                   <Button 
                     variant="outline"
                     onClick={() => {
@@ -429,53 +305,251 @@ export default function DomainPage() {
                       });
                       setOfferModalOpen(true);
                     }}
-                    className="w-full px-6 py-3 rounded-lg"
                     size="lg"
+                    className="flex-1 sm:flex-none px-8 py-3 h-auto"
+                    aria-label={`Make an Offer for ${domainData.domain}`}
                   >
-                    Make Offer
+                    Make an Offer
                   </Button>
-                </div>
-
-                {/* Rent to Own */}
-                <div className="p-6 border border-border rounded-xl text-center space-y-4">
-                  <h3 className="font-semibold text-foreground">Rent to Own</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Monthly via Escrow.com Domain Holding.
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-4">We pay 100% of Escrow.com fees.</p>
+                )}
+                
+                {domainData.availability?.rto && (
                   <Button 
                     variant="outline"
                     onClick={handleRentToOwnClick}
-                    className="w-full px-6 py-3 rounded-lg"
                     size="lg"
+                    className="flex-1 sm:flex-none px-8 py-3 h-auto"
+                    aria-label={`Start Rent to Own for ${domainData.domain}`}
                   >
                     Start RTO
                   </Button>
+                )}
+              </div>
+
+              {/* Trust Bar */}
+              <div className="bg-muted/30 border border-border rounded-lg p-4 mt-3">
+                <div className="flex items-center gap-3">
+                  <img 
+                    src={escrowLogo} 
+                    alt="Escrow.com" 
+                    className="h-5 w-auto object-contain"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium">Protected by Escrow.com.</span> When you buy through NeedSites, we pay 100% of the Escrow.com fees.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          </CardContent>
+        </Card>
 
-          {/* Support strip */}
-          <div className="border-t border-border pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <div className="flex items-center gap-6">
-                <Link to="/faqs" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-                  <HelpCircle className="h-4 w-4" />
-                  FAQs
-                </Link>
-                <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-                  <MessageSquare className="h-4 w-4" />
-                  Contact
-                </Link>
+        {/* Why this domain */}
+        <Card className="apple-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-2xl font-semibold flex items-center gap-3">
+              <Lightbulb className="w-8 h-8 text-primary" />
+              Why this domain?
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid gap-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Lightbulb className="w-5 h-5 text-primary" />
+                </div>
+                <div className="py-1">
+                  <p className="font-semibold text-foreground mb-1">Keyword clarity</p>
+                  <p className="text-sm text-muted-foreground">A clear, keyword-rich domain helps ads and SEO match intent, lifting CTR and driving qualified leads to your business.</p>
+                </div>
               </div>
-              <p className="text-sm text-muted-foreground max-w-md">
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-primary" />
+                </div>
+                <div className="py-1">
+                  <p className="font-semibold text-foreground mb-1">Memorable & credible</p>
+                  <p className="text-sm text-muted-foreground">An intuitive, professional name builds instant trust—making you the go-to authority in your niche.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-primary" />
+                </div>
+                <div className="py-1">
+                  <p className="font-semibold text-foreground mb-1">Fast transfer</p>
+                  <p className="text-sm text-muted-foreground">We make it simple. Get your domain in 1–5 business days, fully protected by Escrow.com (we pay the fees).</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Use Cases & Value Propositions */}
+        <Card className="apple-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-2xl font-semibold">Use Cases & Value Propositions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-3">
+              {useCases.map((useCase, index) => (
+                <div key={index} className="space-y-2 p-4 bg-muted/30 rounded-lg">
+                  <h4 className="font-semibold text-base text-foreground">
+                    {useCase.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {useCase.valueProp}
+                  </p>
+                  {useCase.example && (
+                    <p className="text-xs text-muted-foreground/70 italic">
+                      {useCase.example}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Domain details */}
+        <Card className="apple-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-2xl font-semibold">Domain Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-2 border-b border-border">
+                <span className="text-muted-foreground">Length</span>
+                <span className="font-medium text-foreground">
+                  {domainData.length || domainData.domain.length} characters
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-border">
+                <span className="text-muted-foreground">Extension</span>
+                <span className="font-medium text-foreground">
+                  .{domainData.tld || domainData.domain.split('.').pop()}
+                </span>
+              </div>
+              {domainData.bundle && (
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-muted-foreground">Bundle</span>
+                  <span className="font-medium text-foreground">{domainData.bundle}</span>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Multiple ways to get this domain */}
+        <Card className="apple-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-2xl font-semibold">Multiple ways to get this domain</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-4">
+              
+              {domainData.availability?.bin && (
+                <Card className="border-2 border-primary/20 bg-primary/5">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Buy Now</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className="text-muted-foreground text-sm">
+                      Immediate purchase at listed price.
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      We pay 100% of Escrow.com fees.
+                    </p>
+                    <Button 
+                      onClick={handleBuyNowClick} 
+                      className="w-full h-10"
+                      aria-label={`Buy Now for ${domainData.domain}`}
+                    >
+                      Buy Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {domainData.availability?.offer && (
+                <Card className="border-2 border-muted">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Make an Offer</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className="text-muted-foreground text-sm">
+                      Propose your best number or bundle. Reply in 1 business day.
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        analytics.track('domain_offer_open', {
+                          domain: domainData.domain,
+                          price: domainData.binPrice,
+                          bundle: domainData.bundle,
+                          tags: domainData.tags
+                        });
+                        setOfferModalOpen(true);
+                      }} 
+                      className="w-full h-10"
+                      aria-label={`Make an Offer for ${domainData.domain}`}
+                    >
+                      Make an Offer
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {domainData.availability?.rto && (
+                <Card className="border-2 border-muted">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Rent to Own</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className="text-muted-foreground text-sm">
+                      {domainData.rtoMonthly && domainData.rtoMonths ? 
+                        `From ${formatPrice(domainData.rtoMonthly)}/mo for ${domainData.rtoMonths} months. Escrow.com Domain Holding.` :
+                        "Monthly via Escrow.com Domain Holding."
+                      }
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      We pay 100% of Escrow.com fees.
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      onClick={handleRentToOwnClick} 
+                      className="w-full h-10"
+                      aria-label={`Start Rent to Own for ${domainData.domain}`}
+                    >
+                      Start RTO
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Footer Support Strip */}
+        <Card className="apple-card">
+          <CardContent className="py-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div className="flex gap-6 text-sm">
+                <a href="/faqs" className="text-primary hover:underline">
+                  FAQs
+                </a>
+                <a href="/contact" className="text-primary hover:underline">
+                  Contact
+                </a>
+              </div>
+              <p className="text-sm text-muted-foreground text-center sm:text-right max-w-md">
                 After purchase, we'll learn your goals and provide personalized founder consulting to help you start strong.
               </p>
             </div>
-          </div>
-
-        </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Offer Modal */}
@@ -486,6 +560,6 @@ export default function DomainPage() {
         binPrice={domainData.binPrice}
         onSubmit={handleOfferSubmit}
       />
-    </>
+    </div>
   );
 }
