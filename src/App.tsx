@@ -22,6 +22,7 @@ import Info from './components/Info';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NotFound from './pages/NotFound';
+import Health from './pages/Health';
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/terms" element={<TermsOfService />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/domain/:name" element={<DomainPage />} />
+                    <Route path="/health" element={<Health />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </PageTransition>
