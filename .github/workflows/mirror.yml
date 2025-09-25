@@ -2,8 +2,8 @@ name: Mirror to Public
 
 on:
   push:
-    branches: [ "main" ]   # runs when you push to main
-  workflow_dispatch: {}     # lets you run it manually
+    branches: [ "main" ]
+  workflow_dispatch: {}
 
 jobs:
   mirror:
@@ -14,23 +14,42 @@ jobs:
         with:
           fetch-depth: 0
 
-      # (optional) remove private-only folders before publishing
-      - name: Remove private-only paths
+      - name: Prepare public subset
         run: |
-          rm -rf .vercel || true
-          rm -rf supabase/.temp || true
+          set -e
+          mkdir _public
+          # Copy only safe folders that exist
+          for p in app src components pages public lib; do
+            if [ -d "$p" ]; then cp -R "$p" _public/; fi
+          done
+          # Root files (safe)
+          for f in package.json pnpm-lock.yaml yarn.lock package-lock.json README.md LICENSE; do
+            [ -f "$f" ] && cp "$f" _public/ || true
+          done
+          # Ensure not empty
+          echo "# NeedSites Public Mirror" > _public/README.md
+          # Strip private/noisy
+          rm -rf _public/.git _public/.github _public/.vercel _public/node_modules || true
+          echo "Files copied to _public:"
+          find _public -maxdepth 2 -type f | wc -l
 
-      - name: Initialize public repo
+      - name: Verify secrets
         run: |
-          git config user.name "mirror-bot"
-          git config user.email "mirror-bot@users.noreply.github.com"
-          rm -rf .git
-          git init
-          git add .
-          git commit -m "Mirror: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-          git branch -M main
+          if [ -z "${{ secrets.MIRROR_REPO }}" ]; then echo "MIRROR_REPO missing"; exit 1; fi
+          echo "Target repo: ${{ secrets.MIRROR_REPO }}"
+          if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then echo "MIRROR_TOKEN missing"; exit 1; fi
+          echo "Token present"
 
-      - name: Push to public mirror
-        run: |
-          git remote add origin https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/${{ secrets.MIRROR_REPO }}.git
-          git push -f origin main
+      - name: Push subset to public mirror
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.MIRROR_TOKEN }}
+          repository-name: ${{ secrets.MIRROR_REPO }}
+          branch: main
+          folder: _public
+          clean: true
+          single-commit: true
+
+      - name: Done
+        run: echo "Mirror completed"
+
