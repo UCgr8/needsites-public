@@ -5,6 +5,7 @@ import { Globe, Award, Zap, Star, ArrowRight, Sparkles, Shield } from 'lucide-re
 import { Button } from '../components/ui/button';
 import { CATEGORIES } from '../data/data';
 import PurchaseWaysSection from './PurchaseWaysSection';
+import { SeedDomainsButton } from './SeedDomainsButton';
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
@@ -57,6 +58,12 @@ export default function Home() {
       </Helmet>
       
       <div className="flex flex-col">
+        
+        {/* Temporary Seeding Button - Remove after seeding */}
+        <div className="fixed top-4 right-4 z-50">
+          <SeedDomainsButton />
+        </div>
+        
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center bg-white">
           <div className="container mx-auto px-4 relative z-10">
