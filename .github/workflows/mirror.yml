@@ -14,30 +14,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Build a SAFE subset to publish publicly
       - name: Prepare public subset
         run: |
           set -e
+          rm -rf _public
           mkdir _public
-          # Copy only safe folders that exist (adjust if needed)
+
+          # Copy only folders that are safe to share (adjust if needed)
           for p in app src components pages public lib; do
             if [ -d "$p" ]; then cp -R "$p" _public/; fi
           done
-          # Root files that are safe to publish
+
+          # Copy safe root files
           for f in package.json pnpm-lock.yaml yarn.lock package-lock.json README.md LICENSE PROMPTS.md; do
             [ -f "$f" ] && cp "$f" _public/ || true
           done
-          # Minimal README for the mirror
-          echo "# NeedSites Public Mirror" > _public/README.md
-          # Never publish these
+
+          # Ensure we never publish private/noisy dirs
           rm -rf _public/.git _public/.github _public/.vercel _public/node_modules || true
-          echo "Files copied to _public:"
+
+          # Add a minimal README so the repo isn't empty
+          echo "# NeedSites Public Mirror
+
+This repo is an automated mirror of selected, non-sensitive parts of the private NeedSites codebase for review purposes." > _public/README.md
+
+          echo "Files prepared for mirror:"
           find _public -maxdepth 2 -type f | wc -l
 
       - name: Verify secrets
         run: |
           if [ -z "${{ secrets.MIRROR_REPO }}" ]; then echo "MIRROR_REPO missing"; exit 1; fi
           if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then echo "MIRROR_TOKEN missing"; exit 1; fi
-          echo "Target: ${{ secrets.MIRROR_REPO }}"
+          echo "Target repo: ${{ secrets.MIRROR_REPO }}"
 
       - name: Push subset to public mirror
         uses: JamesIves/github-pages-deploy-action@v4
