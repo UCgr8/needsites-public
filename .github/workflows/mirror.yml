@@ -21,7 +21,7 @@ jobs:
           rm -rf _public
           mkdir _public
 
-          # Copy only folders that are safe to share (adjust if needed)
+          # Copy only safe folders (adjust if needed)
           for p in app src components pages public lib; do
             if [ -d "$p" ]; then cp -R "$p" _public/; fi
           done
@@ -31,15 +31,13 @@ jobs:
             [ -f "$f" ] && cp "$f" _public/ || true
           done
 
-          # Ensure we never publish private/noisy dirs
+          # Never publish these
           rm -rf _public/.git _public/.github _public/.vercel _public/node_modules || true
 
-          # Add a minimal README so the repo isn't empty
-          cat > _public/README.md << 'EOF'
-# NeedSites Public Mirror
-
-This repo is an automated mirror of selected, non-sensitive parts of the private NeedSites codebase for review purposes.
-EOF
+          # Minimal README (avoid heredoc to keep YAML simple)
+          echo "# NeedSites Public Mirror" > _public/README.md
+          echo "" >> _public/README.md
+          echo "This repo is an automated mirror of selected, non-sensitive parts of the private NeedSites codebase for review purposes." >> _public/README.md
 
           echo "Files prepared for mirror:"
           find _public -maxdepth 2 -type f | wc -l
@@ -60,3 +58,4 @@ EOF
           folder: _public
           clean: true
           single-commit: true
+
