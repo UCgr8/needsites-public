@@ -119,7 +119,7 @@ Deno.serve(async (req) => {
     const { error: deleteError } = await supabaseClient
       .from('domains')
       .delete()
-      .gte('id', 0) // Delete all rows
+      .neq('domain', '') // Delete all rows
 
     if (deleteError) {
       console.error('Error clearing domains:', deleteError)
