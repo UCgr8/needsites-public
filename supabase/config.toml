@@ -1,4 +1,0 @@
-project_id = "ifxetmmcscffwlijpdfs"
-
-[functions.seed-domains]
-verify_jwt = false

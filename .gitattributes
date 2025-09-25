@@ -1,4 +1,0 @@
-.env export-ignore
-.env.* export-ignore
-supabase/.temp export-ignore
-.vercel export-ignore
