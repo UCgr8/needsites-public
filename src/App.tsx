@@ -12,7 +12,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './components/Home';
 import Bundles from './components/Bundles';
 import BundlePage from './components/BundlePage';
-import Domains from './components/Domains';
+import DomainsExplorer from './components/DomainsExplorer';
 import Contact from './components/Contact';
 import FAQs from './components/FAQs';
 import Login from './components/Login';
@@ -43,7 +43,7 @@ function App() {
                     <Route path="/info" element={<Info />} />
                     <Route path="/bundles" element={<Bundles />} />
                     <Route path="/bundle/:slug" element={<BundlePage />} />
-                    <Route path="/domains" element={<Domains />} />
+                    <Route path="/domains" element={<DomainsExplorer />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/faqs" element={<FAQs />} />
                     <Route path="/login" element={<Login />} />
