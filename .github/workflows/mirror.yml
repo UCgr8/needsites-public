@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Build a SAFE subset to publish publicly
       - name: Prepare public subset
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
           rm -rf _public
           mkdir _public
 
@@ -35,14 +35,17 @@ jobs:
           rm -rf _public/.git _public/.github _public/.vercel _public/node_modules || true
 
           # Add a minimal README so the repo isn't empty
-          echo "# NeedSites Public Mirror
+          cat > _public/README.md << 'EOF'
+# NeedSites Public Mirror
 
-This repo is an automated mirror of selected, non-sensitive parts of the private NeedSites codebase for review purposes." > _public/README.md
+This repo is an automated mirror of selected, non-sensitive parts of the private NeedSites codebase for review purposes.
+EOF
 
           echo "Files prepared for mirror:"
           find _public -maxdepth 2 -type f | wc -l
 
       - name: Verify secrets
+        shell: bash
         run: |
           if [ -z "${{ secrets.MIRROR_REPO }}" ]; then echo "MIRROR_REPO missing"; exit 1; fi
           if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then echo "MIRROR_TOKEN missing"; exit 1; fi
