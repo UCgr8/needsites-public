@@ -1,0 +1,50 @@
+name: Mirror to Public
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare public subset
+        run: |
+          set -e
+          mkdir _public
+          # Copy only safe folders that exist (adjust if needed)
+          for p in app src components pages public lib; do
+            if [ -d "$p" ]; then cp -R "$p" _public/; fi
+          done
+          # Root files that are safe to publish
+          for f in package.json pnpm-lock.yaml yarn.lock package-lock.json README.md LICENSE PROMPTS.md; do
+            [ -f "$f" ] && cp "$f" _public/ || true
+          done
+          # Minimal README for the mirror
+          echo "# NeedSites Public Mirror" > _public/README.md
+          # Never publish these
+          rm -rf _public/.git _public/.github _public/.vercel _public/node_modules || true
+          echo "Files copied to _public:"
+          find _public -maxdepth 2 -type f | wc -l
+
+      - name: Verify secrets
+        run: |
+          if [ -z "${{ secrets.MIRROR_REPO }}" ]; then echo "MIRROR_REPO missing"; exit 1; fi
+          if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then echo "MIRROR_TOKEN missing"; exit 1; fi
+          echo "Target: ${{ secrets.MIRROR_REPO }}"
+
+      - name: Push subset to public mirror
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.MIRROR_TOKEN }}
+          repository-name: ${{ secrets.MIRROR_REPO }}
+          branch: main
+          folder: _public
+          clean: true
+          single-commit: true
